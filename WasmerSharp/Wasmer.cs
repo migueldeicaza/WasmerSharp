@@ -112,6 +112,8 @@ namespace WasmerSharp {
 
 		public virtual void Dispose (bool disposing)
 		{
+			// TODO: maybe queue all the handles that can not be disposed immediately?
+			// And dispose later?
 			if (disposing)
 				DisposeHandle ();
 			handle = IntPtr.Zero;
@@ -262,7 +264,11 @@ namespace WasmerSharp {
 	}
 
 	public class WasmerExportFunc : WasmerNativeHandle {
-		internal WasmerExportFunc (IntPtr handle) : base (handle) { }
+		internal bool owns;
+		internal WasmerExportFunc (IntPtr handle, bool owns) : base (handle)
+		{
+			this.owns = owns;
+		}
 
 		[DllImport (Library)]
 		unsafe extern static WasmerResult wasmer_export_func_call (IntPtr handle, WasmerValue* values, int valueLen, WasmerValue* results, int resultLen);
@@ -293,12 +299,116 @@ namespace WasmerSharp {
 		extern static void wasmer_import_func_destroy (IntPtr handle);
 		protected override void DisposeHandle ()
 		{
-			wasmer_import_func_destroy (handle);
+			if (owns)
+				wasmer_import_func_destroy (handle);
 		}
+
+		[DllImport (Library)]
+		unsafe extern static WasmerResult wasmer_export_func_params (IntPtr handle, WasmerValueTag* p, uint pLen);
+
+		[DllImport (Library)]
+		extern static WasmerResult wasmer_export_func_params_arity (IntPtr handle, out uint result);
+
+		/// <summary>
+		/// Returns the parameter types for the exported function as an array.   Returns null on error.
+		/// </summary>
+		public WasmerValueTag [] Parameters {
+			get {
+				if (wasmer_export_func_params_arity (handle, out var npars) == WasmerResult.Error)
+					return null;
+				var tags = new WasmerValueTag [npars];
+				unsafe {
+					fixed (WasmerValueTag* t = &tags [0]) {
+						if (wasmer_export_func_params (handle, t, npars) == WasmerResult.Ok)
+							return tags;
+					}
+				}
+				return null;
+			}
+		}
+
+		[DllImport (Library)]
+		unsafe extern static WasmerResult wasmer_export_func_returns (IntPtr handle, WasmerValueTag* ret, uint retLen);
+
+		[DllImport (Library)]
+		extern static WasmerResult wasmer_export_func_returns_arity (IntPtr handle, out uint result);
+
+		/// <summary>
+		/// Returns the return types for the exported function as an array.   Returns null on error.
+		/// </summary>
+		public WasmerValueTag [] Returns {
+			get {
+				if (wasmer_export_func_returns_arity (handle, out var npars) == WasmerResult.Error)
+					return null;
+				var tags = new WasmerValueTag [npars];
+				unsafe {
+					fixed (WasmerValueTag* t = &tags [0]) {
+						if (wasmer_export_func_returns (handle, t, npars) == WasmerResult.Ok)
+							return tags;
+					}
+				}
+				return null;
+			}
+		}
+
 	}
 
 	public class WasmerExport : WasmerNativeHandle {
 		internal WasmerExport (IntPtr handle) : base (handle) { }
+
+		[DllImport (Library)]
+		static extern ImportExportKind wasmer_export_kind (IntPtr handle);
+
+		/// <summary>
+		/// Gets the kind for the exported item
+		/// </summary>
+		public ImportExportKind Kind => wasmer_export_kind (handle);
+
+		[DllImport (Library)]
+		static extern WasmerByteArray wasmer_export_name (IntPtr handle);
+
+		/// <summary>
+		/// Gets the name for the export
+		/// </summary>
+		public string Name => wasmer_export_name (handle).ToString ();
+
+		[DllImport (Library)]
+		extern static IntPtr wasmer_export_to_func (IntPtr handle);
+
+		/// <summary>
+		/// Gets the exported function
+		/// </summary>
+		/// <returns>Null on error, or the exported function.</returns>
+		public WasmerExportFunc GetExportFunc ()
+		{
+			var rh = wasmer_export_to_func (handle);
+			if (rh != null)
+				return new WasmerExportFunc (rh, owns: false);
+			return null;
+		}
+
+		[DllImport (Library)]
+		extern static WasmerResult wasmer_export_to_memory (IntPtr handle, out IntPtr memory);
+
+		/// <summary>
+		/// Returns the memory object from the export
+		/// </summary>
+		/// <returns></returns>
+		public Memory GetMemory ()
+		{
+			// DO WE OWN THE MEM HANDLE?
+			if (wasmer_export_to_memory (handle, out var mem) == WasmerResult.Error)
+				return null;
+			return new Memory (mem);
+		}
+
+		[DllImport (Library)]
+		extern static void wasmer_exports_destroy (IntPtr handle);
+
+		protected override void DisposeHandle ()
+		{
+			wasmer_exports_destroy (handle);
+		}
 	}
 
 	public class WasmerExports : WasmerNativeHandle {
@@ -524,7 +634,7 @@ namespace WasmerSharp {
 					break;
 				}
 			}
-			// TODO: need to extract array lenght for return and other assorted bits
+			// TODO: need to extract array length for return and other assorted bits
 			var ret = new WasmerValue [1];
 			if (Call (functionName, parsOut, ret)) {
 				return new object [] { ret [0].Encode () };
