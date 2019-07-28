@@ -21,7 +21,7 @@ namespace WasmerSharp {
 		F64
 	}
 
-	public struct WasmerByteArray {
+	internal struct WasmerByteArray {
 		internal IntPtr bytes;
 		internal uint bytesLen;
 
@@ -51,8 +51,14 @@ namespace WasmerSharp {
 		}
 	}
 
+	/// <summary>
+	/// This object can wrap an int, long, float or double.   Implicit conversion from those data types to WasmerValue exist, and explicit conversions from a WasmerValue to those types exist.
+	/// </summary>
 	[StructLayout (LayoutKind.Explicit)]
 	public struct WasmerValue {
+		/// <summary>
+		/// The underlying type for the value stored here.
+		/// </summary>
 		[FieldOffset (0)]
 		public WasmerValueTag Tag;
 
@@ -79,6 +85,132 @@ namespace WasmerSharp {
 			}
 			return null;
 		}
+
+		/// <summary>
+		/// Returns the stored value as an int.   This will cast if the value is not a native int.
+		/// </summary>
+		/// <param name="val">The incoming WasmerValue.</param>
+		public static explicit operator int (WasmerValue val)
+		{
+			switch (val.Tag) {
+			case WasmerValueTag.I32:
+				return val.I32;
+			
+			case WasmerValueTag.I64:
+				return (int)val.I64;
+			
+			case WasmerValueTag.F32:
+				return (int)val.F32;
+
+			case WasmerValueTag.F64:
+				return (int)val.F64;
+			}
+			throw new Exception ("Unknown WasmerValueTag");
+		}
+
+		/// <summary>
+		/// Returns the stored value as a long.   This will cast if the value is not a native long.
+		/// </summary>
+		/// <param name="val">The incoming WasmerValue.</param>
+		public static explicit operator long (WasmerValue val)
+		{
+			switch (val.Tag) {
+			case WasmerValueTag.I32:
+				return val.I32;
+
+			case WasmerValueTag.I64:
+				return val.I64;
+
+			case WasmerValueTag.F32:
+				return (long)val.F32;
+
+			case WasmerValueTag.F64:
+				return (long)val.F64;
+			}
+			throw new Exception ("Unknown WasmerValueTag");
+		}
+
+		/// <summary>
+		/// Returns the stored value as a float.   This will cast if the value is not a native float.
+		/// </summary>
+		/// <param name="val">The incoming WasmerValue.</param>
+		public static explicit operator float (WasmerValue val)
+		{
+			switch (val.Tag) {
+			case WasmerValueTag.I32:
+				return val.I32;
+
+			case WasmerValueTag.I64:
+				return (float)val.I64;
+
+			case WasmerValueTag.F32:
+				return val.F32;
+
+			case WasmerValueTag.F64:
+				return (float)val.F64;
+			}
+			throw new Exception ("Unknown WasmerValueTag");
+		}
+
+		/// <summary>
+		/// Returns the stored value as a double.   This will cast if the value is not a native double.
+		/// </summary>
+		/// <param name="val">The incoming WasmerValue.</param>
+
+		public static explicit operator double (WasmerValue val)
+		{
+			switch (val.Tag) {
+			case WasmerValueTag.I32:
+				return val.I32;
+
+			case WasmerValueTag.I64:
+				return (double)val.I64;
+
+			case WasmerValueTag.F32:
+				return val.F32;
+
+			case WasmerValueTag.F64:
+				return val.F64;
+			}
+			throw new Exception ("Unknown WasmerValueTag");
+		}
+
+		/// <summary>
+		/// Creates a WasmerValue from an integer
+		/// </summary>
+		/// <param name="val">Integer value to wrap</param>
+		public static implicit operator WasmerValue (int val)
+		{
+			return new WasmerValue () { I32 = val, Tag = WasmerValueTag.I32 };
+		}
+
+		/// <summary>
+		/// Creates a WasmerValue from an long
+		/// </summary>
+		/// <param name="val">Long value to wrap</param>
+		public static implicit operator WasmerValue (long val)
+		{
+			return new WasmerValue () { I64 = val, Tag = WasmerValueTag.I64 };
+		}
+
+		/// <summary>
+		/// Creates a WasmerValue from an float
+		/// </summary>
+		/// <param name="val">Float value to wrap</param>
+		public static implicit operator WasmerValue (float val)
+		{
+			return new WasmerValue () { F32 = val, Tag = WasmerValueTag.F32 };
+		}
+
+		/// <summary>
+		/// Creates a WasmerValue from an double
+		/// </summary>
+		/// <param name="val">Double value to wrap</param>
+		public static implicit operator WasmerValue (double val)
+		{
+			return new WasmerValue () { F64 = val, Tag = WasmerValueTag.F64 };
+		}
+
 	}
 
 	//
@@ -146,8 +278,8 @@ namespace WasmerSharp {
 	/// <remarks>
 	/// 
 	/// </remarks>
-	public class WasmerModule : WasmerNativeHandle {
-		internal WasmerModule (IntPtr handle) : base (handle) { }
+	public class Module : WasmerNativeHandle {
+		internal Module (IntPtr handle) : base (handle) { }
 
 		[DllImport (Library)]
 		extern static WasmerResult wasmer_compile (out IntPtr handle, IntPtr body, uint len);
@@ -158,10 +290,10 @@ namespace WasmerSharp {
 		/// <param name="wasmBody">A pointer to a block of memory containing the WASM code to load into the module</param>
 		/// <param name="bodyLength">The size of the wasmBody pointer</param>
 		/// <returns>The WasmerModule instance, or null on error</returns>
-		public static WasmerModule Create (IntPtr wasmBody, uint bodyLength)
+		public static Module Create (IntPtr wasmBody, uint bodyLength)
 		{
 			if (wasmer_compile (out var handle, wasmBody, bodyLength) == WasmerResult.Ok) {
-				return new WasmerModule (handle);
+				return new Module (handle);
 			} else
 				return null;
 		}
@@ -171,7 +303,7 @@ namespace WasmerSharp {
 		/// </summary>
 		/// <param name="wasmBody">An array containing the WASM code to load into the module</param>
 		/// <returns>The WasmerModule instance, or null on error</returns>
-		public static WasmerModule Create (byte [] wasmBody)
+		public static Module Create (byte [] wasmBody)
 		{
 			if (wasmBody == null)
 				throw new ArgumentException (nameof (wasmBody));
@@ -202,16 +334,16 @@ namespace WasmerSharp {
 		/// <summary>
 		/// Gets export descriptors for the given module
 		/// </summary>
-		public WasmerExportDescriptor [] ExportDescriptors {
+		public ExportDescriptor [] ExportDescriptors {
 			get {
 				// Not worth surfacing all the Disposable junk, so we extract all the data in one go
 				wasmer_export_descriptors (handle, out var exportsHandle);
 				int len = wasmer_export_descriptors_len (handle);
-				var result = new WasmerExportDescriptor [len];
+				var result = new ExportDescriptor [len];
 				for (int i = 0; i < len; i++) {
 					var dhandle = wasmer_export_descriptors_get (exportsHandle, i);
 
-					result [i] = new WasmerExportDescriptor () {
+					result [i] = new ExportDescriptor () {
 						Kind = wasmer_export_descriptor_kind (dhandle),
 						Name = wasmer_export_descriptor_name (dhandle).ToString ()
 					};
@@ -245,12 +377,20 @@ namespace WasmerSharp {
 				}
 			}
 		}
+
+		[DllImport (Library)]
+		extern static void wasmer_module_destroy (IntPtr handle);
+
+		protected override void DisposeHandle ()
+		{
+			wasmer_module_destroy (handle);
+		}
 	}
 
 	/// <summary>
 	/// Represents an export from a web assembly module
 	/// </summary>
-	public class WasmerExportDescriptor {
+	public class ExportDescriptor {
 		/// <summary>
 		///  Gets export descriptor kind
 		/// </summary>
@@ -263,9 +403,9 @@ namespace WasmerSharp {
 		public string Name { get; internal set; }
 	}
 
-	public class WasmerExportFunc : WasmerNativeHandle {
+	public class ExportFunc : WasmerNativeHandle {
 		internal bool owns;
-		internal WasmerExportFunc (IntPtr handle, bool owns) : base (handle)
+		internal ExportFunc (IntPtr handle, bool owns) : base (handle)
 		{
 			this.owns = owns;
 		}
@@ -353,8 +493,8 @@ namespace WasmerSharp {
 
 	}
 
-	public class WasmerExport : WasmerNativeHandle {
-		internal WasmerExport (IntPtr handle) : base (handle) { }
+	public class Export : WasmerNativeHandle {
+		internal Export (IntPtr handle) : base (handle) { }
 
 		[DllImport (Library)]
 		static extern ImportExportKind wasmer_export_kind (IntPtr handle);
@@ -379,11 +519,11 @@ namespace WasmerSharp {
 		/// Gets the exported function
 		/// </summary>
 		/// <returns>Null on error, or the exported function.</returns>
-		public WasmerExportFunc GetExportFunc ()
+		public ExportFunc GetExportFunc ()
 		{
 			var rh = wasmer_export_to_func (handle);
 			if (rh != null)
-				return new WasmerExportFunc (rh, owns: false);
+				return new ExportFunc (rh, owns: false);
 			return null;
 		}
 
@@ -413,6 +553,13 @@ namespace WasmerSharp {
 
 	public class WasmerExports : WasmerNativeHandle {
 		internal WasmerExports (IntPtr handle) : base (handle) { }
+
+		[DllImport(Library)]
+		extern static IntPtr wasmer_exports_get (IntPtr handle, int idx);
+
+		[DllImport(Library)]
+		extern static int wasmer_exports_len (IntPtr handle);
+
 	}
 
 	/// <summary>
@@ -422,7 +569,7 @@ namespace WasmerSharp {
 		internal Memory (IntPtr handle) : base (handle) { }
 
 		[DllImport (Library)]
-		extern static WasmerResult wasmer_memory_new (out IntPtr handle, WasmerLimits limits);
+		extern static WasmerResult wasmer_memory_new (out IntPtr handle, Limits limits);
 
 		/// <summary>
 		///  Creates a memory block with the specified minimum and maxiumum limits
@@ -432,7 +579,7 @@ namespace WasmerSharp {
 		/// <returns>The object on success, or null on failure.</returns>
 		public static Memory Create (uint minPages, uint? maxPages = null)
 		{
-			WasmerLimits limits;
+			Limits limits;
 			limits.min = minPages;
 
 			if (maxPages.HasValue) {
@@ -492,22 +639,115 @@ namespace WasmerSharp {
 
 	}
 
-	// Represents WasmerGlobal
+	/// <summary>
+	/// Represents a Global variable instance, importable/exportable across multiple modules.
+	/// </summary>
 	public class Global: WasmerNativeHandle {
 		internal Global (IntPtr handle) : base (handle) { }
+
+		[DllImport (Library)]
+		extern static IntPtr wasmer_global_new (WasmerValue value, byte mutable_);
+
+		/// <summary>
+		/// Creates a new global with the specified WasmerValue, or int, float, long and double which are implicitly convertible to it.
+		/// </summary>
+		/// <param name="val">The value to place on the global</param>
+		/// <param name="mutable">Determines whether the global is mutable</param>
+		public Global (WasmerValue val, bool mutable)
+		{
+			handle = wasmer_global_new (val, (byte)(mutable ? 1 : 0));
+		}
+
+
+		[DllImport (Library)]
+		extern static void wasmer_global_destroy (IntPtr handle);
+
+		protected override void DisposeHandle ()
+		{
+			wasmer_global_destroy (handle);
+		}
+
+		[DllImport (Library)]
+		extern static WasmerValue wasmer_global_get (IntPtr handle);
+
+		/// <summary>
+		/// Returns the value stored in this global
+		/// </summary>
+		public WasmerValue Value {
+			get {
+				return wasmer_global_get (handle);
+			}
+		}
+
+		[DllImport(Library)]
+		extern static GlobalDescriptor wasmer_global_get_descriptor (IntPtr global);
+
+		/// <summary>
+		/// Returns the descriptor for this value
+		/// </summary>
+		public GlobalDescriptor Descriptor {
+			get {
+				return wasmer_global_get_descriptor (handle);
+			}
+		}
+
+		[DllImport(Library)]
+		extern static void wasmer_global_set (IntPtr global, WasmerValue value);
+
+		/// <summary>
+		/// Sets the value of the global to the provided value, which can be a WasmerValue, or an int, long, float or double
+		/// </summary>
+		/// <param name="value">The new value to set</param>
+		public void Set (WasmerValue value)
+		{
+			wasmer_global_set (handle, value);
+		}
 	}
 
-	public struct WasmerGlobalDescriptor {
+	public struct GlobalDescriptor {
 		public byte mutable;
 		public WasmerValueTag kind;
 	}
 
-	public class WasmerImportDescriptor : WasmerNativeHandle {
-		internal WasmerImportDescriptor (IntPtr handle) : base (handle) { }
+	public class ImportDescriptor : WasmerNativeHandle {
+		internal ImportDescriptor (IntPtr handle) : base (handle) { }
+
+		[DllImport (Library)]
+		extern static ImportExportKind wasmer_import_descriptor_kind (IntPtr handle);
+
+		/// <summary>
+		/// Returns the descriptor kind
+		/// </summary>
+		public ImportExportKind DescriptorKind => wasmer_import_descriptor_kind (handle);
+
+		[DllImport (Library)]
+		extern static WasmerByteArray wasmer_import_descriptor_module_name (IntPtr handle);
+
+		/// <summary>
+		/// Gets module name for the import descriptor
+		/// </summary>
+		public string ModuleName => wasmer_import_descriptor_module_name (handle).ToString ();
+
+		[DllImport (Library)]
+		extern static WasmerByteArray wasmer_import_descriptor_name (IntPtr handle);
+
+		/// <summary>
+		/// Gets name for the import descriptor
+		/// </summary>
+		public string Name => wasmer_import_descriptor_name (handle).ToString ();
+
 	}
 
-	public class WasmerImportDescriptors : WasmerNativeHandle {
-		internal WasmerImportDescriptors (IntPtr handle) : base (handle) { }
+	public class ImportDescriptors : WasmerNativeHandle {
+		internal ImportDescriptors (IntPtr handle) : base (handle) { }
+
+		[DllImport (Library)]
+		extern static void wasmer_import_descriptors_destroy (IntPtr handle);
+
+		protected override void DisposeHandle ()
+		{
+			wasmer_import_descriptors_destroy (handle);
+		}
 	}
 
 	/// <summary>
@@ -573,6 +813,14 @@ namespace WasmerSharp {
 				Marshal.GetFunctionPointerForDelegate (method),
 				pars, pars.Length, returnTag, returnTag.Length);
 		}
+
+		[DllImport (Library)]
+		extern static void wasmer_import_func_destroy (IntPtr handle);
+
+		protected override void DisposeHandle ()
+		{
+			wasmer_import_func_destroy (handle);	
+		}
 	}
 
 	public class Instance : WasmerNativeHandle {
@@ -634,6 +882,7 @@ namespace WasmerSharp {
 					break;
 				}
 			}
+			
 			// TODO: need to extract array length for return and other assorted bits
 			var ret = new WasmerValue [1];
 			if (Call (functionName, parsOut, ret)) {
@@ -641,15 +890,31 @@ namespace WasmerSharp {
 			}
 			return null;
 		}
+
+		[DllImport (Library)]
+		extern static void wasmer_instance_destroy (IntPtr handle);
+
+		protected override void DisposeHandle ()
+		{
+			wasmer_instance_destroy (handle);
+		}
 	}
 
-	public class WasmerInstanceContext : WasmerNativeHandle {
-		internal WasmerInstanceContext (IntPtr handle) : base (handle) { }
+	public class InstanceContext : WasmerNativeHandle {
+		internal InstanceContext (IntPtr handle) : base (handle) { }
 	}
 
 	// WasmerTable
 	public class Table : WasmerNativeHandle {
 		internal Table (IntPtr handle) : base (handle) { }
+
+		[DllImport (Library)]
+		extern static void wasmer_table_destroy (IntPtr handle);
+
+		protected override void DisposeHandle ()
+		{
+			wasmer_table_destroy (handle);
+		}
 	}
 
 	internal struct wasmer_import {
@@ -754,30 +1019,46 @@ namespace WasmerSharp {
 		}
 	}
 
-	public struct WasmerLimitOption {
+	public struct LimitOption {
 		internal byte hasSome; // bool
 		internal uint some;
 	}
 
-	internal struct WasmerLimits {
+	internal struct Limits {
 		internal uint min;
-		internal WasmerLimitOption max;
+		internal LimitOption max;
 	}
 
-	public class WasmerSerializedModule : WasmerNativeHandle {
-		internal WasmerSerializedModule (IntPtr handle) : base (handle) { }
+	public class SerializedModule : WasmerNativeHandle {
+		internal SerializedModule (IntPtr handle) : base (handle) { }
+
+		[DllImport (Library)]
+		extern static void wasmer_serialized_module_destroy (IntPtr handle);
+
+		protected override void DisposeHandle ()
+		{
+			wasmer_serialized_module_destroy (handle);
+		}
 	}
 
-	public class WasmerTrampolineBufferBuilder : WasmerNativeHandle {
-		internal WasmerTrampolineBufferBuilder (IntPtr handle) : base (handle) { }
+	public class TrampolineBufferBuilder : WasmerNativeHandle {
+		internal TrampolineBufferBuilder (IntPtr handle) : base (handle) { }
 	}
 
-	public class WasmerTrampolineCallable: WasmerNativeHandle {
-		internal WasmerTrampolineCallable(IntPtr handle) : base (handle) { }
+	public class TrampolineCallable: WasmerNativeHandle {
+		internal TrampolineCallable(IntPtr handle) : base (handle) { }
 	}
 
-	public class WasmerTrampolineBuffer : WasmerNativeHandle {
-		internal WasmerTrampolineBuffer (IntPtr handle) : base (handle) { }
+	public class TrampolineBuffer : WasmerNativeHandle {
+		internal TrampolineBuffer (IntPtr handle) : base (handle) { }
+
+		[DllImport (Library)]
+		extern static void wasmer_trampoline_buffer_destroy (IntPtr handle);
+
+		protected override void DisposeHandle ()
+		{
+			wasmer_trampoline_buffer_destroy (handle);
+		}
 	}
 
 }
