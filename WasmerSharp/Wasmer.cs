@@ -385,6 +385,34 @@ namespace WasmerSharp {
 		{
 			wasmer_module_destroy (handle);
 		}
+
+		[DllImport (Library)]
+		extern static void wasmer_import_descriptors (IntPtr moduleHandle, out IntPtr importDescriptors);
+
+		[DllImport (Library)]
+		extern static void wasmer_import_descriptors_destroy (IntPtr handle);
+
+		[DllImport (Library)]
+		extern static IntPtr wasmer_import_descriptors_get (IntPtr descriptorsHandle, int idx);
+
+		[DllImport (Library)]
+		extern static int wasmer_import_descriptors_len (IntPtr handle);
+
+		/// <summary>
+		/// Returns the Import Descriptors for this module
+		/// </summary>
+		public ImportDescriptor [] ImportDescriptors {
+			get {
+				wasmer_import_descriptors (handle, out var importsHandle);
+				var len = wasmer_import_descriptors_len (importsHandle);
+				var res = new ImportDescriptor [len];
+				for (int i = 0; i < len; i++) {
+					res [i] = new ImportDescriptor (wasmer_import_descriptors_get (importsHandle, i));
+				}
+				wasmer_import_descriptors_destroy (importsHandle);
+				return res;
+			}
+		}
 	}
 
 	/// <summary>
@@ -560,6 +588,19 @@ namespace WasmerSharp {
 		[DllImport(Library)]
 		extern static int wasmer_exports_len (IntPtr handle);
 
+		/// <summary>
+		/// Returns an array with all the exports - the individual values must be manually disposed.
+		/// </summary>
+		/// <returns></returns>
+		public Export [] GetExports ()
+		{
+			var len = wasmer_exports_len (handle);
+			var result = new Export [len];
+			for (int i = 0; i < len; i++) {
+				result [i] = new Export (wasmer_exports_get (handle, i));
+			}
+			return result;
+		}
 	}
 
 	/// <summary>
@@ -736,18 +777,6 @@ namespace WasmerSharp {
 		/// </summary>
 		public string Name => wasmer_import_descriptor_name (handle).ToString ();
 
-	}
-
-	public class ImportDescriptors : WasmerNativeHandle {
-		internal ImportDescriptors (IntPtr handle) : base (handle) { }
-
-		[DllImport (Library)]
-		extern static void wasmer_import_descriptors_destroy (IntPtr handle);
-
-		protected override void DisposeHandle ()
-		{
-			wasmer_import_descriptors_destroy (handle);
-		}
 	}
 
 	/// <summary>
