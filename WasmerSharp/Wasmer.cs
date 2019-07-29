@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 namespace WasmerSharp {
@@ -213,23 +214,41 @@ namespace WasmerSharp {
 
 	}
 
-	//
-	// This wraps a native handle, it assumes that things can not be
-	// disposed from anything but the owning thread, so you just dispose
-	// objects explicitly.
-	//
+	/// <summary>
+	/// This wraps a native handle and takes care of disposing the handles they wrap.
+	/// Due to the design of the Wasmer API that can
+	/// </summary>
+	/// <remarks>
+	/// produce a lot of values that need to be destroyed, and in an effort to balance
+	/// the complexity that it would involve, this queues releases of data on either
+	/// construction or on the main thread dispose method.
+	/// </remarks>
 	public class WasmerNativeHandle : IDisposable {
+		static Queue<Tuple<Action<IntPtr>, IntPtr>> pendingReleases = new Queue<Tuple<Action<IntPtr>, IntPtr>> ();
 		internal IntPtr handle;
 
 		protected const string Library = "wasmer_runtime_c_api";
 
+		/// <summary>
+		///  Releases any pending objects that were queued for destruction
+		/// </summary>
+		internal static void Flush ()
+		{
+			while (pendingReleases.Count > 0) {
+				var v = pendingReleases.Dequeue ();
+				v.Item1 (v.Item2);
+			}
+		}
+
 		internal WasmerNativeHandle (IntPtr handle)
 		{
 			this.handle = handle;
+			Flush ();
 		}
 
 		internal WasmerNativeHandle ()
 		{
+			Flush ();
 		}
 
 		public void Dispose ()
@@ -238,16 +257,29 @@ namespace WasmerSharp {
 			GC.SuppressFinalize (this);
 		}
 
-		protected virtual void DisposeHandle ()
+		/// <summary>
+		/// This method when called with disposing, should dispose right away,
+		/// otherwise it should return an Action of IntPtr that can dispose the handle.
+		/// </summary>
+	
+		/// <returns>The method to invoke on disposing, or null if there is no need to dispose</returns>
+		protected virtual Action<IntPtr> GetHandleDisposer ()
 		{
+			return null;
 		}
 
 		public virtual void Dispose (bool disposing)
 		{
-			// TODO: maybe queue all the handles that can not be disposed immediately?
-			// And dispose later?
-			if (disposing)
-				DisposeHandle ();
+			var handleDisposer = GetHandleDisposer ();
+			if (disposing) {
+				if (handleDisposer != null)
+					handleDisposer (handle);
+				Flush ();
+			}  else if (handleDisposer != null) {
+				lock (pendingReleases) {
+					pendingReleases.Enqueue (new Tuple<Action<IntPtr>, IntPtr> (handleDisposer, handle));
+				}
+			}
 			handle = IntPtr.Zero;
 		}
 
@@ -381,9 +413,9 @@ namespace WasmerSharp {
 		[DllImport (Library)]
 		extern static void wasmer_module_destroy (IntPtr handle);
 
-		protected override void DisposeHandle ()
+		protected override Action<IntPtr> GetHandleDisposer ()
 		{
-			wasmer_module_destroy (handle);
+			return wasmer_module_destroy;
 		}
 
 		[DllImport (Library)]
@@ -465,10 +497,12 @@ namespace WasmerSharp {
 
 		[DllImport (Library)]
 		extern static void wasmer_import_func_destroy (IntPtr handle);
-		protected override void DisposeHandle ()
+		protected override Action<IntPtr> GetHandleDisposer ()
 		{
 			if (owns)
-				wasmer_import_func_destroy (handle);
+				return wasmer_import_func_destroy;
+			else
+				return null;
 		}
 
 		[DllImport (Library)]
@@ -573,34 +607,16 @@ namespace WasmerSharp {
 		[DllImport (Library)]
 		extern static void wasmer_exports_destroy (IntPtr handle);
 
-		protected override void DisposeHandle ()
+		protected override Action<IntPtr> GetHandleDisposer ()
 		{
-			wasmer_exports_destroy (handle);
+			return wasmer_exports_destroy;
 		}
 	}
 
 	public class WasmerExports : WasmerNativeHandle {
 		internal WasmerExports (IntPtr handle) : base (handle) { }
 
-		[DllImport(Library)]
-		extern static IntPtr wasmer_exports_get (IntPtr handle, int idx);
-
-		[DllImport(Library)]
-		extern static int wasmer_exports_len (IntPtr handle);
-
-		/// <summary>
-		/// Returns an array with all the exports - the individual values must be manually disposed.
-		/// </summary>
-		/// <returns></returns>
-		public Export [] GetExports ()
-		{
-			var len = wasmer_exports_len (handle);
-			var result = new Export [len];
-			for (int i = 0; i < len; i++) {
-				result [i] = new Export (wasmer_exports_get (handle, i));
-			}
-			return result;
-		}
+		
 	}
 
 	/// <summary>
@@ -640,9 +656,9 @@ namespace WasmerSharp {
 		[DllImport (Library)]
 		extern static void wasmer_memory_destroy (IntPtr handle);
 
-		protected override void DisposeHandle ()
+		protected override Action<IntPtr> GetHandleDisposer ()
 		{
-			wasmer_memory_destroy (handle);
+			return wasmer_memory_destroy;
 		}
 
 		[DllImport (Library)]
@@ -703,9 +719,9 @@ namespace WasmerSharp {
 		[DllImport (Library)]
 		extern static void wasmer_global_destroy (IntPtr handle);
 
-		protected override void DisposeHandle ()
+		protected override Action<IntPtr> GetHandleDisposer ()
 		{
-			wasmer_global_destroy (handle);
+			return wasmer_global_destroy;
 		}
 
 		[DllImport (Library)]
@@ -780,11 +796,11 @@ namespace WasmerSharp {
 	}
 
 	/// <summary>
-	///  Support for surfacing .NET functions to Wasm code
+	///  Support for surfacing .NET functions to the Wasm module.
 	/// </summary>
 	// This is WasmerImportFunc
-	public class Function: WasmerNativeHandle {
-		internal Function (IntPtr handle) : base (handle) { }
+	public class ImportFunction: WasmerNativeHandle {
+		internal ImportFunction (IntPtr handle) : base (handle) { }
 
 		internal static WasmerValueTag ValidateTypeToTag (Type type)
 		{
@@ -807,11 +823,11 @@ namespace WasmerSharp {
 		extern static IntPtr wasmer_import_func_new (IntPtr func, WasmerValueTag [] pars, int paramLen, WasmerValueTag [] returns, int retLen);
 
 		/// <summary>
-		///    Creates a WasmerImportFunc from a delegate method.
+		///    Creates an ImportFunction from a delegate method, the .NET method passed on the delegate will then be available to  be called by the Wasm runtime.
 		/// </summary>
 		/// <param name="method">The method to wrap.   The method can only contains int, long, float or double arguments.  The method return can include void, int, long, float and double. </param>
 	
-		public Function (Delegate method)
+		public ImportFunction (Delegate method)
 		{
 			if (method == null)
 				throw new ArgumentNullException (nameof (method));
@@ -846,10 +862,17 @@ namespace WasmerSharp {
 		[DllImport (Library)]
 		extern static void wasmer_import_func_destroy (IntPtr handle);
 
-		protected override void DisposeHandle ()
+		protected override Action<IntPtr> GetHandleDisposer ()
 		{
-			wasmer_import_func_destroy (handle);	
+			return wasmer_import_func_destroy;
 		}
+
+		// I do not think these are necessary as these are just a way of getting the
+		// data that is computed from the Delegate that creates the ImportFunc
+		// wasmer_import_func_params
+		// wasmer_import_func_params_arity
+		// wasmer_import_func_returns
+		// wasmer_import_func_returns_arity
 	}
 
 	public class Instance : WasmerNativeHandle {
@@ -894,7 +917,7 @@ namespace WasmerSharp {
 			}
 			var parsOut = new WasmerValue [args.Length];
 			for (int i = 0; i < args.Length; i++) {
-				var tag = Function.ValidateTypeToTag (args.GetType ());
+				var tag = ImportFunction.ValidateTypeToTag (args.GetType ());
 				parsOut [i].Tag = tag;
 				switch (tag) {
 				case WasmerValueTag.I32:
@@ -923,9 +946,45 @@ namespace WasmerSharp {
 		[DllImport (Library)]
 		extern static void wasmer_instance_destroy (IntPtr handle);
 
-		protected override void DisposeHandle ()
+		protected override Action<IntPtr> GetHandleDisposer ()
 		{
-			wasmer_instance_destroy (handle);
+			return wasmer_instance_destroy;
+		}
+
+		// Pending this question:
+		// https://github.com/wasmerio/wasmer/issues/591
+		// wasmer_instance_context_data_get
+		// wasmer_instance_context_data_set
+		// wasmer_instance_context_memory
+
+		[DllImport (Library)]
+		extern static void wasmer_instance_exports (IntPtr handle, out IntPtr exportsHandle);
+
+		[DllImport (Library)]
+		extern static IntPtr wasmer_exports_get (IntPtr handle, int idx);
+
+		[DllImport (Library)]
+		extern static int wasmer_exports_len (IntPtr handle);
+
+		[DllImport (Library)]
+		extern static void wasmer_exports_destroy (IntPtr handle);
+
+		/// <summary>
+		/// Returns an array with all the exports - the individual values must be manually disposed.
+		/// </summary>
+		/// <returns></returns>
+		public Export [] Exports {
+			get {
+
+				wasmer_instance_exports (handle, out var exportsHandle);
+				var len = wasmer_exports_len (exportsHandle);
+				var result = new Export [len];
+				for (int i = 0; i < len; i++) {
+					result [i] = new Export (wasmer_exports_get (exportsHandle, i));
+				}
+				wasmer_exports_destroy (exportsHandle);
+				return result;
+			}
 		}
 	}
 
@@ -940,9 +999,9 @@ namespace WasmerSharp {
 		[DllImport (Library)]
 		extern static void wasmer_table_destroy (IntPtr handle);
 
-		protected override void DisposeHandle ()
+		protected override Action<IntPtr> GetHandleDisposer ()
 		{
-			wasmer_table_destroy (handle);
+			return wasmer_table_destroy;
 		}
 	}
 
@@ -1013,7 +1072,7 @@ namespace WasmerSharp {
 		/// <param name="moduleName">The module name for this import</param>
 		/// <param name="importName">The name for this import</param>
 		/// <param name="function">The function to import</param>
-		public Import (string moduleName, string importName, Function function)
+		public Import (string moduleName, string importName, ImportFunction function)
 		{
 			if (moduleName == null)
 				throw new ArgumentNullException (nameof (moduleName));
@@ -1064,9 +1123,9 @@ namespace WasmerSharp {
 		[DllImport (Library)]
 		extern static void wasmer_serialized_module_destroy (IntPtr handle);
 
-		protected override void DisposeHandle ()
+		protected override Action<IntPtr> GetHandleDisposer ()
 		{
-			wasmer_serialized_module_destroy (handle);
+			return wasmer_serialized_module_destroy;
 		}
 	}
 
@@ -1084,9 +1143,9 @@ namespace WasmerSharp {
 		[DllImport (Library)]
 		extern static void wasmer_trampoline_buffer_destroy (IntPtr handle);
 
-		protected override void DisposeHandle ()
+		protected override Action<IntPtr> GetHandleDisposer ()
 		{
-			wasmer_trampoline_buffer_destroy (handle);
+			return wasmer_trampoline_buffer_destroy;
 		}
 	}
 
