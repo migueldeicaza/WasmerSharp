@@ -1,31 +1,15 @@
-# WasmerSharp
+﻿//
+// Wasmer.cs: .NET bindings to the Wasmer engine
+//
+// Author:
+//   Miguel de Icaza (miguel@gnome.org)
+//
+using System;
+using WasmerSharp;
+using System.IO;
 
-.NET Bindings for the Wasmer Runtime.
-
-This binds Wasmer at version ab5f28851a676f9d3672f41d1608e34ddab470ff
-
-# Install
-
-The Wasmer bindings are a .NET Standard library, and they will need
-the Wasmer C runtime to be installed somewhere accessible in your
-system (either the same directory as the DLL, or in a location
-accessible to the dynamic linker).
-
-To obtain the native Wasmer C runtime, you can build Wasmer like this:
-
-```
-cargo build -p wasmer-runtime-c-api
-```
-
-And then copy the `target/debug/libwasmer_runtime_c_api.dylib` library
-to the destination.
-
-# Examples
-
-```
-using WasmerSharp
-
-        // This method is invoked by the WebAssembly code.
+class MainClass {
+	// This method is invoked by the WebAssembly code.
 	public static void Print (InstanceContext ctx, int ptr, int len)
 	{
 		Console.WriteLine (".NET Print called");
@@ -62,8 +46,4 @@ using WasmerSharp
 		else
 			Console.WriteLine ("__hello_wasm returned: " + ret);
 	}
-```
-
-# LICENSE
-
-This is licensed under the MIT License terms.
+}
