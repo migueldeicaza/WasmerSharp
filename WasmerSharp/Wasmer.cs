@@ -308,20 +308,20 @@ namespace WasmerSharp {
 	/// Represents a WebAssembly module, created from a byte array containing the WebAssembly code.
 	/// </summary>
 	/// <remarks>
-	/// 
+	///    Use the Create method to create new instances of a module.
 	/// </remarks>
 	public class Module : WasmerNativeHandle {
 		internal Module (IntPtr handle) : base (handle) { }
 
 		[DllImport (Library)]
 		extern static WasmerResult wasmer_compile (out IntPtr handle, IntPtr body, uint len);
-		
+
 		/// <summary>
 		/// Creates a new Module from the given WASM bytes pointed to by the specified address
 		/// </summary>
 		/// <param name="wasmBody">A pointer to a block of memory containing the WASM code to load into the module</param>
 		/// <param name="bodyLength">The size of the wasmBody pointer</param>
-		/// <returns>The WasmerModule instance, or null on error</returns>
+		/// <returns>The WasmerModule instance, or null on error.   You can use the LastError error property to get details on the error.</returns>
 		public static Module Create (IntPtr wasmBody, uint bodyLength)
 		{
 			if (wasmer_compile (out var handle, wasmBody, bodyLength) == WasmerResult.Ok) {
@@ -334,7 +334,7 @@ namespace WasmerSharp {
 		/// Creates a new Module from the given WASM bytes
 		/// </summary>
 		/// <param name="wasmBody">An array containing the WASM code to load into the module</param>
-		/// <returns>The WasmerModule instance, or null on error</returns>
+		/// <returns>The WasmerModule instance, or null on error.  You can use the LastError error property to get details on the error.</returns>
 		public static Module Create (byte [] wasmBody)
 		{
 			if (wasmBody == null)
@@ -445,6 +445,49 @@ namespace WasmerSharp {
 				return res;
 			}
 		}
+
+		[DllImport (Library)]
+		extern static WasmerResult wasmer_module_serialize (out IntPtr serialized, IntPtr handle);
+
+		/// <summary>
+		/// Serializes the module, the result can be turned into a byte array and saved.
+		/// </summary>
+		/// <returns>Null on error, or an instance of SerializedModule on success.  You can use the LastError error property to get details on the error.</returns>
+		public SerializedModule Serialize ()
+		{
+			if (wasmer_module_serialize (out var serialized, handle) == WasmerResult.Ok) {
+				return new SerializedModule (serialized);
+			} else
+				return null;
+		}
+
+		[DllImport (Library)]
+		extern static byte wasmer_validate (IntPtr bytes, uint len);
+
+		/// <summary>
+		/// Validates a block of bytes for being a valid web assembly package.
+		/// </summary>
+		/// <param name="bytes">Pointer to the bytes that contain the webassembly payload</param>
+		/// <param name="len">Length of the buffer.</param>
+		/// <returns>True if this contains a valid webassembly package, false otherwise.</returns>
+		public bool Validate (IntPtr bytes, int len)
+		{
+			return wasmer_validate (bytes, len) != 0;
+		}
+
+		/// <summary>
+		/// Validates a byte array for being a valid web assembly package.
+		/// </summary>
+		/// <param name="buffer">Array containing the webassembly package to validate</param>
+		/// <returns>True if this contains a valid webassembly package, false otherwise.</returns>
+		public bool Validate (byte [] buffer)
+		{
+			unsafe {
+				fixed (byte* p = &bytes [0]) {
+					return Validate ((IntPtr)p, bytes.Length);
+				}
+			}
+		}
 	}
 
 	/// <summary>
@@ -512,7 +555,7 @@ namespace WasmerSharp {
 		extern static WasmerResult wasmer_export_func_params_arity (IntPtr handle, out uint result);
 
 		/// <summary>
-		/// Returns the parameter types for the exported function as an array.   Returns null on error.
+		/// Returns the parameter types for the exported function as an array.   Returns null on error. You can use the LastError error property to get details on the error.
 		/// </summary>
 		public WasmerValueTag [] Parameters {
 			get {
@@ -536,7 +579,7 @@ namespace WasmerSharp {
 		extern static WasmerResult wasmer_export_func_returns_arity (IntPtr handle, out uint result);
 
 		/// <summary>
-		/// Returns the return types for the exported function as an array.   Returns null on error.
+		/// Returns the return types for the exported function as an array.   Returns null on error. You can use the LastError error property to get details on the error.
 		/// </summary>
 		public WasmerValueTag [] Returns {
 			get {
@@ -580,7 +623,7 @@ namespace WasmerSharp {
 		/// <summary>
 		/// Gets the exported function
 		/// </summary>
-		/// <returns>Null on error, or the exported function.</returns>
+		/// <returns>Null on error, or the exported function.  You can use the LastError error property to get details on the error.</returns>
 		public ExportFunc GetExportFunc ()
 		{
 			var rh = wasmer_export_to_func (handle);
@@ -613,12 +656,6 @@ namespace WasmerSharp {
 		}
 	}
 
-	public class WasmerExports : WasmerNativeHandle {
-		internal WasmerExports (IntPtr handle) : base (handle) { }
-
-		
-	}
-
 	/// <summary>
 	/// Represents the WebAssembly memory.   Memory is allocated in pages, which are 64k bytes in size.
 	/// </summary>
@@ -633,7 +670,7 @@ namespace WasmerSharp {
 		/// </summary>
 		/// <param name="minPages">Minimum number of allowed pages</param>
 		/// <param name="maxPages">Optional, Maximum number of allowed pages</param>
-		/// <returns>The object on success, or null on failure.</returns>
+		/// <returns>The object on success, or null on failure. You can use the LastError error property to get details on the error.</returns>
 		public static Memory Create (uint minPages, uint? maxPages = null)
 		{
 			Limits limits;
@@ -766,6 +803,9 @@ namespace WasmerSharp {
 		public WasmerValueTag kind;
 	}
 
+	/// <summary>
+	/// The import descriptors for a WebAssembly module.
+	/// </summary>
 	public class ImportDescriptor : WasmerNativeHandle {
 		internal ImportDescriptor (IntPtr handle) : base (handle) { }
 
@@ -904,7 +944,7 @@ namespace WasmerSharp {
 		/// </summary>
 		/// <param name="functionName">Namer of the exported function to call in the instane</param>
 		/// <param name="args">The argument types are limited to int, long, float and double.</param>
-		/// <returns>An array of values on success, null on error.</returns>
+		/// <returns>An array of values on success, null on error. You can use the LastError error property to get details on the error.</returns>
 		public object [] Call (string functionName, object [] args)
 		{
 			if (functionName == null)
@@ -992,7 +1032,27 @@ namespace WasmerSharp {
 		internal InstanceContext (IntPtr handle) : base (handle) { }
 	}
 
-	// WasmerTable
+	/// <summary>
+	/// Represents a Wasmer Table.   Use the Create static method to create new instances of the table.
+	/// </summary>
+	/// <remarks>
+	/// <para>
+	/// A table is similar to a linear memory whose elements, instead of being bytes, are opaque values of a
+	/// particular table element type. This allows the table to contain values—like GC references,
+	/// raw OS handles, or native pointers—that are accessed by WebAssembly code indirectly through an integer index.
+	/// This feature bridges the gap between low-level, untrusted linear memory and high-level opaque
+	/// handles/references at the cost of a bounds-checked table indirection.
+	/// </para>
+	/// <para>
+	/// The table’s element type constrains the type of elements stored in the table and allows engines to
+	/// avoid some type checks on table use. When a WebAssembly value is stored in a table, the value’s
+	/// type must precisely match the element type. Depending on the operator/API used to store the value,
+	/// this check may be static or dynamic. Just like linear memory, updates to a table are observed
+	/// immediately by all instances that reference the table. Host environments may also allow storing
+	/// non-WebAssembly values in tables in which case, as with imports, the meaning of using the value
+	/// is defined by the host environment.
+	/// </para>
+	/// </remarks>
 	public class Table : WasmerNativeHandle {
 		internal Table (IntPtr handle) : base (handle) { }
 
@@ -1003,6 +1063,54 @@ namespace WasmerSharp {
 		{
 			return wasmer_table_destroy;
 		}
+
+		[DllImport (Library)]
+		extern static WasmerResult wasmer_table_new (out IntPtr handle, Limits limits);
+
+		/// <summary>
+		/// Creates a new Table for the given descriptor
+		/// </summary>
+		/// <param name="min">Minimum number of elements to store on the table.</param>
+		/// <param name="max">Optional, maximum number of elements to store on the table.</param>
+		/// <returns>An instance of Table on success, or null on error.  You can use the LastError error property to get details on the error.</returns>
+		public static Table Create (uint min, uint? max= null)
+		{
+			Limits limits;
+			limits.min = min;
+
+			if (max.HasValue) {
+				limits.max.hasSome = 1;
+				limits.max.some = max.Value;
+			} else {
+				limits.max.hasSome = 0;
+				limits.max.some = 0;
+			}
+			if (wasmer_table_new (out var handle, limits) == WasmerResult.Ok)
+				return new Table (handle);
+			else
+				return null;
+		}
+
+		[DllImport (Library)]
+		extern static WasmerResult wasmer_table_grow (IntPtr handle, uint delta);
+
+		/// <summary>
+		/// Attemps to grow the table by the specified number of elements.
+		/// </summary>
+		/// <param name="delta">Number of elements to add to the table.</param>
+		/// <returns>true on success, false on failure.  You can use the LastError error property to get details on the error.</returns>
+		public bool Grow (uint delta)
+		{
+			return wasmer_table_grow (handle, delta) == WasmerResult.Ok;
+		}
+
+		[DllImport (Library)]
+		extern static uint wasmer_table_length (IntPtr handle);
+
+		/// <summary>
+		/// Returns the current length of the given Table  
+		/// </summary>
+		public uint Length => wasmer_table_length (handle);
 	}
 
 	internal struct wasmer_import {
@@ -1123,12 +1231,72 @@ namespace WasmerSharp {
 		[DllImport (Library)]
 		extern static void wasmer_serialized_module_destroy (IntPtr handle);
 
+		[DllImport (Library)]
+		extern static WasmerResult wasmer_serialized_module_from_bytes (out IntPtr handle, IntPtr bytes, uint len);
+
+		/// <summary>
+		/// Creates a new SerializedModule from the provided buffer.
+		/// </summary>
+		/// <param name="bytes">Pointer to a region in memory containing the serialized module.</param>
+		/// <param name="len">The number of bytes toe process from the buffer</param>
+		/// <returns>Returns null on error, or an instance of SerializeModule on success.  You can use the LastError error property to get details on the error.</returns>
+		public static SerializedModule FromBytes (IntPtr bytes, uint len)
+		{
+			if (wasmer_serialized_module_from_bytes (out var handle, bytes, len) == WasmerResult.Ok)
+				return new SerializedModule (handle);
+			else
+				return null;
+		}
+
+		/// <summary>
+		/// Creates a new SerializedModule from the provided byte array
+		/// </summary>
+		/// <param name="buffer">Array of bytes containing the serialized module.</param>
+		/// <returns>Returns null on error, or an instance of SerializeModule on success.   You can use the LastError error property to get details on the error.</returns>
+		public static SerializedModule FromBytes (byte [] buffer)
+		{
+			unsafe {
+				fixed (byte* p = &buffer [0]) {
+					return FromBytes ((IntPtr)p, (uint) buffer.Length);
+				}
+			}
+		}
+
+		[DllImport (Library)]
+		extern static WasmerByteArray wasmer_serialized_module_bytes (IntPtr handle);
+
+		/// <summary>
+		/// Returns the serialized module as a byte array.
+		/// </summary>
+		/// <returns>The byte array for this serialized module</returns>
+		public byte [] GetModuleBytes ()
+		{
+			return wasmer_serialized_module_bytes (handle).ToByteArray ();
+		}
+
 		protected override Action<IntPtr> GetHandleDisposer ()
 		{
 			return wasmer_serialized_module_destroy;
 		}
+
+		[DllImport (Library)]
+		extern static WasmerResult wasmer_module_deserialize (out IntPtr module, IntPtr handle);
+
+		/// <summary>
+		/// Deserialize the given serialized module.
+		/// </summary>
+		/// <returns>Returns an instance of a Module, or null on error.  You can use the LastError error property to get details on the error. </returns>
+		public Module Deserialize ()
+		{
+			if (wasmer_module_deserialize (out var moduleHandle, handle) == WasmerResult.Ok)
+				return new Module (moduleHandle);
+			return null;
+		}
 	}
 
+#if false
+
+	// Penbding bindigns: https://gist.github.com/migueldeicaza/32816d404e202840ee13ca9a7f0fe724
 	public class TrampolineBufferBuilder : WasmerNativeHandle {
 		internal TrampolineBufferBuilder (IntPtr handle) : base (handle) { }
 	}
@@ -1148,5 +1316,5 @@ namespace WasmerSharp {
 			return wasmer_trampoline_buffer_destroy;
 		}
 	}
-
+#endif
 }
