@@ -1,0 +1,286 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class SerializedModule
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class SerializedModule
+   ">
+    <meta name="generator" content="docfx 2.18.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="WasmerSharp.SerializedModule">
+  
+  
+  <h1 id="WasmerSharp_SerializedModule" data-uid="WasmerSharp.SerializedModule">Class SerializedModule
+  </h1>
+  <div class="markdown level0 summary"><p>Modules can either be serialized to byte arrays, or created from a serialized state (byte arrays).  This class provides this bridge.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="WasmerSharp.WasmerNativeHandle.html">WasmerNativeHandle</a></div>
+    <div class="level2"><span class="xref">SerializedModule</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="WasmerSharp.WasmerNativeHandle.html#WasmerSharp_WasmerNativeHandle_Dispose">WasmerNativeHandle.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="WasmerSharp.WasmerNativeHandle.html#WasmerSharp_WasmerNativeHandle_LastError">WasmerNativeHandle.LastError</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="../WasmerSharp.html">WasmerSharp</a></h6>
+  <h6><strong>Assembly</strong>: WasmerSharp.dll</h6>
+  <h5 id="WasmerSharp_SerializedModule_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class SerializedModule : WasmerSharp.WasmerNativeHandle</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="WasmerSharp_SerializedModule_Deserialize_" data-uid="WasmerSharp.SerializedModule.Deserialize*"></a>
+  <h4 id="WasmerSharp_SerializedModule_Deserialize" data-uid="WasmerSharp.SerializedModule.Deserialize">Deserialize()</h4>
+  <div class="markdown level1 summary"><p>Deserialize the given serialized module.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WasmerSharp.Module Deserialize ();</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WasmerSharp.Module.html">Module</a></td>
+        <td><p>Returns an instance of a Module, or null on error.  You can use the LastError error property to get details on the error.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="WasmerSharp_SerializedModule_FromBytes_" data-uid="WasmerSharp.SerializedModule.FromBytes*"></a>
+  <h4 id="WasmerSharp_SerializedModule_FromBytes_System_Byte___" data-uid="WasmerSharp.SerializedModule.FromBytes(System.Byte[])">FromBytes(Byte[])</h4>
+  <div class="markdown level1 summary"><p>Creates a new SerializedModule from the provided byte array</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static WasmerSharp.SerializedModule FromBytes (byte[] buffer);</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td><span class="parametername">buffer</span></td>
+        <td><p>Array of bytes containing the serialized module.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WasmerSharp.SerializedModule.html">SerializedModule</a></td>
+        <td><p>Returns null on error, or an instance of SerializeModule on success.   You can use the LastError error property to get details on the error.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="WasmerSharp_SerializedModule_FromBytes_" data-uid="WasmerSharp.SerializedModule.FromBytes*"></a>
+  <h4 id="WasmerSharp_SerializedModule_FromBytes_System_IntPtr_System_UInt32_" data-uid="WasmerSharp.SerializedModule.FromBytes(System.IntPtr,System.UInt32)">FromBytes(IntPtr, UInt32)</h4>
+  <div class="markdown level1 summary"><p>Creates a new SerializedModule from the provided buffer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static WasmerSharp.SerializedModule FromBytes (IntPtr bytes, uint len);</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IntPtr</span></td>
+        <td><span class="parametername">bytes</span></td>
+        <td><p>Pointer to a region in memory containing the serialized module.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.UInt32</span></td>
+        <td><span class="parametername">len</span></td>
+        <td><p>The number of bytes toe process from the buffer</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WasmerSharp.SerializedModule.html">SerializedModule</a></td>
+        <td><p>Returns null on error, or an instance of SerializeModule on success.  You can use the LastError error property to get details on the error.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="WasmerSharp_SerializedModule_GetModuleBytes_" data-uid="WasmerSharp.SerializedModule.GetModuleBytes*"></a>
+  <h4 id="WasmerSharp_SerializedModule_GetModuleBytes" data-uid="WasmerSharp.SerializedModule.GetModuleBytes">GetModuleBytes()</h4>
+  <div class="markdown level1 summary"><p>Returns the serialized module as a byte array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte[] GetModuleBytes ();</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td><p>The byte array for this serialized module</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2015-2017 Microsoft<br>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

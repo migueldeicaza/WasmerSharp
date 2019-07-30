@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Namespace WasmerSharp
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Namespace WasmerSharp
+   ">
+    <meta name="generator" content="docfx 2.18.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="WasmerSharp">
+  
+  <h1 id="WasmerSharp" data-uid="WasmerSharp">Namespace WasmerSharp
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+      <h4><a class="xref" href="WasmerSharp/WasmerSharp.Export.html">Export</a></h4>
+      <section><p>Represents an exported object from a Wasm Instance</p>
+</section>
+      <h4><a class="xref" href="WasmerSharp/WasmerSharp.ExportDescriptor.html">ExportDescriptor</a></h4>
+      <section><p>Represents an export from a web assembly module</p>
+</section>
+      <h4><a class="xref" href="WasmerSharp/WasmerSharp.ExportFunction.html">ExportFunction</a></h4>
+      <section><p>Represents an ExportedFunction from WebAssembly to .NET</p>
+</section>
+      <h4><a class="xref" href="WasmerSharp/WasmerSharp.Global.html">Global</a></h4>
+      <section><p>Represents a Global variable instance, importable/exportable across multiple modules.</p>
+</section>
+      <h4><a class="xref" href="WasmerSharp/WasmerSharp.Import.html">Import</a></h4>
+      <section><p>Use this class to create the various Import objects (Globals, Memory, Function and Tables)</p>
+</section>
+      <h4><a class="xref" href="WasmerSharp/WasmerSharp.ImportDescriptor.html">ImportDescriptor</a></h4>
+      <section><p>The import descriptors for a WebAssembly module describe the type of each import, iits name and the module name it belongs to.</p>
+</section>
+      <h4><a class="xref" href="WasmerSharp/WasmerSharp.ImportFunction.html">ImportFunction</a></h4>
+      <section><p>Support for surfacing .NET functions to the Wasm module.</p>
+</section>
+      <h4><a class="xref" href="WasmerSharp/WasmerSharp.Instance.html">Instance</a></h4>
+      <section><p>Instances represents all the state associated with a module.   These are created by calling Module.Instantiate or by calling the Instance constructor.</p>
+</section>
+      <h4><a class="xref" href="WasmerSharp/WasmerSharp.Memory.html">Memory</a></h4>
+      <section><p>Represents the WebAssembly memory.   Memory is allocated in pages, which are 64k bytes in size.</p>
+</section>
+      <h4><a class="xref" href="WasmerSharp/WasmerSharp.Module.html">Module</a></h4>
+      <section><p>Represents a WebAssembly module, created from a byte array containing the WebAssembly code.</p>
+</section>
+      <h4><a class="xref" href="WasmerSharp/WasmerSharp.SerializedModule.html">SerializedModule</a></h4>
+      <section><p>Modules can either be serialized to byte arrays, or created from a serialized state (byte arrays).  This class provides this bridge.</p>
+</section>
+      <h4><a class="xref" href="WasmerSharp/WasmerSharp.Table.html">Table</a></h4>
+      <section><p>Represents a Wasmer Table.   Use the Create static method to create new instances of the table.</p>
+</section>
+      <h4><a class="xref" href="WasmerSharp/WasmerSharp.WasmerNativeHandle.html">WasmerNativeHandle</a></h4>
+      <section><p>This wraps a native handle and takes care of disposing the handles they wrap.
+            Due to the design of the Wasmer API that can</p>
+</section>
+    <h3 id="structs">Structs
+  </h3>
+      <h4><a class="xref" href="WasmerSharp/WasmerSharp.InstanceContext.html">InstanceContext</a></h4>
+      <section><p>An instance of this type is provided as the first parameter of imported functions and can be used
+            to get some contextual information from the callback to operate on: the global Data set for the
+            instance as well as the associated memory.</p>
+</section>
+      <h4><a class="xref" href="WasmerSharp/WasmerSharp.WasmerValue.html">WasmerValue</a></h4>
+      <section><p>This object can wrap an int, long, float or double.   The Tag property describes the actual payload, and the I32, I64, F32 and F64 fields provide access to the underlying data.   Implicit conversion from those data types to WasmerValue exist, and explicit conversions from a WasmerValue to those types exist.</p>
+</section>
+    <h3 id="enums">Enums
+  </h3>
+      <h4><a class="xref" href="WasmerSharp/WasmerSharp.ImportExportKind.html">ImportExportKind</a></h4>
+      <section><p>Describes the kind of export or import</p>
+</section>
+      <h4><a class="xref" href="WasmerSharp/WasmerSharp.WasmerValueType.html">WasmerValueType</a></h4>
+      <section><p>Describes the types exposed by the WasmerBridge</p>
+</section>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2015-2017 Microsoft<br>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

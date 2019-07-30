@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Introduction </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Introduction ">
+    <meta name="generator" content="docfx 2.18.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="introduction">Introduction</h1>
+
+<p>Familiarity with some of the concepts and conventions of WebAssembly
+will be useful to understand this introduction, but it is not necessary.</p>
+<p>In WebAssembly &quot;Imports&quot; refer to objects that are imported into the
+WebAssembly world, and &quot;Exports&quot; are the bits that are exposed by the
+WebAssembly code.    </p>
+<p>When you want to expose a .NET method to WebAssembly, you would create
+an &quot;ImportFunction&quot; for example.</p>
+<p>WasmerSharp can load WebAssembly code into a .NET application.  .NET
+methods can be exposed to the WebAssembly application, and individual
+entry points from WebAssembly can be invoked from C#.</p>
+<p>The simplest hosting can be done by loading the WebAssembly package
+into memory, creating a memory object, and then invoking a method in
+WebAssembly, the following example shows this:</p>
+<pre><code>using WasmerShrap;
+
+// This creates a memory block with a minimum of 256 64k pages
+// and a maxium of 256 64k pages
+var memory = Memory.Create (minPages: 256, maxPages: 256);
+
+// Now we surface the memory as an import
+var memoryImport = new Import (&quot;env&quot;, &quot;memory&quot;, memory)
+
+// We load a webassembly file
+var wasm = File.ReadAllBytes (&quot;demo.wasm&quot;);
+
+// Now we create an instance based on the WASM file, and the memory provided:
+var instance = new Instance (wasm, memory);
+
+// And now you can invoke some code from WebAssembly:
+var ret = instance.Call (&quot;hello_world&quot;);
+if (ret == null){
+   Console.WriteLine (&quot;Error calling the method hello_world, status:&quot; + instance.LastError);
+else
+   Console.WriteLine (&quot;The method returned: &quot; + ret);
+</code></pre><p>The <a href="../api/WasmerSharp/WasmerSharp.Instance.html"><code>Instance</code></a> class creates a WebAssembly instance out of the
+WebAssembly code (in this case the <code>wasm</code> array) as well as a series
+of imports that are the parameters to the Instance.  In the simple
+example above, we only provided a block of memory - the minimum
+necessary import, but you can also provide functions via
+ImportFunction, Tables and define Global variables that can be shared
+across Instances.</p>
+<p>The <a href="../api/WasmerSharp/WasmerSharp.Instance.html"><code>Instance</code></a>
+constructor takes a variable list of
+<a href="../api/WasmerSharp/WasmerSharp.Import.html"><code>Import</code></a> instances, so
+you can provide multiple functions, tables, memory blocks and globals.
+This is a convenience constructor that exist for quickly running Wasm
+code.  Generally, you could first create a
+<a href="../api/WasmerSharp/WasmerSharp.Module.html"><code>Module</code></a>, and then
+instantiate the <a href="../api/WasmerSharp/WasmerSharp.Module.html"><code>Module</code></a>
+with the list of <a href="../api/WasmerSharp/WasmerSharp.Import.html"><code>Import</code></a>
+that you want.</p>
+<h1 id="exposing-global-variables-to-webassembly">Exposing Global Variables to WebAssembly</h1>
+<p>You can use the <a href="../api/WasmerSharp/WasmerSharp.Global.html"><code>Global</code></a>
+type to create values that can be exposed to the WebAssembly code.
+Globals can either be mutable or immutable, and you specify that at
+creation time.</p>
+<p>One a Global is created, you need to name it and wrap it in an
+<a href="../api/WasmerSharp/WasmerSharp.Import.html"><code>Import</code></a> type, and pass
+this to the <a href="../api/WasmerSharp/WasmerSharp.Instance.html"><code>Instance</code></a>
+constructor.`</p>
+<h1 id="surfacing-net-code-to-webassembly">Surfacing .NET code to WebAssembly</h1>
+<p>To surface code to WebAssembly, you create an instance of the
+<a href="../api/WasmerSharp/WasmerSharp.ImportFunction.html"><code>ImportFunction</code></a>
+method.  This wraps a .NET method.  The method must have the following
+requirements:</p>
+<ul>
+<li><p>The first parameter must be an <a href="../api/WasmerSharp/WasmerSharp.InstanceContext.html"><code>InstanceContext</code></a> parameter, which is
+used by the function to access the <a href="../api/WasmerSharp/WasmerSharp.Memory.html"><code>Memory</code></a> object, and also an
+instance-level data payload.</p>
+</li>
+<li><p>The parameters must be <code>Int32</code>, <code>Int64</code>, <code>Float</code> or <code>Double</code>.</p>
+</li>
+</ul>
+<p>If you need to pass additional information or complex data structures,
+you can consider storing the contents of the data into the <a href="../api/WasmerSharp/WasmerSharp.Memory.html"><code>Memory</code></a> 
+and passing the address to this method, or setting the address in a
+<a href="../api/WasmerSharp/WasmerSharp.Global.html"><code>Global</code></a>  variable and passing that one.</p>
+<p>Once you do this, then you create an <a href="../api/WasmerSharp/WasmerSharp.Import.html"><code>Import</code></a> wrapper for it.</p>
+<h1 id="example">Example</h1>
+<p>This function shows the use of
+<a href="../api/WasmerSharp/WasmerSharp.Global.html"><code>Global</code></a>,
+<a href="../api/WasmerSharp/WasmerSharp.Instance.html"><code>Instance</code></a> and
+<a href="../api/WasmerSharp/WasmerSharp.ImportFunction.html"><code>ImportFunction</code></a>
+in action.</p>
+<pre><code>// This method is invoked by the WebAssembly code.
+public static void Print (InstanceContext ctx, int ptr, int len)
+{
+    Console.WriteLine (&quot;.NET Print called&quot;);
+    var memoryBase = ctx.GetMemory (0).Data;
+    unsafe {
+        var str = Encoding.UTF8.GetString ((byte*)memoryBase + ptr, len);
+
+        Console.WriteLine (&quot;Received this utf string: [{0}]&quot;, str);
+    }
+}
+
+public static void Main (string [] args)
+{
+    //
+    // Creates the imports for the instance
+    //
+    var func = new Import (&quot;env&quot;, &quot;_print_str&quot;, 
+        new ImportFunction ((Action&lt;InstanceContext,int,int&gt;) (Print)));
+
+    var memory = new Import (&quot;env&quot;, &quot;memory&quot;, 
+        Memory.Create (minPages: 256, maxPages: 256));
+
+    var global = new Import (&quot;env&quot;, &quot;__memory_base&quot;, 
+            new Global (1024, false));
+
+    var wasm = File.ReadAllBytes (&quot;target.wasm&quot;);
+
+    //
+    // Create an instance from the wasm bytes, the declared func, 
+    // the memory we created and the global we have
+    //
+    var instance = new Instance (wasm, func, memory, global);
+
+    //
+    // Call the method defined in webassembly
+    //
+    var ret = instance.Call (&quot;_hello_wasm&quot;);
+    if (ret == null)
+        Console.WriteLine (&quot;error calling method {0}&quot;, instance.LastError);
+    else
+        Console.WriteLine (&quot;__hello_wasm returned: &quot; + ret);
+}
+</code></pre></article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/migueldeicaza/WasmerSharp/blob/master/docfx/articles/intro.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2015-2017 Microsoft<br>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

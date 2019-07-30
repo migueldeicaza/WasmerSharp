@@ -1,0 +1,743 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: WasmerSharp
+  name: WasmerSharp
+  href: api/WasmerSharp.html
+  fullName: WasmerSharp
+  nameWithType: WasmerSharp
+- uid: WasmerSharp.Export
+  name: Export
+  href: api/WasmerSharp/WasmerSharp.Export.html
+  fullName: WasmerSharp.Export
+  nameWithType: Export
+- uid: WasmerSharp.Export.GetExportFunction
+  name: GetExportFunction()
+  href: api/WasmerSharp/WasmerSharp.Export.html#WasmerSharp_Export_GetExportFunction
+  fullName: Export.GetExportFunction()
+  nameWithType: Export.GetExportFunction()
+- uid: WasmerSharp.Export.GetExportFunction*
+  name: GetExportFunction
+  href: api/WasmerSharp/WasmerSharp.Export.html#WasmerSharp_Export_GetExportFunction_
+  fullName: Export.GetExportFunction
+  nameWithType: Export.GetExportFunction
+- uid: WasmerSharp.Export.GetMemory
+  name: GetMemory()
+  href: api/WasmerSharp/WasmerSharp.Export.html#WasmerSharp_Export_GetMemory
+  fullName: Export.GetMemory()
+  nameWithType: Export.GetMemory()
+- uid: WasmerSharp.Export.GetMemory*
+  name: GetMemory
+  href: api/WasmerSharp/WasmerSharp.Export.html#WasmerSharp_Export_GetMemory_
+  fullName: Export.GetMemory
+  nameWithType: Export.GetMemory
+- uid: WasmerSharp.Export.Kind
+  name: Kind
+  href: api/WasmerSharp/WasmerSharp.Export.html#WasmerSharp_Export_Kind
+  fullName: Export.Kind
+  nameWithType: Export.Kind
+- uid: WasmerSharp.Export.Kind*
+  name: Kind
+  href: api/WasmerSharp/WasmerSharp.Export.html#WasmerSharp_Export_Kind_
+  fullName: Export.Kind
+  nameWithType: Export.Kind
+- uid: WasmerSharp.Export.Name
+  name: Name
+  href: api/WasmerSharp/WasmerSharp.Export.html#WasmerSharp_Export_Name
+  fullName: Export.Name
+  nameWithType: Export.Name
+- uid: WasmerSharp.Export.Name*
+  name: Name
+  href: api/WasmerSharp/WasmerSharp.Export.html#WasmerSharp_Export_Name_
+  fullName: Export.Name
+  nameWithType: Export.Name
+- uid: WasmerSharp.ExportDescriptor
+  name: ExportDescriptor
+  href: api/WasmerSharp/WasmerSharp.ExportDescriptor.html
+  fullName: WasmerSharp.ExportDescriptor
+  nameWithType: ExportDescriptor
+- uid: WasmerSharp.ExportDescriptor.#ctor
+  name: ExportDescriptor()
+  href: api/WasmerSharp/WasmerSharp.ExportDescriptor.html#WasmerSharp_ExportDescriptor__ctor
+  fullName: ExportDescriptor.ExportDescriptor()
+  nameWithType: ExportDescriptor.ExportDescriptor()
+- uid: WasmerSharp.ExportDescriptor.#ctor*
+  name: ExportDescriptor
+  href: api/WasmerSharp/WasmerSharp.ExportDescriptor.html#WasmerSharp_ExportDescriptor__ctor_
+  fullName: ExportDescriptor.ExportDescriptor
+  nameWithType: ExportDescriptor.ExportDescriptor
+- uid: WasmerSharp.ExportDescriptor.Kind
+  name: Kind
+  href: api/WasmerSharp/WasmerSharp.ExportDescriptor.html#WasmerSharp_ExportDescriptor_Kind
+  fullName: ExportDescriptor.Kind
+  nameWithType: ExportDescriptor.Kind
+- uid: WasmerSharp.ExportDescriptor.Kind*
+  name: Kind
+  href: api/WasmerSharp/WasmerSharp.ExportDescriptor.html#WasmerSharp_ExportDescriptor_Kind_
+  fullName: ExportDescriptor.Kind
+  nameWithType: ExportDescriptor.Kind
+- uid: WasmerSharp.ExportDescriptor.Name
+  name: Name
+  href: api/WasmerSharp/WasmerSharp.ExportDescriptor.html#WasmerSharp_ExportDescriptor_Name
+  fullName: ExportDescriptor.Name
+  nameWithType: ExportDescriptor.Name
+- uid: WasmerSharp.ExportDescriptor.Name*
+  name: Name
+  href: api/WasmerSharp/WasmerSharp.ExportDescriptor.html#WasmerSharp_ExportDescriptor_Name_
+  fullName: ExportDescriptor.Name
+  nameWithType: ExportDescriptor.Name
+- uid: WasmerSharp.ExportFunction
+  name: ExportFunction
+  href: api/WasmerSharp/WasmerSharp.ExportFunction.html
+  fullName: WasmerSharp.ExportFunction
+  nameWithType: ExportFunction
+- uid: WasmerSharp.ExportFunction.Call(WasmerSharp.WasmerValue[],WasmerSharp.WasmerValue[])
+  name: Call(WasmerValue[], WasmerValue[])
+  href: api/WasmerSharp/WasmerSharp.ExportFunction.html#WasmerSharp_ExportFunction_Call_WasmerSharp_WasmerValue___WasmerSharp_WasmerValue___
+  fullName: ExportFunction.Call(WasmerValue[], WasmerValue[])
+  nameWithType: ExportFunction.Call(WasmerValue[], WasmerValue[])
+- uid: WasmerSharp.ExportFunction.Call*
+  name: Call
+  href: api/WasmerSharp/WasmerSharp.ExportFunction.html#WasmerSharp_ExportFunction_Call_
+  fullName: ExportFunction.Call
+  nameWithType: ExportFunction.Call
+- uid: WasmerSharp.ExportFunction.Parameters
+  name: Parameters
+  href: api/WasmerSharp/WasmerSharp.ExportFunction.html#WasmerSharp_ExportFunction_Parameters
+  fullName: ExportFunction.Parameters
+  nameWithType: ExportFunction.Parameters
+- uid: WasmerSharp.ExportFunction.Parameters*
+  name: Parameters
+  href: api/WasmerSharp/WasmerSharp.ExportFunction.html#WasmerSharp_ExportFunction_Parameters_
+  fullName: ExportFunction.Parameters
+  nameWithType: ExportFunction.Parameters
+- uid: WasmerSharp.ExportFunction.Returns
+  name: Returns
+  href: api/WasmerSharp/WasmerSharp.ExportFunction.html#WasmerSharp_ExportFunction_Returns
+  fullName: ExportFunction.Returns
+  nameWithType: ExportFunction.Returns
+- uid: WasmerSharp.ExportFunction.Returns*
+  name: Returns
+  href: api/WasmerSharp/WasmerSharp.ExportFunction.html#WasmerSharp_ExportFunction_Returns_
+  fullName: ExportFunction.Returns
+  nameWithType: ExportFunction.Returns
+- uid: WasmerSharp.Global
+  name: Global
+  href: api/WasmerSharp/WasmerSharp.Global.html
+  fullName: WasmerSharp.Global
+  nameWithType: Global
+- uid: WasmerSharp.Global.#ctor(WasmerSharp.WasmerValue,System.Boolean)
+  name: Global(WasmerValue, Boolean)
+  href: api/WasmerSharp/WasmerSharp.Global.html#WasmerSharp_Global__ctor_WasmerSharp_WasmerValue_System_Boolean_
+  fullName: Global.Global(WasmerValue, Boolean)
+  nameWithType: Global.Global(WasmerValue, Boolean)
+- uid: WasmerSharp.Global.#ctor*
+  name: Global
+  href: api/WasmerSharp/WasmerSharp.Global.html#WasmerSharp_Global__ctor_
+  fullName: Global.Global
+  nameWithType: Global.Global
+- uid: WasmerSharp.Global.IsMutable
+  name: IsMutable
+  href: api/WasmerSharp/WasmerSharp.Global.html#WasmerSharp_Global_IsMutable
+  fullName: Global.IsMutable
+  nameWithType: Global.IsMutable
+- uid: WasmerSharp.Global.IsMutable*
+  name: IsMutable
+  href: api/WasmerSharp/WasmerSharp.Global.html#WasmerSharp_Global_IsMutable_
+  fullName: Global.IsMutable
+  nameWithType: Global.IsMutable
+- uid: WasmerSharp.Global.Set(WasmerSharp.WasmerValue)
+  name: Set(WasmerValue)
+  href: api/WasmerSharp/WasmerSharp.Global.html#WasmerSharp_Global_Set_WasmerSharp_WasmerValue_
+  fullName: Global.Set(WasmerValue)
+  nameWithType: Global.Set(WasmerValue)
+- uid: WasmerSharp.Global.Set*
+  name: Set
+  href: api/WasmerSharp/WasmerSharp.Global.html#WasmerSharp_Global_Set_
+  fullName: Global.Set
+  nameWithType: Global.Set
+- uid: WasmerSharp.Global.Value
+  name: Value
+  href: api/WasmerSharp/WasmerSharp.Global.html#WasmerSharp_Global_Value
+  fullName: Global.Value
+  nameWithType: Global.Value
+- uid: WasmerSharp.Global.Value*
+  name: Value
+  href: api/WasmerSharp/WasmerSharp.Global.html#WasmerSharp_Global_Value_
+  fullName: Global.Value
+  nameWithType: Global.Value
+- uid: WasmerSharp.Global.ValueType
+  name: ValueType
+  href: api/WasmerSharp/WasmerSharp.Global.html#WasmerSharp_Global_ValueType
+  fullName: Global.ValueType
+  nameWithType: Global.ValueType
+- uid: WasmerSharp.Global.ValueType*
+  name: ValueType
+  href: api/WasmerSharp/WasmerSharp.Global.html#WasmerSharp_Global_ValueType_
+  fullName: Global.ValueType
+  nameWithType: Global.ValueType
+- uid: WasmerSharp.Import
+  name: Import
+  href: api/WasmerSharp/WasmerSharp.Import.html
+  fullName: WasmerSharp.Import
+  nameWithType: Import
+- uid: WasmerSharp.Import.#ctor(System.String,System.String,WasmerSharp.Global)
+  name: Import(String, String, Global)
+  href: api/WasmerSharp/WasmerSharp.Import.html#WasmerSharp_Import__ctor_System_String_System_String_WasmerSharp_Global_
+  fullName: Import.Import(String, String, Global)
+  nameWithType: Import.Import(String, String, Global)
+- uid: WasmerSharp.Import.#ctor(System.String,System.String,WasmerSharp.ImportFunction)
+  name: Import(String, String, ImportFunction)
+  href: api/WasmerSharp/WasmerSharp.Import.html#WasmerSharp_Import__ctor_System_String_System_String_WasmerSharp_ImportFunction_
+  fullName: Import.Import(String, String, ImportFunction)
+  nameWithType: Import.Import(String, String, ImportFunction)
+- uid: WasmerSharp.Import.#ctor(System.String,System.String,WasmerSharp.Memory)
+  name: Import(String, String, Memory)
+  href: api/WasmerSharp/WasmerSharp.Import.html#WasmerSharp_Import__ctor_System_String_System_String_WasmerSharp_Memory_
+  fullName: Import.Import(String, String, Memory)
+  nameWithType: Import.Import(String, String, Memory)
+- uid: WasmerSharp.Import.#ctor(System.String,System.String,WasmerSharp.Table)
+  name: Import(String, String, Table)
+  href: api/WasmerSharp/WasmerSharp.Import.html#WasmerSharp_Import__ctor_System_String_System_String_WasmerSharp_Table_
+  fullName: Import.Import(String, String, Table)
+  nameWithType: Import.Import(String, String, Table)
+- uid: WasmerSharp.Import.#ctor*
+  name: Import
+  href: api/WasmerSharp/WasmerSharp.Import.html#WasmerSharp_Import__ctor_
+  fullName: Import.Import
+  nameWithType: Import.Import
+- uid: WasmerSharp.Import.ImportName
+  name: ImportName
+  href: api/WasmerSharp/WasmerSharp.Import.html#WasmerSharp_Import_ImportName
+  fullName: Import.ImportName
+  nameWithType: Import.ImportName
+- uid: WasmerSharp.Import.ImportName*
+  name: ImportName
+  href: api/WasmerSharp/WasmerSharp.Import.html#WasmerSharp_Import_ImportName_
+  fullName: Import.ImportName
+  nameWithType: Import.ImportName
+- uid: WasmerSharp.Import.Kind
+  name: Kind
+  href: api/WasmerSharp/WasmerSharp.Import.html#WasmerSharp_Import_Kind
+  fullName: Import.Kind
+  nameWithType: Import.Kind
+- uid: WasmerSharp.Import.Kind*
+  name: Kind
+  href: api/WasmerSharp/WasmerSharp.Import.html#WasmerSharp_Import_Kind_
+  fullName: Import.Kind
+  nameWithType: Import.Kind
+- uid: WasmerSharp.Import.ModuleName
+  name: ModuleName
+  href: api/WasmerSharp/WasmerSharp.Import.html#WasmerSharp_Import_ModuleName
+  fullName: Import.ModuleName
+  nameWithType: Import.ModuleName
+- uid: WasmerSharp.Import.ModuleName*
+  name: ModuleName
+  href: api/WasmerSharp/WasmerSharp.Import.html#WasmerSharp_Import_ModuleName_
+  fullName: Import.ModuleName
+  nameWithType: Import.ModuleName
+- uid: WasmerSharp.ImportDescriptor
+  name: ImportDescriptor
+  href: api/WasmerSharp/WasmerSharp.ImportDescriptor.html
+  fullName: WasmerSharp.ImportDescriptor
+  nameWithType: ImportDescriptor
+- uid: WasmerSharp.ImportDescriptor.DescriptorKind
+  name: DescriptorKind
+  href: api/WasmerSharp/WasmerSharp.ImportDescriptor.html#WasmerSharp_ImportDescriptor_DescriptorKind
+  fullName: ImportDescriptor.DescriptorKind
+  nameWithType: ImportDescriptor.DescriptorKind
+- uid: WasmerSharp.ImportDescriptor.DescriptorKind*
+  name: DescriptorKind
+  href: api/WasmerSharp/WasmerSharp.ImportDescriptor.html#WasmerSharp_ImportDescriptor_DescriptorKind_
+  fullName: ImportDescriptor.DescriptorKind
+  nameWithType: ImportDescriptor.DescriptorKind
+- uid: WasmerSharp.ImportDescriptor.ModuleName
+  name: ModuleName
+  href: api/WasmerSharp/WasmerSharp.ImportDescriptor.html#WasmerSharp_ImportDescriptor_ModuleName
+  fullName: ImportDescriptor.ModuleName
+  nameWithType: ImportDescriptor.ModuleName
+- uid: WasmerSharp.ImportDescriptor.ModuleName*
+  name: ModuleName
+  href: api/WasmerSharp/WasmerSharp.ImportDescriptor.html#WasmerSharp_ImportDescriptor_ModuleName_
+  fullName: ImportDescriptor.ModuleName
+  nameWithType: ImportDescriptor.ModuleName
+- uid: WasmerSharp.ImportDescriptor.Name
+  name: Name
+  href: api/WasmerSharp/WasmerSharp.ImportDescriptor.html#WasmerSharp_ImportDescriptor_Name
+  fullName: ImportDescriptor.Name
+  nameWithType: ImportDescriptor.Name
+- uid: WasmerSharp.ImportDescriptor.Name*
+  name: Name
+  href: api/WasmerSharp/WasmerSharp.ImportDescriptor.html#WasmerSharp_ImportDescriptor_Name_
+  fullName: ImportDescriptor.Name
+  nameWithType: ImportDescriptor.Name
+- uid: WasmerSharp.ImportExportKind
+  name: ImportExportKind
+  href: api/WasmerSharp/WasmerSharp.ImportExportKind.html
+  fullName: WasmerSharp.ImportExportKind
+  nameWithType: ImportExportKind
+- uid: WasmerSharp.ImportExportKind.Function
+  name: Function
+  href: api/WasmerSharp/WasmerSharp.ImportExportKind.html#WasmerSharp_ImportExportKind_Function
+  fullName: ImportExportKind.Function
+  nameWithType: ImportExportKind.Function
+- uid: WasmerSharp.ImportExportKind.Global
+  name: Global
+  href: api/WasmerSharp/WasmerSharp.ImportExportKind.html#WasmerSharp_ImportExportKind_Global
+  fullName: ImportExportKind.Global
+  nameWithType: ImportExportKind.Global
+- uid: WasmerSharp.ImportExportKind.Memory
+  name: Memory
+  href: api/WasmerSharp/WasmerSharp.ImportExportKind.html#WasmerSharp_ImportExportKind_Memory
+  fullName: ImportExportKind.Memory
+  nameWithType: ImportExportKind.Memory
+- uid: WasmerSharp.ImportExportKind.Table
+  name: Table
+  href: api/WasmerSharp/WasmerSharp.ImportExportKind.html#WasmerSharp_ImportExportKind_Table
+  fullName: ImportExportKind.Table
+  nameWithType: ImportExportKind.Table
+- uid: WasmerSharp.ImportFunction
+  name: ImportFunction
+  href: api/WasmerSharp/WasmerSharp.ImportFunction.html
+  fullName: WasmerSharp.ImportFunction
+  nameWithType: ImportFunction
+- uid: WasmerSharp.ImportFunction.#ctor(System.Delegate)
+  name: ImportFunction(Delegate)
+  href: api/WasmerSharp/WasmerSharp.ImportFunction.html#WasmerSharp_ImportFunction__ctor_System_Delegate_
+  fullName: ImportFunction.ImportFunction(Delegate)
+  nameWithType: ImportFunction.ImportFunction(Delegate)
+- uid: WasmerSharp.ImportFunction.#ctor*
+  name: ImportFunction
+  href: api/WasmerSharp/WasmerSharp.ImportFunction.html#WasmerSharp_ImportFunction__ctor_
+  fullName: ImportFunction.ImportFunction
+  nameWithType: ImportFunction.ImportFunction
+- uid: WasmerSharp.Instance
+  name: Instance
+  href: api/WasmerSharp/WasmerSharp.Instance.html
+  fullName: WasmerSharp.Instance
+  nameWithType: Instance
+- uid: WasmerSharp.Instance.#ctor(System.Byte[],WasmerSharp.Import[])
+  name: Instance(Byte[], Import[])
+  href: api/WasmerSharp/WasmerSharp.Instance.html#WasmerSharp_Instance__ctor_System_Byte___WasmerSharp_Import___
+  fullName: Instance.Instance(Byte[], Import[])
+  nameWithType: Instance.Instance(Byte[], Import[])
+- uid: WasmerSharp.Instance.#ctor*
+  name: Instance
+  href: api/WasmerSharp/WasmerSharp.Instance.html#WasmerSharp_Instance__ctor_
+  fullName: Instance.Instance
+  nameWithType: Instance.Instance
+- uid: WasmerSharp.Instance.Call(System.String,System.Object[])
+  name: Call(String, Object[])
+  href: api/WasmerSharp/WasmerSharp.Instance.html#WasmerSharp_Instance_Call_System_String_System_Object___
+  fullName: Instance.Call(String, Object[])
+  nameWithType: Instance.Call(String, Object[])
+- uid: WasmerSharp.Instance.Call(System.String,WasmerSharp.WasmerValue[],WasmerSharp.WasmerValue[])
+  name: Call(String, WasmerValue[], WasmerValue[])
+  href: api/WasmerSharp/WasmerSharp.Instance.html#WasmerSharp_Instance_Call_System_String_WasmerSharp_WasmerValue___WasmerSharp_WasmerValue___
+  fullName: Instance.Call(String, WasmerValue[], WasmerValue[])
+  nameWithType: Instance.Call(String, WasmerValue[], WasmerValue[])
+- uid: WasmerSharp.Instance.Call*
+  name: Call
+  href: api/WasmerSharp/WasmerSharp.Instance.html#WasmerSharp_Instance_Call_
+  fullName: Instance.Call
+  nameWithType: Instance.Call
+- uid: WasmerSharp.Instance.Exports
+  name: Exports
+  href: api/WasmerSharp/WasmerSharp.Instance.html#WasmerSharp_Instance_Exports
+  fullName: Instance.Exports
+  nameWithType: Instance.Exports
+- uid: WasmerSharp.Instance.Exports*
+  name: Exports
+  href: api/WasmerSharp/WasmerSharp.Instance.html#WasmerSharp_Instance_Exports_
+  fullName: Instance.Exports
+  nameWithType: Instance.Exports
+- uid: WasmerSharp.Instance.SetData(System.Object)
+  name: SetData(Object)
+  href: api/WasmerSharp/WasmerSharp.Instance.html#WasmerSharp_Instance_SetData_System_Object_
+  fullName: Instance.SetData(Object)
+  nameWithType: Instance.SetData(Object)
+- uid: WasmerSharp.Instance.SetData*
+  name: SetData
+  href: api/WasmerSharp/WasmerSharp.Instance.html#WasmerSharp_Instance_SetData_
+  fullName: Instance.SetData
+  nameWithType: Instance.SetData
+- uid: WasmerSharp.InstanceContext
+  name: InstanceContext
+  href: api/WasmerSharp/WasmerSharp.InstanceContext.html
+  fullName: WasmerSharp.InstanceContext
+  nameWithType: InstanceContext
+- uid: WasmerSharp.InstanceContext.Data
+  name: Data
+  href: api/WasmerSharp/WasmerSharp.InstanceContext.html#WasmerSharp_InstanceContext_Data
+  fullName: InstanceContext.Data
+  nameWithType: InstanceContext.Data
+- uid: WasmerSharp.InstanceContext.Data*
+  name: Data
+  href: api/WasmerSharp/WasmerSharp.InstanceContext.html#WasmerSharp_InstanceContext_Data_
+  fullName: InstanceContext.Data
+  nameWithType: InstanceContext.Data
+- uid: WasmerSharp.InstanceContext.GetMemory(System.UInt32)
+  name: GetMemory(UInt32)
+  href: api/WasmerSharp/WasmerSharp.InstanceContext.html#WasmerSharp_InstanceContext_GetMemory_System_UInt32_
+  fullName: InstanceContext.GetMemory(UInt32)
+  nameWithType: InstanceContext.GetMemory(UInt32)
+- uid: WasmerSharp.InstanceContext.GetMemory*
+  name: GetMemory
+  href: api/WasmerSharp/WasmerSharp.InstanceContext.html#WasmerSharp_InstanceContext_GetMemory_
+  fullName: InstanceContext.GetMemory
+  nameWithType: InstanceContext.GetMemory
+- uid: WasmerSharp.Memory
+  name: Memory
+  href: api/WasmerSharp/WasmerSharp.Memory.html
+  fullName: WasmerSharp.Memory
+  nameWithType: Memory
+- uid: WasmerSharp.Memory.#ctor(System.UInt32,System.Nullable{System.UInt32})
+  name: Memory(UInt32, Nullable<UInt32>)
+  href: api/WasmerSharp/WasmerSharp.Memory.html#WasmerSharp_Memory__ctor_System_UInt32_System_Nullable_System_UInt32__
+  fullName: Memory.Memory(UInt32, Nullable<UInt32>)
+  nameWithType: Memory.Memory(UInt32, Nullable<UInt32>)
+- uid: WasmerSharp.Memory.#ctor*
+  name: Memory
+  href: api/WasmerSharp/WasmerSharp.Memory.html#WasmerSharp_Memory__ctor_
+  fullName: Memory.Memory
+  nameWithType: Memory.Memory
+- uid: WasmerSharp.Memory.Create(System.UInt32,System.Nullable{System.UInt32})
+  name: Create(UInt32, Nullable<UInt32>)
+  href: api/WasmerSharp/WasmerSharp.Memory.html#WasmerSharp_Memory_Create_System_UInt32_System_Nullable_System_UInt32__
+  fullName: Memory.Create(UInt32, Nullable<UInt32>)
+  nameWithType: Memory.Create(UInt32, Nullable<UInt32>)
+- uid: WasmerSharp.Memory.Create*
+  name: Create
+  href: api/WasmerSharp/WasmerSharp.Memory.html#WasmerSharp_Memory_Create_
+  fullName: Memory.Create
+  nameWithType: Memory.Create
+- uid: WasmerSharp.Memory.Data
+  name: Data
+  href: api/WasmerSharp/WasmerSharp.Memory.html#WasmerSharp_Memory_Data
+  fullName: Memory.Data
+  nameWithType: Memory.Data
+- uid: WasmerSharp.Memory.Data*
+  name: Data
+  href: api/WasmerSharp/WasmerSharp.Memory.html#WasmerSharp_Memory_Data_
+  fullName: Memory.Data
+  nameWithType: Memory.Data
+- uid: WasmerSharp.Memory.DataLength
+  name: DataLength
+  href: api/WasmerSharp/WasmerSharp.Memory.html#WasmerSharp_Memory_DataLength
+  fullName: Memory.DataLength
+  nameWithType: Memory.DataLength
+- uid: WasmerSharp.Memory.DataLength*
+  name: DataLength
+  href: api/WasmerSharp/WasmerSharp.Memory.html#WasmerSharp_Memory_DataLength_
+  fullName: Memory.DataLength
+  nameWithType: Memory.DataLength
+- uid: WasmerSharp.Memory.Grow(System.UInt32)
+  name: Grow(UInt32)
+  href: api/WasmerSharp/WasmerSharp.Memory.html#WasmerSharp_Memory_Grow_System_UInt32_
+  fullName: Memory.Grow(UInt32)
+  nameWithType: Memory.Grow(UInt32)
+- uid: WasmerSharp.Memory.Grow*
+  name: Grow
+  href: api/WasmerSharp/WasmerSharp.Memory.html#WasmerSharp_Memory_Grow_
+  fullName: Memory.Grow
+  nameWithType: Memory.Grow
+- uid: WasmerSharp.Memory.PageLength
+  name: PageLength
+  href: api/WasmerSharp/WasmerSharp.Memory.html#WasmerSharp_Memory_PageLength
+  fullName: Memory.PageLength
+  nameWithType: Memory.PageLength
+- uid: WasmerSharp.Memory.PageLength*
+  name: PageLength
+  href: api/WasmerSharp/WasmerSharp.Memory.html#WasmerSharp_Memory_PageLength_
+  fullName: Memory.PageLength
+  nameWithType: Memory.PageLength
+- uid: WasmerSharp.Module
+  name: Module
+  href: api/WasmerSharp/WasmerSharp.Module.html
+  fullName: WasmerSharp.Module
+  nameWithType: Module
+- uid: WasmerSharp.Module.Create(System.Byte[])
+  name: Create(Byte[])
+  href: api/WasmerSharp/WasmerSharp.Module.html#WasmerSharp_Module_Create_System_Byte___
+  fullName: Module.Create(Byte[])
+  nameWithType: Module.Create(Byte[])
+- uid: WasmerSharp.Module.Create(System.IntPtr,System.UInt32)
+  name: Create(IntPtr, UInt32)
+  href: api/WasmerSharp/WasmerSharp.Module.html#WasmerSharp_Module_Create_System_IntPtr_System_UInt32_
+  fullName: Module.Create(IntPtr, UInt32)
+  nameWithType: Module.Create(IntPtr, UInt32)
+- uid: WasmerSharp.Module.Create*
+  name: Create
+  href: api/WasmerSharp/WasmerSharp.Module.html#WasmerSharp_Module_Create_
+  fullName: Module.Create
+  nameWithType: Module.Create
+- uid: WasmerSharp.Module.ExportDescriptors
+  name: ExportDescriptors
+  href: api/WasmerSharp/WasmerSharp.Module.html#WasmerSharp_Module_ExportDescriptors
+  fullName: Module.ExportDescriptors
+  nameWithType: Module.ExportDescriptors
+- uid: WasmerSharp.Module.ExportDescriptors*
+  name: ExportDescriptors
+  href: api/WasmerSharp/WasmerSharp.Module.html#WasmerSharp_Module_ExportDescriptors_
+  fullName: Module.ExportDescriptors
+  nameWithType: Module.ExportDescriptors
+- uid: WasmerSharp.Module.ImportDescriptors
+  name: ImportDescriptors
+  href: api/WasmerSharp/WasmerSharp.Module.html#WasmerSharp_Module_ImportDescriptors
+  fullName: Module.ImportDescriptors
+  nameWithType: Module.ImportDescriptors
+- uid: WasmerSharp.Module.ImportDescriptors*
+  name: ImportDescriptors
+  href: api/WasmerSharp/WasmerSharp.Module.html#WasmerSharp_Module_ImportDescriptors_
+  fullName: Module.ImportDescriptors
+  nameWithType: Module.ImportDescriptors
+- uid: WasmerSharp.Module.Instatiate(WasmerSharp.Import[])
+  name: Instatiate(Import[])
+  href: api/WasmerSharp/WasmerSharp.Module.html#WasmerSharp_Module_Instatiate_WasmerSharp_Import___
+  fullName: Module.Instatiate(Import[])
+  nameWithType: Module.Instatiate(Import[])
+- uid: WasmerSharp.Module.Instatiate*
+  name: Instatiate
+  href: api/WasmerSharp/WasmerSharp.Module.html#WasmerSharp_Module_Instatiate_
+  fullName: Module.Instatiate
+  nameWithType: Module.Instatiate
+- uid: WasmerSharp.Module.Serialize
+  name: Serialize()
+  href: api/WasmerSharp/WasmerSharp.Module.html#WasmerSharp_Module_Serialize
+  fullName: Module.Serialize()
+  nameWithType: Module.Serialize()
+- uid: WasmerSharp.Module.Serialize*
+  name: Serialize
+  href: api/WasmerSharp/WasmerSharp.Module.html#WasmerSharp_Module_Serialize_
+  fullName: Module.Serialize
+  nameWithType: Module.Serialize
+- uid: WasmerSharp.Module.Validate(System.Byte[])
+  name: Validate(Byte[])
+  href: api/WasmerSharp/WasmerSharp.Module.html#WasmerSharp_Module_Validate_System_Byte___
+  fullName: Module.Validate(Byte[])
+  nameWithType: Module.Validate(Byte[])
+- uid: WasmerSharp.Module.Validate(System.IntPtr,System.UInt32)
+  name: Validate(IntPtr, UInt32)
+  href: api/WasmerSharp/WasmerSharp.Module.html#WasmerSharp_Module_Validate_System_IntPtr_System_UInt32_
+  fullName: Module.Validate(IntPtr, UInt32)
+  nameWithType: Module.Validate(IntPtr, UInt32)
+- uid: WasmerSharp.Module.Validate*
+  name: Validate
+  href: api/WasmerSharp/WasmerSharp.Module.html#WasmerSharp_Module_Validate_
+  fullName: Module.Validate
+  nameWithType: Module.Validate
+- uid: WasmerSharp.SerializedModule
+  name: SerializedModule
+  href: api/WasmerSharp/WasmerSharp.SerializedModule.html
+  fullName: WasmerSharp.SerializedModule
+  nameWithType: SerializedModule
+- uid: WasmerSharp.SerializedModule.Deserialize
+  name: Deserialize()
+  href: api/WasmerSharp/WasmerSharp.SerializedModule.html#WasmerSharp_SerializedModule_Deserialize
+  fullName: SerializedModule.Deserialize()
+  nameWithType: SerializedModule.Deserialize()
+- uid: WasmerSharp.SerializedModule.Deserialize*
+  name: Deserialize
+  href: api/WasmerSharp/WasmerSharp.SerializedModule.html#WasmerSharp_SerializedModule_Deserialize_
+  fullName: SerializedModule.Deserialize
+  nameWithType: SerializedModule.Deserialize
+- uid: WasmerSharp.SerializedModule.FromBytes(System.Byte[])
+  name: FromBytes(Byte[])
+  href: api/WasmerSharp/WasmerSharp.SerializedModule.html#WasmerSharp_SerializedModule_FromBytes_System_Byte___
+  fullName: SerializedModule.FromBytes(Byte[])
+  nameWithType: SerializedModule.FromBytes(Byte[])
+- uid: WasmerSharp.SerializedModule.FromBytes(System.IntPtr,System.UInt32)
+  name: FromBytes(IntPtr, UInt32)
+  href: api/WasmerSharp/WasmerSharp.SerializedModule.html#WasmerSharp_SerializedModule_FromBytes_System_IntPtr_System_UInt32_
+  fullName: SerializedModule.FromBytes(IntPtr, UInt32)
+  nameWithType: SerializedModule.FromBytes(IntPtr, UInt32)
+- uid: WasmerSharp.SerializedModule.FromBytes*
+  name: FromBytes
+  href: api/WasmerSharp/WasmerSharp.SerializedModule.html#WasmerSharp_SerializedModule_FromBytes_
+  fullName: SerializedModule.FromBytes
+  nameWithType: SerializedModule.FromBytes
+- uid: WasmerSharp.SerializedModule.GetModuleBytes
+  name: GetModuleBytes()
+  href: api/WasmerSharp/WasmerSharp.SerializedModule.html#WasmerSharp_SerializedModule_GetModuleBytes
+  fullName: SerializedModule.GetModuleBytes()
+  nameWithType: SerializedModule.GetModuleBytes()
+- uid: WasmerSharp.SerializedModule.GetModuleBytes*
+  name: GetModuleBytes
+  href: api/WasmerSharp/WasmerSharp.SerializedModule.html#WasmerSharp_SerializedModule_GetModuleBytes_
+  fullName: SerializedModule.GetModuleBytes
+  nameWithType: SerializedModule.GetModuleBytes
+- uid: WasmerSharp.Table
+  name: Table
+  href: api/WasmerSharp/WasmerSharp.Table.html
+  fullName: WasmerSharp.Table
+  nameWithType: Table
+- uid: WasmerSharp.Table.Create(System.UInt32,System.Nullable{System.UInt32})
+  name: Create(UInt32, Nullable<UInt32>)
+  href: api/WasmerSharp/WasmerSharp.Table.html#WasmerSharp_Table_Create_System_UInt32_System_Nullable_System_UInt32__
+  fullName: Table.Create(UInt32, Nullable<UInt32>)
+  nameWithType: Table.Create(UInt32, Nullable<UInt32>)
+- uid: WasmerSharp.Table.Create*
+  name: Create
+  href: api/WasmerSharp/WasmerSharp.Table.html#WasmerSharp_Table_Create_
+  fullName: Table.Create
+  nameWithType: Table.Create
+- uid: WasmerSharp.Table.Grow(System.UInt32)
+  name: Grow(UInt32)
+  href: api/WasmerSharp/WasmerSharp.Table.html#WasmerSharp_Table_Grow_System_UInt32_
+  fullName: Table.Grow(UInt32)
+  nameWithType: Table.Grow(UInt32)
+- uid: WasmerSharp.Table.Grow*
+  name: Grow
+  href: api/WasmerSharp/WasmerSharp.Table.html#WasmerSharp_Table_Grow_
+  fullName: Table.Grow
+  nameWithType: Table.Grow
+- uid: WasmerSharp.Table.Length
+  name: Length
+  href: api/WasmerSharp/WasmerSharp.Table.html#WasmerSharp_Table_Length
+  fullName: Table.Length
+  nameWithType: Table.Length
+- uid: WasmerSharp.Table.Length*
+  name: Length
+  href: api/WasmerSharp/WasmerSharp.Table.html#WasmerSharp_Table_Length_
+  fullName: Table.Length
+  nameWithType: Table.Length
+- uid: WasmerSharp.WasmerNativeHandle
+  name: WasmerNativeHandle
+  href: api/WasmerSharp/WasmerSharp.WasmerNativeHandle.html
+  fullName: WasmerSharp.WasmerNativeHandle
+  nameWithType: WasmerNativeHandle
+- uid: WasmerSharp.WasmerNativeHandle.Dispose
+  name: Dispose()
+  href: api/WasmerSharp/WasmerSharp.WasmerNativeHandle.html#WasmerSharp_WasmerNativeHandle_Dispose
+  fullName: WasmerNativeHandle.Dispose()
+  nameWithType: WasmerNativeHandle.Dispose()
+- uid: WasmerSharp.WasmerNativeHandle.Dispose*
+  name: Dispose
+  href: api/WasmerSharp/WasmerSharp.WasmerNativeHandle.html#WasmerSharp_WasmerNativeHandle_Dispose_
+  fullName: WasmerNativeHandle.Dispose
+  nameWithType: WasmerNativeHandle.Dispose
+- uid: WasmerSharp.WasmerNativeHandle.LastError
+  name: LastError
+  href: api/WasmerSharp/WasmerSharp.WasmerNativeHandle.html#WasmerSharp_WasmerNativeHandle_LastError
+  fullName: WasmerNativeHandle.LastError
+  nameWithType: WasmerNativeHandle.LastError
+- uid: WasmerSharp.WasmerNativeHandle.LastError*
+  name: LastError
+  href: api/WasmerSharp/WasmerSharp.WasmerNativeHandle.html#WasmerSharp_WasmerNativeHandle_LastError_
+  fullName: WasmerNativeHandle.LastError
+  nameWithType: WasmerNativeHandle.LastError
+- uid: WasmerSharp.WasmerValue
+  name: WasmerValue
+  href: api/WasmerSharp/WasmerSharp.WasmerValue.html
+  fullName: WasmerSharp.WasmerValue
+  nameWithType: WasmerValue
+- uid: WasmerSharp.WasmerValue.Encode
+  name: Encode()
+  href: api/WasmerSharp/WasmerSharp.WasmerValue.html#WasmerSharp_WasmerValue_Encode
+  fullName: WasmerValue.Encode()
+  nameWithType: WasmerValue.Encode()
+- uid: WasmerSharp.WasmerValue.Encode*
+  name: Encode
+  href: api/WasmerSharp/WasmerSharp.WasmerValue.html#WasmerSharp_WasmerValue_Encode_
+  fullName: WasmerValue.Encode
+  nameWithType: WasmerValue.Encode
+- uid: WasmerSharp.WasmerValue.F32
+  name: F32
+  href: api/WasmerSharp/WasmerSharp.WasmerValue.html#WasmerSharp_WasmerValue_F32
+  fullName: WasmerValue.F32
+  nameWithType: WasmerValue.F32
+- uid: WasmerSharp.WasmerValue.F64
+  name: F64
+  href: api/WasmerSharp/WasmerSharp.WasmerValue.html#WasmerSharp_WasmerValue_F64
+  fullName: WasmerValue.F64
+  nameWithType: WasmerValue.F64
+- uid: WasmerSharp.WasmerValue.I32
+  name: I32
+  href: api/WasmerSharp/WasmerSharp.WasmerValue.html#WasmerSharp_WasmerValue_I32
+  fullName: WasmerValue.I32
+  nameWithType: WasmerValue.I32
+- uid: WasmerSharp.WasmerValue.I64
+  name: I64
+  href: api/WasmerSharp/WasmerSharp.WasmerValue.html#WasmerSharp_WasmerValue_I64
+  fullName: WasmerValue.I64
+  nameWithType: WasmerValue.I64
+- uid: WasmerSharp.WasmerValue.op_Explicit(WasmerSharp.WasmerValue to System.Double)
+  name: op_Explicit(WasmerValue to Double)
+  href: api/WasmerSharp/WasmerSharp.WasmerValue.html#WasmerSharp_WasmerValue_op_Explicit_WasmerSharp_WasmerValue_to_System_Double_
+  fullName: WasmerValue.op_Explicit(WasmerValue to Double)
+  nameWithType: WasmerValue.op_Explicit(WasmerValue to Double)
+- uid: WasmerSharp.WasmerValue.op_Explicit(WasmerSharp.WasmerValue to System.Int32)
+  name: op_Explicit(WasmerValue to Int32)
+  href: api/WasmerSharp/WasmerSharp.WasmerValue.html#WasmerSharp_WasmerValue_op_Explicit_WasmerSharp_WasmerValue_to_System_Int32_
+  fullName: WasmerValue.op_Explicit(WasmerValue to Int32)
+  nameWithType: WasmerValue.op_Explicit(WasmerValue to Int32)
+- uid: WasmerSharp.WasmerValue.op_Explicit(WasmerSharp.WasmerValue to System.Int64)
+  name: op_Explicit(WasmerValue to Int64)
+  href: api/WasmerSharp/WasmerSharp.WasmerValue.html#WasmerSharp_WasmerValue_op_Explicit_WasmerSharp_WasmerValue_to_System_Int64_
+  fullName: WasmerValue.op_Explicit(WasmerValue to Int64)
+  nameWithType: WasmerValue.op_Explicit(WasmerValue to Int64)
+- uid: WasmerSharp.WasmerValue.op_Explicit(WasmerSharp.WasmerValue to System.Single)
+  name: op_Explicit(WasmerValue to Single)
+  href: api/WasmerSharp/WasmerSharp.WasmerValue.html#WasmerSharp_WasmerValue_op_Explicit_WasmerSharp_WasmerValue_to_System_Single_
+  fullName: WasmerValue.op_Explicit(WasmerValue to Single)
+  nameWithType: WasmerValue.op_Explicit(WasmerValue to Single)
+- uid: WasmerSharp.WasmerValue.op_Explicit*
+  name: op_Explicit
+  href: api/WasmerSharp/WasmerSharp.WasmerValue.html#WasmerSharp_WasmerValue_op_Explicit_
+  fullName: WasmerValue.op_Explicit
+  nameWithType: WasmerValue.op_Explicit
+- uid: WasmerSharp.WasmerValue.op_Implicit(System.Double to WasmerSharp.WasmerValue)
+  name: op_Implicit(Double to WasmerValue)
+  href: api/WasmerSharp/WasmerSharp.WasmerValue.html#WasmerSharp_WasmerValue_op_Implicit_System_Double_to_WasmerSharp_WasmerValue_
+  fullName: WasmerValue.op_Implicit(Double to WasmerValue)
+  nameWithType: WasmerValue.op_Implicit(Double to WasmerValue)
+- uid: WasmerSharp.WasmerValue.op_Implicit(System.Int32 to WasmerSharp.WasmerValue)
+  name: op_Implicit(Int32 to WasmerValue)
+  href: api/WasmerSharp/WasmerSharp.WasmerValue.html#WasmerSharp_WasmerValue_op_Implicit_System_Int32_to_WasmerSharp_WasmerValue_
+  fullName: WasmerValue.op_Implicit(Int32 to WasmerValue)
+  nameWithType: WasmerValue.op_Implicit(Int32 to WasmerValue)
+- uid: WasmerSharp.WasmerValue.op_Implicit(System.Int64 to WasmerSharp.WasmerValue)
+  name: op_Implicit(Int64 to WasmerValue)
+  href: api/WasmerSharp/WasmerSharp.WasmerValue.html#WasmerSharp_WasmerValue_op_Implicit_System_Int64_to_WasmerSharp_WasmerValue_
+  fullName: WasmerValue.op_Implicit(Int64 to WasmerValue)
+  nameWithType: WasmerValue.op_Implicit(Int64 to WasmerValue)
+- uid: WasmerSharp.WasmerValue.op_Implicit(System.Single to WasmerSharp.WasmerValue)
+  name: op_Implicit(Single to WasmerValue)
+  href: api/WasmerSharp/WasmerSharp.WasmerValue.html#WasmerSharp_WasmerValue_op_Implicit_System_Single_to_WasmerSharp_WasmerValue_
+  fullName: WasmerValue.op_Implicit(Single to WasmerValue)
+  nameWithType: WasmerValue.op_Implicit(Single to WasmerValue)
+- uid: WasmerSharp.WasmerValue.op_Implicit*
+  name: op_Implicit
+  href: api/WasmerSharp/WasmerSharp.WasmerValue.html#WasmerSharp_WasmerValue_op_Implicit_
+  fullName: WasmerValue.op_Implicit
+  nameWithType: WasmerValue.op_Implicit
+- uid: WasmerSharp.WasmerValue.Tag
+  name: Tag
+  href: api/WasmerSharp/WasmerSharp.WasmerValue.html#WasmerSharp_WasmerValue_Tag
+  fullName: WasmerValue.Tag
+  nameWithType: WasmerValue.Tag
+- uid: WasmerSharp.WasmerValueType
+  name: WasmerValueType
+  href: api/WasmerSharp/WasmerSharp.WasmerValueType.html
+  fullName: WasmerSharp.WasmerValueType
+  nameWithType: WasmerValueType
+- uid: WasmerSharp.WasmerValueType.Float32
+  name: Float32
+  href: api/WasmerSharp/WasmerSharp.WasmerValueType.html#WasmerSharp_WasmerValueType_Float32
+  fullName: WasmerValueType.Float32
+  nameWithType: WasmerValueType.Float32
+- uid: WasmerSharp.WasmerValueType.Float64
+  name: Float64
+  href: api/WasmerSharp/WasmerSharp.WasmerValueType.html#WasmerSharp_WasmerValueType_Float64
+  fullName: WasmerValueType.Float64
+  nameWithType: WasmerValueType.Float64
+- uid: WasmerSharp.WasmerValueType.Int32
+  name: Int32
+  href: api/WasmerSharp/WasmerSharp.WasmerValueType.html#WasmerSharp_WasmerValueType_Int32
+  fullName: WasmerValueType.Int32
+  nameWithType: WasmerValueType.Int32
+- uid: WasmerSharp.WasmerValueType.Int64
+  name: Int64
+  href: api/WasmerSharp/WasmerSharp.WasmerValueType.html#WasmerSharp_WasmerValueType_Int64
+  fullName: WasmerValueType.Int64
+  nameWithType: WasmerValueType.Int64

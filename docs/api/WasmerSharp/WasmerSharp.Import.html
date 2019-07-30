@@ -1,0 +1,373 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Import
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Import
+   ">
+    <meta name="generator" content="docfx 2.18.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="WasmerSharp.Import">
+  
+  
+  <h1 id="WasmerSharp_Import" data-uid="WasmerSharp.Import">Class Import
+  </h1>
+  <div class="markdown level0 summary"><p>Use this class to create the various Import objects (Globals, Memory, Function and Tables)</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">Import</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="../WasmerSharp.html">WasmerSharp</a></h6>
+  <h6><strong>Assembly</strong>: WasmerSharp.dll</h6>
+  <h5 id="WasmerSharp_Import_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class Import</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="WasmerSharp_Import__ctor_" data-uid="WasmerSharp.Import.#ctor*"></a>
+  <h4 id="WasmerSharp_Import__ctor_System_String_System_String_WasmerSharp_Global_" data-uid="WasmerSharp.Import.#ctor(System.String,System.String,WasmerSharp.Global)">Import(String, String, Global)</h4>
+  <div class="markdown level1 summary"><p>Creates a Global import.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Import (string moduleName, string importName, WasmerSharp.Global global);</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">moduleName</span></td>
+        <td><p>The module name for this import</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">importName</span></td>
+        <td><p>The name for this import.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="WasmerSharp.Global.html">Global</a></td>
+        <td><span class="parametername">global</span></td>
+        <td><p>The global object to import</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="WasmerSharp_Import__ctor_" data-uid="WasmerSharp.Import.#ctor*"></a>
+  <h4 id="WasmerSharp_Import__ctor_System_String_System_String_WasmerSharp_ImportFunction_" data-uid="WasmerSharp.Import.#ctor(System.String,System.String,WasmerSharp.ImportFunction)">Import(String, String, ImportFunction)</h4>
+  <div class="markdown level1 summary"><p>Creates a Function import.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Import (string moduleName, string importName, WasmerSharp.ImportFunction function);</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">moduleName</span></td>
+        <td><p>The module name for this import</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">importName</span></td>
+        <td><p>The name for this import</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="WasmerSharp.ImportFunction.html">ImportFunction</a></td>
+        <td><span class="parametername">function</span></td>
+        <td><p>The function to import</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="WasmerSharp_Import__ctor_" data-uid="WasmerSharp.Import.#ctor*"></a>
+  <h4 id="WasmerSharp_Import__ctor_System_String_System_String_WasmerSharp_Memory_" data-uid="WasmerSharp.Import.#ctor(System.String,System.String,WasmerSharp.Memory)">Import(String, String, Memory)</h4>
+  <div class="markdown level1 summary"><p>Creates a Memory import.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Import (string moduleName, string importName, WasmerSharp.Memory memory);</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">moduleName</span></td>
+        <td><p>The module name for this import</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">importName</span></td>
+        <td><p>The name for this import, if not specified, it will default to &quot;memory&quot;</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="WasmerSharp.Memory.html">Memory</a></td>
+        <td><span class="parametername">memory</span></td>
+        <td><p>The memory object to import</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="WasmerSharp_Import__ctor_" data-uid="WasmerSharp.Import.#ctor*"></a>
+  <h4 id="WasmerSharp_Import__ctor_System_String_System_String_WasmerSharp_Table_" data-uid="WasmerSharp.Import.#ctor(System.String,System.String,WasmerSharp.Table)">Import(String, String, Table)</h4>
+  <div class="markdown level1 summary"><p>Creates a Table import.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Import (string moduleName, string importName, WasmerSharp.Table table);</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">moduleName</span></td>
+        <td><p>The module name for this import</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">importName</span></td>
+        <td><p>The name for this import</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="WasmerSharp.Table.html">Table</a></td>
+        <td><span class="parametername">table</span></td>
+        <td><p>The table to import</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="WasmerSharp_Import_ImportName_" data-uid="WasmerSharp.Import.ImportName*"></a>
+  <h4 id="WasmerSharp_Import_ImportName" data-uid="WasmerSharp.Import.ImportName">ImportName</h4>
+  <div class="markdown level1 summary"><p>The name for this import</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ImportName { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>To be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="WasmerSharp_Import_Kind_" data-uid="WasmerSharp.Import.Kind*"></a>
+  <h4 id="WasmerSharp_Import_Kind" data-uid="WasmerSharp.Import.Kind">Kind</h4>
+  <div class="markdown level1 summary"><p>The kind of import</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WasmerSharp.ImportExportKind Kind { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="WasmerSharp.ImportExportKind.html">ImportExportKind</a></td>
+        <td><p>To be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="WasmerSharp_Import_ModuleName_" data-uid="WasmerSharp.Import.ModuleName*"></a>
+  <h4 id="WasmerSharp_Import_ModuleName" data-uid="WasmerSharp.Import.ModuleName">ModuleName</h4>
+  <div class="markdown level1 summary"><p>The module name for this import</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ModuleName { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>To be added.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2015-2017 Microsoft<br>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
