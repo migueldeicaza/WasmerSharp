@@ -1,0 +1,83 @@
+<Type Name="ImportExportKind" FullName="WasmerSharp.ImportExportKind">
+  <TypeSignature Language="C#" Value="public enum ImportExportKind" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed ImportExportKind extends System.Enum" />
+  <AssemblyInfo>
+    <AssemblyName>WasmerSharp</AssemblyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <summary>
+            Describes the kind of export or import
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Function">
+      <MemberSignature Language="C#" Value="Function" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype WasmerSharp.ImportExportKind Function = unsigned int32(0)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.ImportExportKind</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The import or export is a Function
+            </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="Global">
+      <MemberSignature Language="C#" Value="Global" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype WasmerSharp.ImportExportKind Global = unsigned int32(1)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.ImportExportKind</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The import or export is a global
+            </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="Memory">
+      <MemberSignature Language="C#" Value="Memory" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype WasmerSharp.ImportExportKind Memory = unsigned int32(2)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.ImportExportKind</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+             The import or export is a memory object
+            </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="Table">
+      <MemberSignature Language="C#" Value="Table" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype WasmerSharp.ImportExportKind Table = unsigned int32(3)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.ImportExportKind</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The import or export is a table
+            </summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

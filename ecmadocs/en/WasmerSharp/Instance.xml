@@ -1,0 +1,146 @@
+<Type Name="Instance" FullName="WasmerSharp.Instance">
+  <TypeSignature Language="C#" Value="public class Instance : WasmerSharp.WasmerNativeHandle" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Instance extends WasmerSharp.WasmerNativeHandle" />
+  <AssemblyInfo>
+    <AssemblyName>WasmerSharp</AssemblyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>WasmerSharp.WasmerNativeHandle</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Instances represents all the state associated with a module.   These are created by calling Module.Instantiate or by calling the Instance constructor.
+            </summary>
+    <remarks>
+            At runtime, a module can be instantiated with a set of import values to produce an instance, which is an
+            immutable tuple referencing all the state accessible to the running module. Multiple module instances
+            can access the same shared state which is the basis for dynamic linking in WebAssembly.
+            </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Instance (byte[] wasm, WasmerSharp.Import[] imports);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] wasm, class WasmerSharp.Import[] imports) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="wasm" Type="System.Byte[]" />
+        <Parameter Name="imports" Type="WasmerSharp.Import[]">
+          <Attributes>
+            <Attribute>
+              <AttributeName>System.ParamArray</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="wasm">Wasm byte code</param>
+        <param name="imports">The list of imports to pass, usually Function, Global and Memory</param>
+        <summary>
+            Creates a new Instance from the given wasm bytes and imports. 
+            </summary>
+        <returns>A Wasmer.Instance on success, or null on error.   You can use the LastError error property to get details on the error.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Call">
+      <MemberSignature Language="C#" Value="public object[] Call (string functionName, object[] args);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance object[] Call(string functionName, object[] args) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="functionName" Type="System.String" />
+        <Parameter Name="args" Type="System.Object[]">
+          <Attributes>
+            <Attribute>
+              <AttributeName>System.ParamArray</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="functionName">Namer of the exported function to call in the instane</param>
+        <param name="args">The argument types are limited to int, long, float and double.</param>
+        <summary>
+            Calls the specified function with the provided arguments
+            </summary>
+        <returns>An array of values on success, null on error. You can use the LastError error property to get details on the error.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Call">
+      <MemberSignature Language="C#" Value="public bool Call (string functionName, WasmerSharp.WasmerValue[] parameters, WasmerSharp.WasmerValue[] results);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Call(string functionName, valuetype WasmerSharp.WasmerValue[] parameters, valuetype WasmerSharp.WasmerValue[] results) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="functionName" Type="System.String" />
+        <Parameter Name="parameters" Type="WasmerSharp.WasmerValue[]" />
+        <Parameter Name="results" Type="WasmerSharp.WasmerValue[]" />
+      </Parameters>
+      <Docs>
+        <param name="functionName">Namer of the exported function to call in the instane</param>
+        <param name="parameters">The parameters to pass to the function</param>
+        <param name="results">The array where the return values are returned</param>
+        <summary>
+            Calls the specified function with the provided arguments
+            </summary>
+        <returns>True on success, false on failure</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Exports">
+      <MemberSignature Language="C#" Value="public WasmerSharp.Export[] Exports { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class WasmerSharp.Export[] Exports" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.Export[]</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Returns an array with all the exports - the individual values must be manually disposed.
+            </summary>
+        <value />
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetData">
+      <MemberSignature Language="C#" Value="public void SetData (object value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetData(object value) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="value">The value to pass to all the InstanceContext members</param>
+        <summary>
+            Sets a global data field that can be accessed by all imported functions and retrieved by the InstanceContext.Data property.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

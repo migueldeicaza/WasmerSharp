@@ -1,0 +1,102 @@
+<Type Name="Export" FullName="WasmerSharp.Export">
+  <TypeSignature Language="C#" Value="public class Export : WasmerSharp.WasmerNativeHandle" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Export extends WasmerSharp.WasmerNativeHandle" />
+  <AssemblyInfo>
+    <AssemblyName>WasmerSharp</AssemblyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>WasmerSharp.WasmerNativeHandle</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Represents an exported object from a Wasm Instance
+            </summary>
+    <remarks>
+      <para>
+              A module can declare a sequence of exports which are returned at
+              instantiation time to the host environment.
+            </para>
+      <para>
+               Exports have a name, which is required to be valid UTF-8, whose meaning is defined by the host environment, a type, indicating whether the export is a function, global, memory or table.
+            </para>
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="GetExportFunction">
+      <MemberSignature Language="C#" Value="public WasmerSharp.ExportFunction GetExportFunction ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class WasmerSharp.ExportFunction GetExportFunction() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.ExportFunction</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Gets the exported function
+            </summary>
+        <returns>Null on error, or the exported function.  You can use the LastError error property to get details on the error.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetMemory">
+      <MemberSignature Language="C#" Value="public WasmerSharp.Memory GetMemory ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class WasmerSharp.Memory GetMemory() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.Memory</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Returns the memory object from the export
+            </summary>
+        <returns />
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Kind">
+      <MemberSignature Language="C#" Value="public WasmerSharp.ImportExportKind Kind { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype WasmerSharp.ImportExportKind Kind" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.ImportExportKind</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the kind for the exported item
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Name">
+      <MemberSignature Language="C#" Value="public string Name { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string Name" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the name for the export
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,140 @@
+<Type Name="Memory" FullName="WasmerSharp.Memory">
+  <TypeSignature Language="C#" Value="public class Memory : WasmerSharp.WasmerNativeHandle" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Memory extends WasmerSharp.WasmerNativeHandle" />
+  <AssemblyInfo>
+    <AssemblyName>WasmerSharp</AssemblyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>WasmerSharp.WasmerNativeHandle</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Represents the WebAssembly memory.   Memory is allocated in pages, which are 64k bytes in size.
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Memory (uint minPages, Nullable&lt;uint&gt; maxPages = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int32 minPages, valuetype System.Nullable`1&lt;unsigned int32&gt; maxPages) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="minPages" Type="System.UInt32" />
+        <Parameter Name="maxPages" Type="System.Nullable&lt;System.UInt32&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="minPages">Minimum number of allowed pages</param>
+        <param name="maxPages">Optional, Maximum number of allowed pages</param>
+        <summary>
+             Constructor for memory, throws if there is an error.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Create">
+      <MemberSignature Language="C#" Value="public static WasmerSharp.Memory Create (uint minPages, Nullable&lt;uint&gt; maxPages = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class WasmerSharp.Memory Create(unsigned int32 minPages, valuetype System.Nullable`1&lt;unsigned int32&gt; maxPages) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.Memory</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="minPages" Type="System.UInt32" />
+        <Parameter Name="maxPages" Type="System.Nullable&lt;System.UInt32&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="minPages">Minimum number of allowed pages</param>
+        <param name="maxPages">Optional, Maximum number of allowed pages</param>
+        <summary>
+             Creates a memory block with the specified minimum and maxiumum limits
+            </summary>
+        <returns>The object on success, or null on failure. You can use the LastError error property to get details on the error.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Data">
+      <MemberSignature Language="C#" Value="public IntPtr Data { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance native int Data" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.IntPtr</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Returns a pointer to the memory backing this Memory instance.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DataLength">
+      <MemberSignature Language="C#" Value="public uint DataLength { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance unsigned int32 DataLength" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.UInt32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Returns the current length in bytes of the given memory 
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Grow">
+      <MemberSignature Language="C#" Value="public bool Grow (uint deltaPages);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Grow(unsigned int32 deltaPages) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="deltaPages" Type="System.UInt32" />
+      </Parameters>
+      <Docs>
+        <param name="deltaPages">The number of additional pages to grow</param>
+        <summary>
+            Grows the memory by the specified amount of pages.
+            </summary>
+        <returns>true on success, false on error.   You can use the LastError property to get more details on the error.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PageLength">
+      <MemberSignature Language="C#" Value="public uint PageLength { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance unsigned int32 PageLength" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.UInt32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Returns the current length in pages of the given memory 
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

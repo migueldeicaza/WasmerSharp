@@ -1,0 +1,115 @@
+<Type Name="Global" FullName="WasmerSharp.Global">
+  <TypeSignature Language="C#" Value="public class Global : WasmerSharp.WasmerNativeHandle" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Global extends WasmerSharp.WasmerNativeHandle" />
+  <AssemblyInfo>
+    <AssemblyName>WasmerSharp</AssemblyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>WasmerSharp.WasmerNativeHandle</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Represents a Global variable instance, importable/exportable across multiple modules.
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Global (WasmerSharp.WasmerValue val, bool mutable);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype WasmerSharp.WasmerValue val, bool mutable) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="val" Type="WasmerSharp.WasmerValue" />
+        <Parameter Name="mutable" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="val">The value to place on the global</param>
+        <param name="mutable">Determines whether the global is mutable</param>
+        <summary>
+            Creates a new global with the specified WasmerValue, or int, float, long and double which are implicitly convertible to it.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsMutable">
+      <MemberSignature Language="C#" Value="public bool IsMutable { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsMutable" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Determines whether this Global is mutable or not.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Set">
+      <MemberSignature Language="C#" Value="public void Set (WasmerSharp.WasmerValue value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Set(valuetype WasmerSharp.WasmerValue value) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="WasmerSharp.WasmerValue" />
+      </Parameters>
+      <Docs>
+        <param name="value">The new value to set</param>
+        <summary>
+            Sets the value of the global to the provided value, which can be a WasmerValue, or an int, long, float or double
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Value">
+      <MemberSignature Language="C#" Value="public WasmerSharp.WasmerValue Value { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype WasmerSharp.WasmerValue Value" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.WasmerValue</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Returns the value stored in this global
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ValueType">
+      <MemberSignature Language="C#" Value="public WasmerSharp.WasmerValueType ValueType { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype WasmerSharp.WasmerValueType ValueType" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.WasmerValueType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Returns the ValueType (type) of the global.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

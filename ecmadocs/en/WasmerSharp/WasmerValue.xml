@@ -1,0 +1,300 @@
+<Type Name="WasmerValue" FullName="WasmerSharp.WasmerValue">
+  <TypeSignature Language="C#" Value="public struct WasmerValue" />
+  <TypeSignature Language="ILAsm" Value=".class public ansi sealed beforefieldinit WasmerValue extends System.ValueType" />
+  <AssemblyInfo>
+    <AssemblyName>WasmerSharp</AssemblyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.ValueType</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>
+            This object can wrap an int, long, float or double.   The Tag property describes the actual payload, and the I32, I64, F32 and F64 fields provide access to the underlying data.   Implicit conversion from those data types to WasmerValue exist, and explicit conversions from a WasmerValue to those types exist.
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Encode">
+      <MemberSignature Language="C#" Value="public object Encode ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance object Encode() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Returns a boxed object that contains the underlying .NET type (int, long, float, double) based on the Tag for this value.
+            </summary>
+        <returns>The boxed value.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="F32">
+      <MemberSignature Language="C#" Value="public float F32;" />
+      <MemberSignature Language="ILAsm" Value=".field public float32 F32" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Single</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The 32-bit floating point component, when the Tag is Float32
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="F64">
+      <MemberSignature Language="C#" Value="public double F64;" />
+      <MemberSignature Language="ILAsm" Value=".field public float64 F64" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Double</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The 64-bit floating point component, when the Tag is Float64
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="I32">
+      <MemberSignature Language="C#" Value="public int I32;" />
+      <MemberSignature Language="ILAsm" Value=".field public int32 I32" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The 32-bit integer component, when the Tag is Int32
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="I64">
+      <MemberSignature Language="C#" Value="public long I64;" />
+      <MemberSignature Language="ILAsm" Value=".field public int64 I64" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The 64-bit integer component, when the Tag is Int64
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Explicit">
+      <MemberSignature Language="C#" Value="public static double op_Explicit (WasmerSharp.WasmerValue val);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname float64 op_Explicit(valuetype WasmerSharp.WasmerValue val) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Double</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="val" Type="WasmerSharp.WasmerValue" />
+      </Parameters>
+      <Docs>
+        <param name="val">The incoming WasmerValue.</param>
+        <summary>
+            Returns the stored value as a double.   This will cast if the value is not a native double.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Explicit">
+      <MemberSignature Language="C#" Value="public static int op_Explicit (WasmerSharp.WasmerValue val);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname int32 op_Explicit(valuetype WasmerSharp.WasmerValue val) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="val" Type="WasmerSharp.WasmerValue" />
+      </Parameters>
+      <Docs>
+        <param name="val">The incoming WasmerValue.</param>
+        <summary>
+            Returns the stored value as an int.   This will cast if the value is not a native int.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Explicit">
+      <MemberSignature Language="C#" Value="public static long op_Explicit (WasmerSharp.WasmerValue val);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname int64 op_Explicit(valuetype WasmerSharp.WasmerValue val) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int64</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="val" Type="WasmerSharp.WasmerValue" />
+      </Parameters>
+      <Docs>
+        <param name="val">The incoming WasmerValue.</param>
+        <summary>
+            Returns the stored value as a long.   This will cast if the value is not a native long.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Explicit">
+      <MemberSignature Language="C#" Value="public static float op_Explicit (WasmerSharp.WasmerValue val);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname float32 op_Explicit(valuetype WasmerSharp.WasmerValue val) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Single</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="val" Type="WasmerSharp.WasmerValue" />
+      </Parameters>
+      <Docs>
+        <param name="val">The incoming WasmerValue.</param>
+        <summary>
+            Returns the stored value as a float.   This will cast if the value is not a native float.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Implicit">
+      <MemberSignature Language="C#" Value="public static WasmerSharp.WasmerValue op_Implicit (double val);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype WasmerSharp.WasmerValue op_Implicit(float64 val) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.WasmerValue</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="val" Type="System.Double" />
+      </Parameters>
+      <Docs>
+        <param name="val">Double value to wrap</param>
+        <summary>
+            Creates a WasmerValue from an double
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Implicit">
+      <MemberSignature Language="C#" Value="public static WasmerSharp.WasmerValue op_Implicit (int val);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype WasmerSharp.WasmerValue op_Implicit(int32 val) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.WasmerValue</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="val" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="val">Integer value to wrap</param>
+        <summary>
+            Creates a WasmerValue from an integer
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Implicit">
+      <MemberSignature Language="C#" Value="public static WasmerSharp.WasmerValue op_Implicit (long val);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype WasmerSharp.WasmerValue op_Implicit(int64 val) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.WasmerValue</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="val" Type="System.Int64" />
+      </Parameters>
+      <Docs>
+        <param name="val">Long value to wrap</param>
+        <summary>
+            Creates a WasmerValue from an long
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Implicit">
+      <MemberSignature Language="C#" Value="public static WasmerSharp.WasmerValue op_Implicit (float val);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype WasmerSharp.WasmerValue op_Implicit(float32 val) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.WasmerValue</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="val" Type="System.Single" />
+      </Parameters>
+      <Docs>
+        <param name="val">Float value to wrap</param>
+        <summary>
+            Creates a WasmerValue from an float
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Tag">
+      <MemberSignature Language="C#" Value="public WasmerSharp.WasmerValueType Tag;" />
+      <MemberSignature Language="ILAsm" Value=".field public valuetype WasmerSharp.WasmerValueType Tag" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.WasmerValueType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The underlying type for the value stored here.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

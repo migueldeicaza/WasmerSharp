@@ -1,0 +1,197 @@
+<Type Name="Module" FullName="WasmerSharp.Module">
+  <TypeSignature Language="C#" Value="public class Module : WasmerSharp.WasmerNativeHandle" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Module extends WasmerSharp.WasmerNativeHandle" />
+  <AssemblyInfo>
+    <AssemblyName>WasmerSharp</AssemblyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>WasmerSharp.WasmerNativeHandle</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Represents a WebAssembly module, created from a byte array containing the WebAssembly code.
+            </summary>
+    <remarks>
+               Use the Create method to create new instances of a module.
+            </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Create">
+      <MemberSignature Language="C#" Value="public static WasmerSharp.Module Create (byte[] wasmBody);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class WasmerSharp.Module Create(unsigned int8[] wasmBody) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.Module</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="wasmBody" Type="System.Byte[]" />
+      </Parameters>
+      <Docs>
+        <param name="wasmBody">An array containing the WASM code to load into the module</param>
+        <summary>
+            Creates a new Module from the given WASM bytes
+            </summary>
+        <returns>The WasmerModule instance, or null on error.  You can use the LastError error property to get details on the error.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Create">
+      <MemberSignature Language="C#" Value="public static WasmerSharp.Module Create (IntPtr wasmBody, uint bodyLength);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class WasmerSharp.Module Create(native int wasmBody, unsigned int32 bodyLength) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.Module</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="wasmBody" Type="System.IntPtr" />
+        <Parameter Name="bodyLength" Type="System.UInt32" />
+      </Parameters>
+      <Docs>
+        <param name="wasmBody">A pointer to a block of memory containing the WASM code to load into the module</param>
+        <param name="bodyLength">The size of the wasmBody pointer</param>
+        <summary>
+            Creates a new Module from the given WASM bytes pointed to by the specified address
+            </summary>
+        <returns>The WasmerModule instance, or null on error.   You can use the LastError error property to get details on the error.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ExportDescriptors">
+      <MemberSignature Language="C#" Value="public WasmerSharp.ExportDescriptor[] ExportDescriptors { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class WasmerSharp.ExportDescriptor[] ExportDescriptors" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.ExportDescriptor[]</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets export descriptors for the given module
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ImportDescriptors">
+      <MemberSignature Language="C#" Value="public WasmerSharp.ImportDescriptor[] ImportDescriptors { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class WasmerSharp.ImportDescriptor[] ImportDescriptors" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.ImportDescriptor[]</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Returns the Import Descriptors for this module
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Instatiate">
+      <MemberSignature Language="C#" Value="public WasmerSharp.Instance Instatiate (WasmerSharp.Import[] imports);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class WasmerSharp.Instance Instatiate(class WasmerSharp.Import[] imports) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.Instance</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="imports" Type="WasmerSharp.Import[]">
+          <Attributes>
+            <Attribute>
+              <AttributeName>System.ParamArray</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="imports">The list of imports to pass, usually Function, Global and Memory</param>
+        <summary>
+            Creates a new Instance from the given wasm bytes and imports. 
+            </summary>
+        <returns>A Wasmer.Instance on success, or null on error.   You can use the LastError error property to get details on the error.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Serialize">
+      <MemberSignature Language="C#" Value="public WasmerSharp.SerializedModule Serialize ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class WasmerSharp.SerializedModule Serialize() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.SerializedModule</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Serializes the module, the result can be turned into a byte array and saved.
+            </summary>
+        <returns>Null on error, or an instance of SerializedModule on success.  You can use the LastError error property to get details on the error.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Validate">
+      <MemberSignature Language="C#" Value="public bool Validate (byte[] buffer);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Validate(unsigned int8[] buffer) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="buffer" Type="System.Byte[]" />
+      </Parameters>
+      <Docs>
+        <param name="buffer">Array containing the webassembly package to validate</param>
+        <summary>
+            Validates a byte array for being a valid web assembly package.
+            </summary>
+        <returns>True if this contains a valid webassembly package, false otherwise.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Validate">
+      <MemberSignature Language="C#" Value="public bool Validate (IntPtr bytes, uint len);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Validate(native int bytes, unsigned int32 len) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="bytes" Type="System.IntPtr" />
+        <Parameter Name="len" Type="System.UInt32" />
+      </Parameters>
+      <Docs>
+        <param name="bytes">Pointer to the bytes that contain the webassembly payload</param>
+        <param name="len">Length of the buffer.</param>
+        <summary>
+            Validates a block of bytes for being a valid web assembly package.
+            </summary>
+        <returns>True if this contains a valid webassembly package, false otherwise.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -1,0 +1,83 @@
+<Type Name="WasmerValueType" FullName="WasmerSharp.WasmerValueType">
+  <TypeSignature Language="C#" Value="public enum WasmerValueType" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed WasmerValueType extends System.Enum" />
+  <AssemblyInfo>
+    <AssemblyName>WasmerSharp</AssemblyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <summary>
+            Describes the types exposed by the WasmerBridge
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Float32">
+      <MemberSignature Language="C#" Value="Float32" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype WasmerSharp.WasmerValueType Float32 = unsigned int32(2)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.WasmerValueType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The type is a 32-bit floating point
+            </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="Float64">
+      <MemberSignature Language="C#" Value="Float64" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype WasmerSharp.WasmerValueType Float64 = unsigned int32(3)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.WasmerValueType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The type is a 64-bit floating point
+            </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="Int32">
+      <MemberSignature Language="C#" Value="Int32" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype WasmerSharp.WasmerValueType Int32 = unsigned int32(0)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.WasmerValueType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The type is 32-bit integer
+            </summary>
+      </Docs>
+    </Member>
+    <Member MemberName="Int64">
+      <MemberSignature Language="C#" Value="Int64" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype WasmerSharp.WasmerValueType Int64 = unsigned int32(1)" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.WasmerValueType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The type is a 64 bit integer
+            </summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

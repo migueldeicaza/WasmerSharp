@@ -1,0 +1,162 @@
+<Type Name="Import" FullName="WasmerSharp.Import">
+  <TypeSignature Language="C#" Value="public class Import" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Import extends System.Object" />
+  <AssemblyInfo>
+    <AssemblyName>WasmerSharp</AssemblyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Use this class to create the various Import objects (Globals, Memory, Function and Tables)
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Import (string moduleName, string importName, WasmerSharp.Global global);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string moduleName, string importName, class WasmerSharp.Global global) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="moduleName" Type="System.String" />
+        <Parameter Name="importName" Type="System.String" />
+        <Parameter Name="global" Type="WasmerSharp.Global" />
+      </Parameters>
+      <Docs>
+        <param name="moduleName">The module name for this import</param>
+        <param name="importName">The name for this import.</param>
+        <param name="global">The global object to import</param>
+        <summary>
+            Creates a Global import.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Import (string moduleName, string importName, WasmerSharp.ImportFunction function);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string moduleName, string importName, class WasmerSharp.ImportFunction function) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="moduleName" Type="System.String" />
+        <Parameter Name="importName" Type="System.String" />
+        <Parameter Name="function" Type="WasmerSharp.ImportFunction" />
+      </Parameters>
+      <Docs>
+        <param name="moduleName">The module name for this import</param>
+        <param name="importName">The name for this import</param>
+        <param name="function">The function to import</param>
+        <summary>
+            Creates a Function import.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Import (string moduleName, string importName, WasmerSharp.Memory memory);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string moduleName, string importName, class WasmerSharp.Memory memory) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="moduleName" Type="System.String" />
+        <Parameter Name="importName" Type="System.String" />
+        <Parameter Name="memory" Type="WasmerSharp.Memory" />
+      </Parameters>
+      <Docs>
+        <param name="moduleName">The module name for this import</param>
+        <param name="importName">The name for this import, if not specified, it will default to "memory"</param>
+        <param name="memory">The memory object to import</param>
+        <summary>
+            Creates a Memory import.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Import (string moduleName, string importName, WasmerSharp.Table table);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string moduleName, string importName, class WasmerSharp.Table table) cil managed" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="moduleName" Type="System.String" />
+        <Parameter Name="importName" Type="System.String" />
+        <Parameter Name="table" Type="WasmerSharp.Table" />
+      </Parameters>
+      <Docs>
+        <param name="moduleName">The module name for this import</param>
+        <param name="importName">The name for this import</param>
+        <param name="table">The table to import</param>
+        <summary>
+            Creates a Table import.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ImportName">
+      <MemberSignature Language="C#" Value="public string ImportName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ImportName" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+             The name for this import
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Kind">
+      <MemberSignature Language="C#" Value="public WasmerSharp.ImportExportKind Kind { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype WasmerSharp.ImportExportKind Kind" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.ImportExportKind</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The kind of import
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ModuleName">
+      <MemberSignature Language="C#" Value="public string ModuleName { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string ModuleName" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The module name for this import
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

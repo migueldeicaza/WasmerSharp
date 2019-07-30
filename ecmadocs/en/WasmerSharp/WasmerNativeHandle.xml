@@ -1,0 +1,65 @@
+<Type Name="WasmerNativeHandle" FullName="WasmerSharp.WasmerNativeHandle">
+  <TypeSignature Language="C#" Value="public class WasmerNativeHandle : IDisposable" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit WasmerNativeHandle extends System.Object implements class System.IDisposable" />
+  <AssemblyInfo>
+    <AssemblyName>WasmerSharp</AssemblyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IDisposable</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>
+            This wraps a native handle and takes care of disposing the handles they wrap.
+            Due to the design of the Wasmer API that can
+            </summary>
+    <remarks>
+            produce a lot of values that need to be destroyed, and in an effort to balance
+            the complexity that it would involve, this queues releases of data on either
+            construction or on the main thread dispose method.
+            </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Dispose">
+      <MemberSignature Language="C#" Value="public void Dispose ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Dispose() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+             Disposes the object, releasing the unmanaged resources associated with it.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LastError">
+      <MemberSignature Language="C#" Value="public string LastError { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance string LastError" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Returns the last error message that was raised by the Wasmer Runtime
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

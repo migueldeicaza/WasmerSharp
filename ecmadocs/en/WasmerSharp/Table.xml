@@ -1,0 +1,101 @@
+<Type Name="Table" FullName="WasmerSharp.Table">
+  <TypeSignature Language="C#" Value="public class Table : WasmerSharp.WasmerNativeHandle" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Table extends WasmerSharp.WasmerNativeHandle" />
+  <AssemblyInfo>
+    <AssemblyName>WasmerSharp</AssemblyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>WasmerSharp.WasmerNativeHandle</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Represents a Wasmer Table.   Use the Create static method to create new instances of the table.
+            </summary>
+    <remarks>
+      <para>
+            A table is similar to a linear memory whose elements, instead of being bytes, are opaque values of a
+            particular table element type. This allows the table to contain values—like GC references,
+            raw OS handles, or native pointers—that are accessed by WebAssembly code indirectly through an integer index.
+            This feature bridges the gap between low-level, untrusted linear memory and high-level opaque
+            handles/references at the cost of a bounds-checked table indirection.
+            </para>
+      <para>
+            The table’s element type constrains the type of elements stored in the table and allows engines to
+            avoid some type checks on table use. When a WebAssembly value is stored in a table, the value’s
+            type must precisely match the element type. Depending on the operator/API used to store the value,
+            this check may be static or dynamic. Just like linear memory, updates to a table are observed
+            immediately by all instances that reference the table. Host environments may also allow storing
+            non-WebAssembly values in tables in which case, as with imports, the meaning of using the value
+            is defined by the host environment.
+            </para>
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Create">
+      <MemberSignature Language="C#" Value="public static WasmerSharp.Table Create (uint min, Nullable&lt;uint&gt; max = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class WasmerSharp.Table Create(unsigned int32 min, valuetype System.Nullable`1&lt;unsigned int32&gt; max) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.Table</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="min" Type="System.UInt32" />
+        <Parameter Name="max" Type="System.Nullable&lt;System.UInt32&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="min">Minimum number of elements to store on the table.</param>
+        <param name="max">Optional, maximum number of elements to store on the table.</param>
+        <summary>
+            Creates a new Table for the given descriptor
+            </summary>
+        <returns>An instance of Table on success, or null on error.  You can use the LastError error property to get details on the error.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Grow">
+      <MemberSignature Language="C#" Value="public bool Grow (uint delta);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Grow(unsigned int32 delta) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="delta" Type="System.UInt32" />
+      </Parameters>
+      <Docs>
+        <param name="delta">Number of elements to add to the table.</param>
+        <summary>
+            Attemps to grow the table by the specified number of elements.
+            </summary>
+        <returns>true on success, false on failure.  You can use the LastError error property to get details on the error.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Length">
+      <MemberSignature Language="C#" Value="public uint Length { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance unsigned int32 Length" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.UInt32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Returns the current length of the given Table  
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

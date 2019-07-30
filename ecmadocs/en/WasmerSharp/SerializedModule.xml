@@ -1,0 +1,104 @@
+<Type Name="SerializedModule" FullName="WasmerSharp.SerializedModule">
+  <TypeSignature Language="C#" Value="public class SerializedModule : WasmerSharp.WasmerNativeHandle" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SerializedModule extends WasmerSharp.WasmerNativeHandle" />
+  <AssemblyInfo>
+    <AssemblyName>WasmerSharp</AssemblyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>WasmerSharp.WasmerNativeHandle</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Modules can either be serialized to byte arrays, or created from a serialized state (byte arrays).  This class provides this bridge.
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Deserialize">
+      <MemberSignature Language="C#" Value="public WasmerSharp.Module Deserialize ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class WasmerSharp.Module Deserialize() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.Module</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Deserialize the given serialized module.
+            </summary>
+        <returns>Returns an instance of a Module, or null on error.  You can use the LastError error property to get details on the error. </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FromBytes">
+      <MemberSignature Language="C#" Value="public static WasmerSharp.SerializedModule FromBytes (byte[] buffer);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class WasmerSharp.SerializedModule FromBytes(unsigned int8[] buffer) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.SerializedModule</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="buffer" Type="System.Byte[]" />
+      </Parameters>
+      <Docs>
+        <param name="buffer">Array of bytes containing the serialized module.</param>
+        <summary>
+            Creates a new SerializedModule from the provided byte array
+            </summary>
+        <returns>Returns null on error, or an instance of SerializeModule on success.   You can use the LastError error property to get details on the error.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FromBytes">
+      <MemberSignature Language="C#" Value="public static WasmerSharp.SerializedModule FromBytes (IntPtr bytes, uint len);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class WasmerSharp.SerializedModule FromBytes(native int bytes, unsigned int32 len) cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>WasmerSharp.SerializedModule</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="bytes" Type="System.IntPtr" />
+        <Parameter Name="len" Type="System.UInt32" />
+      </Parameters>
+      <Docs>
+        <param name="bytes">Pointer to a region in memory containing the serialized module.</param>
+        <param name="len">The number of bytes toe process from the buffer</param>
+        <summary>
+            Creates a new SerializedModule from the provided buffer.
+            </summary>
+        <returns>Returns null on error, or an instance of SerializeModule on success.  You can use the LastError error property to get details on the error.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetModuleBytes">
+      <MemberSignature Language="C#" Value="public byte[] GetModuleBytes ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int8[] GetModuleBytes() cil managed" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Byte[]</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Returns the serialized module as a byte array.
+            </summary>
+        <returns>The byte array for this serialized module</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
