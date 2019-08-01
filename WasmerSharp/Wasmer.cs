@@ -82,8 +82,10 @@ namespace WasmerSharp {
 		{
 			WasmerByteArray ret;
 
-			ret.bytes = Marshal.StringToCoTaskMemAuto (txt);
-			ret.bytesLen = (uint)System.Text.Encoding.UTF8.GetByteCount (txt);
+			var byteBuffer = System.Text.Encoding.UTF8.GetBytes(txt);
+			ret.bytes = Marshal.AllocHGlobal(byteBuffer.Length + 1);
+			Marshal.Copy(byteBuffer, 0, ret.bytes, byteBuffer.Length);
+			ret.bytesLen = (uint) byteBuffer.Length;
 			return ret;
 		}
 	}
@@ -1300,6 +1302,7 @@ namespace WasmerSharp {
 		public uint Length => wasmer_table_length (handle);
 	}
 
+	[StructLayout (LayoutKind.Sequential)]
 	internal struct wasmer_import {
 		internal WasmerByteArray module_name;
 		internal WasmerByteArray import_name;

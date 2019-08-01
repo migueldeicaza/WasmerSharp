@@ -1,7 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageVersion>1.0</PackageVersion>
+    <Authors>Miguel de Icaza</Authors>
+    <PackageLicenseUrl>https://github.com/migueldeicaza/WasmerSharp/blob/master/LICENSE</PackageLicenseUrl>
+    <Owners>Miguel de Icaza</Owners>
+    <PackageProjectUrl>https://github.com/migueldeicaza/WasmerSharp</PackageProjectUrl>
+    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <Summary>.NET bindings to the Wasmer WebAssembly runtime</Summary>
+    <PackageTags>webassembly, .net, wasm, wasmer</PackageTags>
+    <Title>WasmerSharp</Title>
+    <Description>WasmerSharp is a .NET API to host the Wasmer WebAssembly runtime in .NET, allowing developers to blend WebAssembly code with .NET code in desktops and servers.</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -15,4 +27,12 @@
     <DebugType></DebugType>
     <DocumentationFile>bin\Release\netstandard2.0\WasmerSharp.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="nuget\WasmerSharp.targets" />
+    <None Include="nuget\WasmerSharp.targets" PackagePath="build\netstandard2.0\WasmerSharp.targets" Pack="true" />
+    <None Include="..\native\wasmer_runtime_c_api.dll" Link="nuget\runtimes\win7-x64\native\wasmer_runtime_c_api.dll" PackagePath="runtimes\win7-x64\native\wasmer_runtime_c_api.dll" Pack="true" />
+    <None Include="..\native\libwasmer_runtime_c_api.dylib" Link="nuget\runtimes\osx\native\libwasmer_runtime_c_api.dylib" PackagePath="runtimes\osx\native\libwasmer_runtime_c_api.dylib" Pack="true" />
+    <None Include="..\native\libwasmer_runtime_c_api.so" Link="nuget\runtimes\linux\native\libwasmer_runtime_c_api.so" PackagePath="runtimes\linux\native\libwasmer_runtime_c_api.so" Pack="true" />
+  </ItemGroup>
 </Project>

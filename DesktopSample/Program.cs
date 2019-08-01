@@ -20,13 +20,17 @@ class MainClass {
 			Console.WriteLine ("Received this utf string: [{0}]", str);
 		}
 	}
-	
+
+	// This delegate is needed since .NET Core's GetFunctionPointerForDelegate does not allow
+	// for generics to be passed.
+	delegate void myCallback (InstanceContext ctx, int arg1, int arg2);
+
 	public static void Main (string [] args)
 	{
 		//
 		// Creates the imports for the instance
 		//
-		var func = new Import ("env", "_print_str", new ImportFunction ((Action<InstanceContext,int,int>) (Print)));
+		var func = new Import ("env", "_print_str", new ImportFunction ((myCallback) (Print)));
 		var memory = new Import ("env", "memory", Memory.Create (minPages: 256, maxPages: 256));
 		var global = new Import ("env", "__memory_base", new Global (1024, false));
 
