@@ -94,6 +94,15 @@ and passing the address to this method, or setting the address in a
 
 Once you do this, then you create an [`Import`](../api/WasmerSharp/WasmerSharp.Import.html) wrapper for it.
 
+# Exploring Imports and Exports
+
+If you have a WebAssembly file, you can load it using
+[`Module.Create`](../api/WasmerSharp/WasmerSharp.Module.html)` and
+then obtain a list of expectations (the `ImportDescriptors` property)
+as well as the itemts it exports (the `ExportDescriptors` property).
+Both return arrays that you can iterate with and contain things like
+the `ModuleName`, `Name`, and the kind of descriptor.
+
 # Example
 
 This function shows the use of
@@ -115,13 +124,15 @@ public static void Print (InstanceContext ctx, int ptr, int len)
 	}
 }
 
+delegate void PrintCallback (IntstanceContext ic, int par1, int par2);
+
 public static void Main (string [] args)
 {
 	//
 	// Creates the imports for the instance
 	//
 	var func = new Import ("env", "_print_str", 
-	    new ImportFunction ((Action<InstanceContext,int,int>) (Print)));
+	    new ImportFunction ((PrintCallback) (Print)));
 
 	var memory = new Import ("env", "memory", 
 	    Memory.Create (minPages: 256, maxPages: 256));
@@ -147,3 +158,4 @@ public static void Main (string [] args)
 		Console.WriteLine ("__hello_wasm returned: " + ret);
 }
 ```
+

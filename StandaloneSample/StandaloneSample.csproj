@@ -25,7 +25,4 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="WasmerSharp" Version="1.0.0" />
-  </ItemGroup>
 </Project>

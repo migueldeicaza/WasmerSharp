@@ -8,6 +8,12 @@ using System;
 using WasmerSharp;
 using System.IO;
 
+class ExportSample {
+	public void Print (InstanceContext ctx, int ptr, int len)
+	{
+	}
+}
+
 class MainClass {
 	// This method is invoked by the WebAssembly code.
 	public static void Print (InstanceContext ctx, int ptr, int len)
@@ -35,6 +41,12 @@ class MainClass {
 		var global = new Import ("env", "__memory_base", new Global (1024, false));
 
 		var wasm = File.ReadAllBytes ("target.wasm");
+
+		var x = Module.Create (wasm);
+		Console.WriteLine ("The loaded target.wasm has the following imports listed:");
+		foreach (var import in x.ImportDescriptors) {
+			Console.WriteLine ($"import: {import.Kind} {import.ModuleName}::{import.Name} ");
+		}
 
 		//
 		// Create an instance from the wasm bytes, the declared func, the memory we created and the global we have

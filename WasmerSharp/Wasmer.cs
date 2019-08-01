@@ -6,6 +6,7 @@
 //
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace WasmerSharp {
@@ -64,6 +65,9 @@ namespace WasmerSharp {
 
 		public override string ToString ()
 		{
+			if (bytes == IntPtr.Zero)
+				return null;
+
 			unsafe {
 				var len = bytesLen > Int32.MaxValue ? Int32.MaxValue : (int)bytesLen;
 				return System.Text.Encoding.UTF8.GetString ((byte*)bytes, len);
@@ -72,6 +76,9 @@ namespace WasmerSharp {
 
 		internal byte [] ToByteArray ()
 		{
+			if (bytes == IntPtr.Zero)
+				return null;
+
 			var len = bytesLen > Int32.MaxValue ? Int32.MaxValue : (int)bytesLen;
 			var ret = new byte [len];
 			Marshal.Copy (bytes, ret, 0, len);
@@ -93,35 +100,36 @@ namespace WasmerSharp {
 	/// <summary>
 	/// This object can wrap an int, long, float or double.   The Tag property describes the actual payload, and the I32, I64, F32 and F64 fields provide access to the underlying data.   Implicit conversion from those data types to WasmerValue exist, and explicit conversions from a WasmerValue to those types exist.
 	/// </summary>
-	[StructLayout (LayoutKind.Explicit)]
+	[StructLayout (LayoutKind.Sequential)]
 	public struct WasmerValue {
 		/// <summary>
 		/// The underlying type for the value stored here.
 		/// </summary>
-		[FieldOffset (0)]
 		public WasmerValueType Tag;
+
+		/// <summary>
+		/// The underlying value for the value stored here.
+		/// </summary>
+
+		internal WasmerInnerValue Storage;
 
 		/// <summary>
 		/// The 32-bit integer component, when the Tag is Int32
 		/// </summary>
-		[FieldOffset (4)]
-		public int I32;
+		public int Int32 => Storage.I32;
+
 		/// <summary>
 		/// The 64-bit integer component, when the Tag is Int64
 		/// </summary>
-		[FieldOffset (4)]
-		public long I64;
+		public long Int64 => Storage.I64;
 		/// <summary>
 		/// The 32-bit floating point component, when the Tag is Float32
 		/// </summary>
-		[FieldOffset (4)]
-		public float F32;
-
+		public float Float32 => Storage.F32;
 		/// <summary>
 		/// The 64-bit floating point component, when the Tag is Float64
 		/// </summary>
-		[FieldOffset (4)]
-		public double F64;
+		public double Float64 => Storage.F64;
 
 		/// <summary>
 		/// Returns a boxed object that contains the underlying .NET type (int, long, float, double) based on the Tag for this value.
@@ -131,15 +139,24 @@ namespace WasmerSharp {
 		{
 			switch (Tag) {
 			case WasmerValueType.Int32:
-				return I32;
+				return Storage.I32;
 			case WasmerValueType.Int64:
-				return I64;
+				return Storage.I64;
 			case WasmerValueType.Float32:
-				return F32;
+				return Storage.F32;
 			case WasmerValueType.Float64:
-				return F64;
+				return Storage.F64;
 			}
 			return null;
+		}
+
+		/// <summary>
+		///  Returns the value, suitable to be printed, the type is not shown.
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString ()
+		{
+			return Encode ().ToString ();
 		}
 
 		/// <summary>
@@ -150,16 +167,16 @@ namespace WasmerSharp {
 		{
 			switch (val.Tag) {
 			case WasmerValueType.Int32:
-				return val.I32;
+				return val.Storage.I32;
 
 			case WasmerValueType.Int64:
-				return (int)val.I64;
+				return (int)val.Storage.I64;
 
 			case WasmerValueType.Float32:
-				return (int)val.F32;
+				return (int)val.Storage.F32;
 
 			case WasmerValueType.Float64:
-				return (int)val.F64;
+				return (int)val.Storage.F64;
 			}
 			throw new Exception ("Unknown WasmerValueType");
 		}
@@ -172,16 +189,16 @@ namespace WasmerSharp {
 		{
 			switch (val.Tag) {
 			case WasmerValueType.Int32:
-				return val.I32;
+				return val.Storage.I32;
 
 			case WasmerValueType.Int64:
-				return val.I64;
+				return val.Storage.I64;
 
 			case WasmerValueType.Float32:
-				return (long)val.F32;
+				return (long)val.Storage.F32;
 
 			case WasmerValueType.Float64:
-				return (long)val.F64;
+				return (long)val.Storage.F64;
 			}
 			throw new Exception ("Unknown WasmerValueType");
 		}
@@ -194,16 +211,16 @@ namespace WasmerSharp {
 		{
 			switch (val.Tag) {
 			case WasmerValueType.Int32:
-				return val.I32;
+				return val.Storage.I32;
 
 			case WasmerValueType.Int64:
-				return (float)val.I64;
+				return (float)val.Storage.I64;
 
 			case WasmerValueType.Float32:
-				return val.F32;
+				return val.Storage.F32;
 
 			case WasmerValueType.Float64:
-				return (float)val.F64;
+				return (float)val.Storage.F64;
 			}
 			throw new Exception ("Unknown WasmerValueType");
 		}
@@ -217,16 +234,16 @@ namespace WasmerSharp {
 		{
 			switch (val.Tag) {
 			case WasmerValueType.Int32:
-				return val.I32;
+				return val.Storage.I32;
 
 			case WasmerValueType.Int64:
-				return (double)val.I64;
+				return (double)val.Storage.I64;
 
 			case WasmerValueType.Float32:
-				return val.F32;
+				return val.Storage.F32;
 
 			case WasmerValueType.Float64:
-				return val.F64;
+				return val.Storage.F64;
 			}
 			throw new Exception ("Unknown WasmerValueType");
 		}
@@ -237,7 +254,7 @@ namespace WasmerSharp {
 		/// <param name="val">Integer value to wrap</param>
 		public static implicit operator WasmerValue (int val)
 		{
-			return new WasmerValue () { I32 = val, Tag = WasmerValueType.Int32 };
+			return new WasmerValue () { Tag = WasmerValueType.Int32, Storage = new WasmerInnerValue () { I32 = val } };
 		}
 
 		/// <summary>
@@ -246,7 +263,7 @@ namespace WasmerSharp {
 		/// <param name="val">Long value to wrap</param>
 		public static implicit operator WasmerValue (long val)
 		{
-			return new WasmerValue () { I64 = val, Tag = WasmerValueType.Int64 };
+			return new WasmerValue () { Tag = WasmerValueType.Int64, Storage = new WasmerInnerValue () { I64 = val } };
 		}
 
 		/// <summary>
@@ -255,7 +272,7 @@ namespace WasmerSharp {
 		/// <param name="val">Float value to wrap</param>
 		public static implicit operator WasmerValue (float val)
 		{
-			return new WasmerValue () { F32 = val, Tag = WasmerValueType.Float32 };
+			return new WasmerValue () { Tag = WasmerValueType.Float32, Storage = new WasmerInnerValue () { F32 = val } };
 		}
 
 		/// <summary>
@@ -264,8 +281,21 @@ namespace WasmerSharp {
 		/// <param name="val">Double value to wrap</param>
 		public static implicit operator WasmerValue (double val)
 		{
-			return new WasmerValue () { F64 = val, Tag = WasmerValueType.Float64 };
+			return new WasmerValue () { Tag = WasmerValueType.Float64, Storage = new WasmerInnerValue () { F64 = val } };
 		}
+
+	}
+
+	[StructLayout (LayoutKind.Explicit)]
+	struct WasmerInnerValue {
+		[FieldOffset (0)]
+		public int I32;
+		[FieldOffset (0)]
+		public long I64;
+		[FieldOffset (0)]
+		public float F32;
+		[FieldOffset (0)]
+		public double F64;
 
 	}
 
@@ -351,11 +381,14 @@ namespace WasmerSharp {
 		public string LastError {
 			get {
 				var len = wasmer_last_error_length ();
-				var buf = Marshal.AllocHGlobal (len);
-				wasmer_last_error_message (buf, len);
-				var str = Marshal.PtrToStringAuto (buf);
-				Marshal.FreeHGlobal (buf);
-				return str;
+				unsafe {
+					var buf = Marshal.AllocHGlobal (len);
+					wasmer_last_error_message (buf, len);
+					var str = System.Text.Encoding.UTF8.GetString ((byte*)buf, len);
+					
+					Marshal.FreeHGlobal (buf);
+					return str;
+				}
 			}
 		}
 
@@ -492,6 +525,13 @@ namespace WasmerSharp {
 		[DllImport (Library)]
 		extern static int wasmer_import_descriptors_len (IntPtr handle);
 
+		[DllImport (Library)]
+		extern static ImportExportKind wasmer_import_descriptor_kind (IntPtr handle);
+		[DllImport (Library)]
+		extern static WasmerByteArray wasmer_import_descriptor_module_name (IntPtr handle);
+		[DllImport (Library)]
+		extern static WasmerByteArray wasmer_import_descriptor_name (IntPtr handle);
+
 		/// <summary>
 		/// Returns the Import Descriptors for this module
 		/// </summary>
@@ -501,7 +541,15 @@ namespace WasmerSharp {
 				var len = wasmer_import_descriptors_len (importsHandle);
 				var res = new ImportDescriptor [len];
 				for (int i = 0; i < len; i++) {
-					res [i] = new ImportDescriptor (wasmer_import_descriptors_get (importsHandle, i));
+					var id = wasmer_import_descriptors_get (importsHandle, i);
+
+					// Need to prepopulate, as it looks like destroying the container
+					// also destroy the underlyiung data structures used by these.
+					res [i] = new ImportDescriptor () {
+						Kind = wasmer_import_descriptor_kind (id),
+						ModuleName = wasmer_import_descriptor_module_name (id).ToString (),
+						Name = wasmer_import_descriptor_name (id).ToString ()
+					};
 				}
 				wasmer_import_descriptors_destroy (importsHandle);
 				return res;
@@ -550,6 +598,11 @@ namespace WasmerSharp {
 				}
 			}
 		}
+
+		public override string ToString ()
+		{
+			return "Module";
+		}
 	}
 
 	/// <summary>
@@ -566,6 +619,11 @@ namespace WasmerSharp {
 		/// Gets name for the export descriptor
 		/// </summary>
 		public string Name { get; internal set; }
+
+		public override string ToString ()
+		{
+			return $"{Kind} (\"{Name}\")";
+		}
 	}
 
 	/// <summary>
@@ -660,7 +718,6 @@ namespace WasmerSharp {
 				return null;
 			}
 		}
-
 	}
 
 	/// <summary>
@@ -763,7 +820,6 @@ namespace WasmerSharp {
 				limits.max.hasSome = 0;
 				limits.max.some = 0;
 			}
-
 			if (wasmer_memory_new (out var handle, limits) == WasmerResult.Ok) {
 				return new Memory (handle);
 			}
@@ -842,6 +898,10 @@ namespace WasmerSharp {
 		/// </summary>
 		public IntPtr Data => wasmer_memory_data (handle);
 
+		public override string ToString ()
+		{
+			return $"{DataLength} bytes at address {(ulong)Data:x}";
+		}
 	}
 
 	/// <summary>
@@ -853,16 +913,80 @@ namespace WasmerSharp {
 		[DllImport (Library)]
 		extern static IntPtr wasmer_global_new (WasmerValue value, byte mutable_);
 
-		/// <summary>
-		/// Creates a new global with the specified WasmerValue, or int, float, long and double which are implicitly convertible to it.
-		/// </summary>
-		/// <param name="val">The value to place on the global</param>
-		/// <param name="mutable">Determines whether the global is mutable</param>
 		public Global (WasmerValue val, bool mutable)
 		{
 			handle = wasmer_global_new (val, (byte)(mutable ? 1 : 0));
 		}
 
+		struct IntValue {
+			public WasmerValueType t;
+			public int payload;
+		}
+		struct LongValue {
+			public WasmerValueType t;
+			public long payload;
+		}
+		struct FloatValue {
+			public WasmerValueType t;
+			public float payload;
+		}
+		struct DoubleValue {
+			public WasmerValueType t;
+			public double payload;
+		}
+
+		[DllImport (Library)]
+		extern static IntPtr wasmer_global_new (IntValue value, byte mutable_);
+		[DllImport (Library)]
+		extern static IntPtr wasmer_global_new (LongValue value, byte mutable_);
+		[DllImport (Library)]
+		extern static IntPtr wasmer_global_new (FloatValue value, byte mutable_);
+		[DllImport (Library)]
+		extern static IntPtr wasmer_global_new (DoubleValue value, byte mutable_);
+
+		/// <summary>
+		/// Creates a new integer global with the specified WasmerValue.
+		/// </summary>
+		/// <param name="val">The value to place on the global</param>
+		/// <param name="mutable">Determines whether the global is mutable</param>
+		public Global (int val, bool mutable)
+		{
+			var x = new IntValue () { t = WasmerValueType.Int32, payload = val };
+			handle = wasmer_global_new (x, (byte)( mutable ? 1 : 0));
+		}
+
+		/// <summary>
+		/// Creates a new long global with the specified WasmerValue.
+		/// </summary>
+		/// <param name="val">The value to place on the global</param>
+		/// <param name="mutable">Determines whether the global is mutable</param>
+		public Global (long val, bool mutable)
+		{
+			var x = new LongValue () { t = WasmerValueType.Int64, payload = val };
+			handle = wasmer_global_new (x, (byte)(mutable ? 1 : 0));
+		}
+
+		/// <summary>
+		/// Creates a new float global with the specified WasmerValue.
+		/// </summary>
+		/// <param name="val">The value to place on the global</param>
+		/// <param name="mutable">Determines whether the global is mutable</param>
+		public Global (float val, bool mutable)
+		{
+			var x = new FloatValue () { t = WasmerValueType.Float32, payload = val };
+			handle = wasmer_global_new (x, (byte)(mutable ? 1 : 0));
+		}
+
+		/// <summary>
+		/// Creates a new double global with the specified WasmerValue.
+		/// </summary>
+		/// <param name="val">The value to place on the global</param>
+		/// <param name="mutable">Determines whether the global is mutable</param>
+		public Global (double val, bool mutable)
+		{
+			var x = new DoubleValue () { t = WasmerValueType.Float64, payload = val };
+			handle = wasmer_global_new (x, (byte)(mutable ? 1 : 0));
+		}
 
 		[DllImport (Library)]
 		extern static void wasmer_global_destroy (IntPtr handle);
@@ -873,14 +997,25 @@ namespace WasmerSharp {
 		}
 
 		[DllImport (Library)]
-		extern static WasmerValue wasmer_global_get (IntPtr handle);
+		extern static WorkaroundWasmerValue wasmer_global_get (IntPtr handle);
+
+		[StructLayout(LayoutKind.Sequential)]
+		struct WorkaroundWasmerValue {
+			int x;
+			long y;
+		}
 
 		/// <summary>
 		/// Returns the value stored in this global
 		/// </summary>
 		public WasmerValue Value {
 			get {
-				return wasmer_global_get (handle);
+				// Need these gymnastics in CoreCLR because it chokes with
+				// unions.
+				var result = wasmer_global_get (handle);
+				unsafe {
+					return *(WasmerValue*)(&result);
+				}
 			}
 		}
 
@@ -906,7 +1041,7 @@ namespace WasmerSharp {
 		}
 
 		[DllImport (Library)]
-		extern static void wasmer_global_set (IntPtr global, WasmerValue value);
+		extern static void wasmer_global_set (IntPtr global, WorkaroundWasmerValue value);
 
 		/// <summary>
 		/// Sets the value of the global to the provided value, which can be a WasmerValue, or an int, long, float or double
@@ -914,7 +1049,12 @@ namespace WasmerSharp {
 		/// <param name="value">The new value to set</param>
 		public void Set (WasmerValue value)
 		{
-			wasmer_global_set (handle, value);
+			unsafe {
+				WorkaroundWasmerValue x;
+				
+				x = *(WorkaroundWasmerValue*)(&value);
+				wasmer_global_set (handle, x);
+			}
 		}
 	}
 
@@ -928,32 +1068,27 @@ namespace WasmerSharp {
 	/// The import descriptors for a WebAssembly module describe the type of each import, iits name and the module name it belongs to.
 	/// </summary>
 	public class ImportDescriptor : WasmerNativeHandle {
-		internal ImportDescriptor (IntPtr handle) : base (handle) { }
-
-		[DllImport (Library)]
-		extern static ImportExportKind wasmer_import_descriptor_kind (IntPtr handle);
+		internal ImportDescriptor () { }
 
 		/// <summary>
 		/// Returns the descriptor kind
 		/// </summary>
-		public ImportExportKind DescriptorKind => wasmer_import_descriptor_kind (handle);
-
-		[DllImport (Library)]
-		extern static WasmerByteArray wasmer_import_descriptor_module_name (IntPtr handle);
+		public ImportExportKind Kind { get; internal set; }
 
 		/// <summary>
 		/// Gets module name for the import descriptor
 		/// </summary>
-		public string ModuleName => wasmer_import_descriptor_module_name (handle).ToString ();
-
-		[DllImport (Library)]
-		extern static WasmerByteArray wasmer_import_descriptor_name (IntPtr handle);
+		public string ModuleName { get; internal set; }
 
 		/// <summary>
 		/// Gets name for the import descriptor
 		/// </summary>
-		public string Name => wasmer_import_descriptor_name (handle).ToString ();
+		public string Name { get; internal set; }
 
+		public override string ToString ()
+		{
+			return $"{Kind}(\"{ModuleName}::{Name}\"" ;
+		}
 	}
 
 	/// <summary>
@@ -1141,16 +1276,16 @@ namespace WasmerSharp {
 				parsOut [i].Tag = tag;
 				switch (tag) {
 				case WasmerValueType.Int32:
-					parsOut [i].I32 = (int)args [i];
+					parsOut [i].Storage.I32 = (int)args [i];
 					break;
 				case WasmerValueType.Int64:
-					parsOut [i].I64 = (long)args [i];
+					parsOut [i].Storage.I64 = (long)args [i];
 					break;
 				case WasmerValueType.Float32:
-					parsOut [i].F32 = (float)args [i];
+					parsOut [i].Storage.F32 = (float)args [i];
 					break;
 				case WasmerValueType.Float64:
-					parsOut [i].F64 = (double)args [i];
+					parsOut [i].Storage.F64 = (double)args [i];
 					break;
 				}
 			}
@@ -1218,6 +1353,15 @@ namespace WasmerSharp {
 			gchandle = GCHandle.Alloc (value);
 			wasmer_instance_context_data_set (handle, GCHandle.ToIntPtr (gchandle));
 		}
+
+		[DllImport (Library)]
+		extern static InstanceContext wasmer_instance_context_get (IntPtr handle);
+
+		/// <summary>
+		/// Extracts the instance's context and returns it.
+		/// </summary>
+		public InstanceContext Context => wasmer_instance_context_get (handle);
+
 	}
 
 
@@ -1327,6 +1471,45 @@ namespace WasmerSharp {
 		/// </summary>
 		public ImportExportKind Kind { get; private set; }
 		internal WasmerNativeHandle payload;
+
+		/// <summary>
+		/// Returns an array of Import elements based on the suitable functions in the type T as Imports.
+		/// </summary>
+		/// <typeparam name="T">The type that will be scanned for methods.</typeparam>
+		/// <param name="moduleName">The module name used by default.</param>
+		/// <remarks>
+		/// You can use this method to easily expose a number of methods in a type to the 
+		/// </remarks>
+		/// <returns>Array of imports with ImportFunctions as defined on the type</returns>
+		public static Import [] FunctionsFromType<T> (string moduleName)
+		{
+			var result = new List<Import> ();
+			foreach (var mi in typeof (T).GetMethods (BindingFlags.Static | BindingFlags.Public)) {
+				var pi = mi.GetParameters ();
+				if (pi.Length == 0)
+					continue;
+				if (pi [0].GetType () == typeof (InstanceContext)) {
+					for (int i = 1; i < pi.Length; i++) {
+						var pit = pi [i].GetType ();
+						if (pit == typeof (int) || pit == typeof (long) || pit == typeof (double) || pit == typeof (float)) {
+							var module = moduleName;
+							var name = mi.Name;
+
+							var cattr = mi.GetCustomAttribute<WasmerImportAttribute> ();
+							if (cattr != null) {
+								if (cattr.Module != null)
+									module = cattr.Module;
+								if (cattr.Name != null)
+									name = cattr.Name;
+							}
+							var func = new ImportFunction (Delegate.CreateDelegate (typeof(T), mi));
+							result.Add (new Import (moduleName, name, func));
+						}
+					}
+				}
+			}
+			return result.ToArray ();
+		}
 
 		/// <summary>
 		/// Creates a Memory import.
@@ -1493,7 +1676,7 @@ namespace WasmerSharp {
 	/// instance as well as the associated memory.
 	/// </summary>
 	public struct InstanceContext {
-		IntPtr handle;
+		public IntPtr Handle;
 
 		[DllImport (WasmerNativeHandle.Library)]
 		extern static IntPtr wasmer_instance_context_data_get (IntPtr handle);
@@ -1501,7 +1684,7 @@ namespace WasmerSharp {
 		/// <summary>
 		/// Retrieves the global Data value that was set for this Instance.
 		/// </summary>
-		public object Data => GCHandle.FromIntPtr (wasmer_instance_context_data_get (handle));
+		public object Data => GCHandle.FromIntPtr (wasmer_instance_context_data_get (Handle));
 
 		[DllImport (WasmerNativeHandle.Library)]
 		extern static IntPtr wasmer_instance_context_memory (IntPtr handle, uint memoryId);
@@ -1512,13 +1695,45 @@ namespace WasmerSharp {
 		/// <param name="idx">The index of the memory to retrieve, currently only supports one memory blob.</param>
 		public Memory GetMemory (uint idx)
 		{
-			var b = wasmer_instance_context_memory (handle, idx);
+			var b = wasmer_instance_context_memory (Handle, idx);
 			if (b == IntPtr.Zero)
 				return null;
 			return new Memory (b, owns: false);
 		}
 	}
 
+	/// <summary>
+	/// This attribute can be applied to a member that takes an IntanceContext as a first parameter
+	/// and zero or more parameters of type int, long, float or double to register the module name
+	/// and name.   The resulting method is returned as an Imports that is suitable to be passed
+	/// to the Instantiate methods.
+	/// </summary>
+	[AttributeUsage(AttributeTargets.Method)]
+	public class WasmerImportAttribute : Attribute {
+		public string Module;
+		public string Name;
+
+		/// <summary>
+		/// Sets the import name, and inherits the module name
+		/// </summary>
+		/// <param name="name">Name to give this import</param>
+		public WasmerImportAttribute (string name)
+		{
+			Module = "";
+			Name = name;
+		}
+
+		/// <summary>
+		/// Sets the import name and module name.
+		/// </summary>
+		/// <param name="module">Name for the module.</param>
+		/// <param name="name">Name to give this import</param>
+		public WasmerImportAttribute (string module, string name)
+		{
+			Module = module;
+			Name = name;
+		}
+	}
 #if false
 
 	// Penbding bindigns: https://gist.github.com/migueldeicaza/32816d404e202840ee13ca9a7f0fe724
