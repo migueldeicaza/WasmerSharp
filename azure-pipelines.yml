@@ -27,7 +27,7 @@ jobs:
     displayName: Downloading the Wasmer Native Runtimes
 
   - script: |
-      msbuild /p:Configuration=Release WasmerSharp/WasmerSharp.csproj
+      (cd WasmerSharp; msbuild /p:Configuration=Release WasmerSharp/WasmerSharp.csproj)
     displayName: Build WasmerSharp
 
   - task: PublishBuildArtifacts@1
