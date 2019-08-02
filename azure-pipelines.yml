@@ -21,6 +21,11 @@ steps:
 
 - task: Bash@3
   inputs:
+    script: pwd; ls -lR 
+  displayName: Downloading the Wasmer Native Runtimes
+
+- task: Bash@3
+  inputs:
     script: make fetch-runtimes
   displayName: Downloading the Wasmer Native Runtimes
 
