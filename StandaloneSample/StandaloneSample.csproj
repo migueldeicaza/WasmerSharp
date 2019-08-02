@@ -15,14 +15,14 @@
     <Compile Remove="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\DesktopSample\Program.cs">
-      <Link>Program.cs</Link>
-    </Compile>
+    <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\DesktopSample\target.wasm">
-      <Link>target.wasm</Link>
+    <Content Include="target.wasm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="WasmerSharp" Version="0.6.0" />
   </ItemGroup>
 </Project>

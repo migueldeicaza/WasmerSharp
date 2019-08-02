@@ -35,4 +35,9 @@
     <None Include="..\native\libwasmer_runtime_c_api.dylib" Link="nuget\runtimes\osx\native\libwasmer_runtime_c_api.dylib" PackagePath="runtimes\osx\native\libwasmer_runtime_c_api.dylib" Pack="true" />
     <None Include="..\native\libwasmer_runtime_c_api.so" Link="nuget\runtimes\linux\native\libwasmer_runtime_c_api.so" PackagePath="runtimes\linux\native\libwasmer_runtime_c_api.so" Pack="true" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Wasmer.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
 </Project>

@@ -49,7 +49,14 @@ into the development directory).
 To obtain the native Wasmer C runtime, you can either download the
 support library for your platform from [Wasmer
 Releases](https://github.com/wasmerio/wasmer/releases) page or using
-the toplevel makefile target "fetch-runtimes"
+the toplevel makefile target "fetch-runtimes".  Those are named:
+
+* `libwasmer_runtime_c_api.dylib` for MacOS
+* `libwasmer_runtime_c_api.so` for Linux
+* `wasmer_runtime_c_api.dll` for Windows
+
+The runtime that you get needs to be copied in the appropriate locaion
+in `bin/Debug` or `bin/Release` in those places.
 
 If you want to work on the Wasmer runtime and produce the support
 libraries for WasmerSharp, you would build Wasmer like this:
