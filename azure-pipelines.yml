@@ -27,8 +27,18 @@ jobs:
     displayName: Downloading the Wasmer Native Runtimes
 
   - script: |
-      (cd WasmerSharp; msbuild /p:Configuration=Release WasmerSharp/WasmerSharp.csproj)
+      (cd WasmerSharp; msbuild /p:Configuration=Release WasmerSharp.csproj)
     displayName: Build WasmerSharp
+
+  - script: |
+      (cd DesktopSample; msbuild)
+      (DYLD_LIBRARY_PATH=../native mono bin/Debug/*exe)
+    displayName: Build and run Mono/.NET Desktop Sample
+
+  - script: |
+      (cd CoreSample; dotnet build)
+      (cd CoreSample/CoreSample/bin/Debug/netcoreapp*/; DYLD_LIBRARY_PATH=../../../../native dotnet CoreSample.dll )
+    displayName: Build and run .NET Core Sample
 
   - task: PublishBuildArtifacts@1
     inputs: 
