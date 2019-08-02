@@ -22,7 +22,7 @@ steps:
 - task: Bash@3
   inputs:
     script: pwd; ls -lR 
-  displayName: Downloading the Wasmer Native Runtimes
+  displayName: List contents
 
 - task: Bash@3
   inputs:
