@@ -18,12 +18,12 @@
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>7.2</LangVersion>
     <DocumentationFile>bin\Debug\netstandard2.0\WasmerSharp.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>7.2</LangVersion>
     <DebugType></DebugType>
     <DocumentationFile>bin\Release\netstandard2.0\WasmerSharp.xml</DocumentationFile>
   </PropertyGroup>

@@ -599,10 +599,6 @@ namespace WasmerSharp {
 			}
 		}
 
-		public override string ToString ()
-		{
-			return "Module";
-		}
 	}
 
 	/// <summary>
@@ -620,6 +616,9 @@ namespace WasmerSharp {
 		/// </summary>
 		public string Name { get; internal set; }
 
+		/// <summary>
+		///  Returns a human-readable description of the export
+		/// </summary>
 		public override string ToString ()
 		{
 			return $"{Kind} (\"{Name}\")";
@@ -898,6 +897,9 @@ namespace WasmerSharp {
 		/// </summary>
 		public IntPtr Data => wasmer_memory_data (handle);
 
+		/// <summary>
+		///  Returns a human-readable description of the Memory resource
+		/// </summary>
 		public override string ToString ()
 		{
 			return $"{DataLength} bytes at address {(ulong)Data:x}";
@@ -910,17 +912,12 @@ namespace WasmerSharp {
 	public class Global : WasmerNativeHandle {
 		internal Global (IntPtr handle) : base (handle) { }
 
-		[DllImport (Library)]
-		extern static IntPtr wasmer_global_new (WasmerValue value, byte mutable_);
-
-		public Global (WasmerValue val, bool mutable)
-		{
-			handle = wasmer_global_new (val, (byte)(mutable ? 1 : 0));
-		}
-
+		// To avoid the warnings about the "fill" members here
+#pragma warning disable 649
 		struct IntValue {
 			public WasmerValueType t;
 			public int payload;
+			public int fill;
 		}
 		struct LongValue {
 			public WasmerValueType t;
@@ -929,20 +926,22 @@ namespace WasmerSharp {
 		struct FloatValue {
 			public WasmerValueType t;
 			public float payload;
+			public int fill;
 		}
 		struct DoubleValue {
 			public WasmerValueType t;
 			public double payload;
 		}
+#pragma warning restore 649
 
 		[DllImport (Library)]
-		extern static IntPtr wasmer_global_new (IntValue value, byte mutable_);
+		extern static IntPtr wasmer_global_new (IntValue value, [MarshalAs(UnmanagedType.U1)] bool mutable);
 		[DllImport (Library)]
-		extern static IntPtr wasmer_global_new (LongValue value, byte mutable_);
+		extern static IntPtr wasmer_global_new (LongValue value, [MarshalAs(UnmanagedType.U1)] bool mutable);
 		[DllImport (Library)]
-		extern static IntPtr wasmer_global_new (FloatValue value, byte mutable_);
+		extern static IntPtr wasmer_global_new (FloatValue value, [MarshalAs(UnmanagedType.U1)] bool mutable);
 		[DllImport (Library)]
-		extern static IntPtr wasmer_global_new (DoubleValue value, byte mutable_);
+		extern static IntPtr wasmer_global_new (DoubleValue value, [MarshalAs(UnmanagedType.U1)] bool mutable);
 
 		/// <summary>
 		/// Creates a new integer global with the specified WasmerValue.
@@ -952,7 +951,7 @@ namespace WasmerSharp {
 		public Global (int val, bool mutable)
 		{
 			var x = new IntValue () { t = WasmerValueType.Int32, payload = val };
-			handle = wasmer_global_new (x, (byte)( mutable ? 1 : 0));
+			handle = wasmer_global_new (x, mutable);
 		}
 
 		/// <summary>
@@ -963,7 +962,7 @@ namespace WasmerSharp {
 		public Global (long val, bool mutable)
 		{
 			var x = new LongValue () { t = WasmerValueType.Int64, payload = val };
-			handle = wasmer_global_new (x, (byte)(mutable ? 1 : 0));
+			handle = wasmer_global_new (x, mutable);
 		}
 
 		/// <summary>
@@ -974,7 +973,7 @@ namespace WasmerSharp {
 		public Global (float val, bool mutable)
 		{
 			var x = new FloatValue () { t = WasmerValueType.Float32, payload = val };
-			handle = wasmer_global_new (x, (byte)(mutable ? 1 : 0));
+			handle = wasmer_global_new (x, mutable);
 		}
 
 		/// <summary>
@@ -985,7 +984,7 @@ namespace WasmerSharp {
 		public Global (double val, bool mutable)
 		{
 			var x = new DoubleValue () { t = WasmerValueType.Float64, payload = val };
-			handle = wasmer_global_new (x, (byte)(mutable ? 1 : 0));
+			handle = wasmer_global_new (x, mutable);
 		}
 
 		[DllImport (Library)]
@@ -1085,6 +1084,9 @@ namespace WasmerSharp {
 		/// </summary>
 		public string Name { get; internal set; }
 
+		/// <summary>
+		///  Returns a human-readable description of the import
+		/// </summary>
 		public override string ToString ()
 		{
 			return $"{Kind}(\"{ModuleName}::{Name}\"" ;
@@ -1676,6 +1678,9 @@ namespace WasmerSharp {
 	/// instance as well as the associated memory.
 	/// </summary>
 	public struct InstanceContext {
+		/// <summary>
+		///   Handle to the underlying wasmer_instance_context_t *
+		/// </summary>
 		public IntPtr Handle;
 
 		[DllImport (WasmerNativeHandle.Library)]
@@ -1710,7 +1715,9 @@ namespace WasmerSharp {
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Method)]
 	public class WasmerImportAttribute : Attribute {
+		/// <summary>The desired module name to apply to this method.</summary>
 		public string Module;
+		/// <summary>The desired name to surface the method as.</summary>
 		public string Name;
 
 		/// <summary>

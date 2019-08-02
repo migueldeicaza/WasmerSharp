@@ -31,15 +31,21 @@ class MainClass {
 	// for generics to be passed.
 	delegate void myCallback (InstanceContext ctx, int arg1, int arg2);
 
+	static void TestGlobals ()
+	{
+		var global = new Global (1024, false);
+		Console.WriteLine ("Global: {0} {1} {2}", global.Value, global.IsMutable, global.ValueType);
+	}
+	
 	public static void Main (string [] args)
 	{
+		TestGlobals ();
 		//
 		// Creates the imports for the instance
 		//
 		var func = new Import ("env", "_print_str", new ImportFunction ((myCallback) (Print)));
 		var memory = new Import ("env", "memory", Memory.Create (minPages: 256, maxPages: 256));
 		var global = new Import ("env", "__memory_base", new Global (1024, false));
-
 		var wasm = File.ReadAllBytes ("target.wasm");
 
 		var x = Module.Create (wasm);
