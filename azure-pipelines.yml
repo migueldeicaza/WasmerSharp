@@ -33,7 +33,7 @@ jobs:
 
   - script: |
       (cd DesktopSample; msbuild)
-      (DYLD_LIBRARY_PATH=../native mono bin/Debug/*exe)
+      (cd DesktopSample; DYLD_LIBRARY_PATH=../native mono bin/Debug/*exe)
     displayName: Build and run Mono/.NET Desktop Sample
 
   - script: |
