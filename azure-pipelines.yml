@@ -1,7 +1,7 @@
 
 trigger:
 - master
-
+- release/*
 
 # To manually select a Xamarin SDK version on the Microsoft-hosted macOS agent,
 # configure this task with the *Mono* version that is associated with the
