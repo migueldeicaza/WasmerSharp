@@ -19,7 +19,7 @@ into memory, creating a memory object, and then invoking a method in
 WebAssembly, the following example shows this:
 
 ```
-using WasmerShrap;
+using WasmerSharp;
 
 // This creates a memory block with a minimum of 256 64k pages
 // and a maxium of 256 64k pages
