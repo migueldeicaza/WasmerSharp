@@ -31,15 +31,15 @@ jobs:
       (cd WasmerSharp; msbuild /p:Configuration=Release WasmerSharp.csproj)
     displayName: Build WasmerSharp
 
-  - script: |
-      (cd DemoDesktop; nuget restore; msbuild)
-      (cd DemoDesktop; DYLD_LIBRARY_PATH=../native mono bin/Debug/*exe)
-    displayName: Build and run Mono/.NET Desktop Sample
+  #- script: |
+  #    (cd DemoDesktop; nuget restore; msbuild)
+  #    (cd DemoDesktop; DYLD_LIBRARY_PATH=../native mono bin/Debug/*exe)
+  #  displayName: Build and run Mono/.NET Desktop Sample
 
   - script: |
       export DOTNET_CLI_TELEMETRY_OPTOUT=1
-      (cd CoreSample; dotnet build)
-      (cd CoreSample/bin/Debug/netcoreapp*/; DYLD_LIBRARY_PATH=../../../../native dotnet CoreSample.dll )
+      (cd StandaloneSample; dotnet build)
+      (cd StandaloneSample/bin/Debug/netcoreapp*/; DYLD_LIBRARY_PATH=../../../../native dotnet CoreSample.dll )
     displayName: Build and run .NET Core Sample
 
   - task: PublishBuildArtifacts@1
