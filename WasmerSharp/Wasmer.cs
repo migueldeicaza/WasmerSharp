@@ -1269,12 +1269,9 @@ namespace WasmerSharp {
 			if (args == null)
 				throw new ArgumentNullException (nameof (args));
 
-			foreach (var a in args) {
-
-			}
 			var parsOut = new WasmerValue [args.Length];
 			for (int i = 0; i < args.Length; i++) {
-				var tag = ImportFunction.ValidateTypeToTag (args.GetType ());
+				var tag = ImportFunction.ValidateTypeToTag (args [i].GetType ());
 				parsOut [i].Tag = tag;
 				switch (tag) {
 				case WasmerValueType.Int32:
