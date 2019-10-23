@@ -39,7 +39,7 @@ jobs:
   - script: |
       export DOTNET_CLI_TELEMETRY_OPTOUT=1
       (cd StandaloneSample; dotnet build)
-      (cd StandaloneSample/bin/Debug/netcoreapp*/; DYLD_LIBRARY_PATH=../../../../native dotnet CoreSample.dll )
+      (cd StandaloneSample/bin/Debug/netcoreapp*/; DYLD_LIBRARY_PATH=../../../../native dotnet StandaloneSample.dll )
     displayName: Build and run .NET Core Sample
 
   - task: PublishBuildArtifacts@1
