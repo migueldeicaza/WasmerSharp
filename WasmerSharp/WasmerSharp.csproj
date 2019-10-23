@@ -4,7 +4,7 @@
     <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>0.6.0</PackageVersion>
+    <PackageVersion>0.7.0</PackageVersion>
     <Authors>Miguel de Icaza</Authors>
     <PackageLicenseUrl>https://github.com/migueldeicaza/WasmerSharp/blob/master/LICENSE</PackageLicenseUrl>
     <Owners>Miguel de Icaza</Owners>
