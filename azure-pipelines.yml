@@ -32,8 +32,8 @@ jobs:
     displayName: Build WasmerSharp
 
   - script: |
-      (cd DesktopSample; nuget restore; msbuild)
-      (cd DesktopSample; DYLD_LIBRARY_PATH=../native mono bin/Debug/*exe)
+      (cd DemoDesktop; nuget restore; msbuild)
+      (cd DemoDesktop; DYLD_LIBRARY_PATH=../native mono bin/Debug/*exe)
     displayName: Build and run Mono/.NET Desktop Sample
 
   - script: |
