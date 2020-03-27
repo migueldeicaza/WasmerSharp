@@ -483,7 +483,7 @@ namespace WasmerSharp {
 		/// </summary>
 		/// <param name="imports">The list of imports to pass, usually Function, Global and Memory</param>
 		/// <returns>A Wasmer.Instance on success, or null on error.   You can use the LastError error property to get details on the error.</returns>
-		public Instance Instatiate (params Import [] imports)
+		public Instance Instantiate (params Import [] imports)
 		{
 			if (imports == null)
 				throw new ArgumentNullException (nameof (imports));
