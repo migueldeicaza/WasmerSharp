@@ -32,7 +32,7 @@ var memoryImport = new Import ("env", "memory", memory)
 var wasm = File.ReadAllBytes ("demo.wasm");
 
 // Now we create an instance based on the WASM file, and the memory provided:
-var instance = new Instance (wasm, memory);
+var instance = new Instance (wasm, memoryImport);
 
 // And now you can invoke some code from WebAssembly:
 var ret = instance.Call ("hello_world");
