@@ -90,9 +90,9 @@ namespace WasmerSharp {
 			WasmerByteArray ret;
 
 			var byteBuffer = System.Text.Encoding.UTF8.GetBytes(txt);
-			ret.bytes = Marshal.AllocHGlobal(byteBuffer.Length + 1);
-			Marshal.Copy(byteBuffer, 0, ret.bytes, byteBuffer.Length);
-			ret.bytesLen = (uint) byteBuffer.Length;
+			ret.bytes = Marshal.AllocHGlobal (byteBuffer.Length + 1);
+			Marshal.Copy (byteBuffer, 0, ret.bytes, byteBuffer.Length);
+			ret.bytesLen = (uint)byteBuffer.Length;
 			return ret;
 		}
 	}
@@ -385,7 +385,7 @@ namespace WasmerSharp {
 					var buf = Marshal.AllocHGlobal (len);
 					wasmer_last_error_message (buf, len);
 					var str = System.Text.Encoding.UTF8.GetString ((byte*)buf, len);
-					
+
 					Marshal.FreeHGlobal (buf);
 					return str;
 				}
@@ -794,7 +794,8 @@ namespace WasmerSharp {
 	/// </summary>
 	public class Memory : WasmerNativeHandle {
 		bool owns;
-		internal Memory (IntPtr handle, bool owns = true) : base (handle) {
+		internal Memory (IntPtr handle, bool owns = true) : base (handle)
+		{
 			this.owns = owns;
 		}
 
@@ -830,8 +831,8 @@ namespace WasmerSharp {
 		/// </summary>
 		/// <param name="minPages">Minimum number of allowed pages</param>
 		/// <param name="maxPages">Optional, Maximum number of allowed pages</param>
-		
-		public Memory  (uint minPages, uint? maxPages = null)
+
+		public Memory (uint minPages, uint? maxPages = null)
 		{
 			Limits limits;
 			limits.min = minPages;
@@ -844,7 +845,7 @@ namespace WasmerSharp {
 				limits.max.some = 0;
 			}
 
-			if (wasmer_memory_new (out var xhandle, limits) == WasmerResult.Ok) 
+			if (wasmer_memory_new (out var xhandle, limits) == WasmerResult.Ok)
 				handle = xhandle;
 			else
 				throw new Exception ("Error creating the requested memory");
@@ -856,7 +857,7 @@ namespace WasmerSharp {
 		internal override Action<IntPtr> GetHandleDisposer ()
 		{
 			if (owns)
-			    return wasmer_memory_destroy;
+				return wasmer_memory_destroy;
 			return null;
 		}
 
@@ -935,13 +936,13 @@ namespace WasmerSharp {
 #pragma warning restore 649
 
 		[DllImport (Library)]
-		extern static IntPtr wasmer_global_new (IntValue value, [MarshalAs(UnmanagedType.U1)] bool mutable);
+		extern static IntPtr wasmer_global_new (IntValue value, [MarshalAs (UnmanagedType.U1)] bool mutable);
 		[DllImport (Library)]
-		extern static IntPtr wasmer_global_new (LongValue value, [MarshalAs(UnmanagedType.U1)] bool mutable);
+		extern static IntPtr wasmer_global_new (LongValue value, [MarshalAs (UnmanagedType.U1)] bool mutable);
 		[DllImport (Library)]
-		extern static IntPtr wasmer_global_new (FloatValue value, [MarshalAs(UnmanagedType.U1)] bool mutable);
+		extern static IntPtr wasmer_global_new (FloatValue value, [MarshalAs (UnmanagedType.U1)] bool mutable);
 		[DllImport (Library)]
-		extern static IntPtr wasmer_global_new (DoubleValue value, [MarshalAs(UnmanagedType.U1)] bool mutable);
+		extern static IntPtr wasmer_global_new (DoubleValue value, [MarshalAs (UnmanagedType.U1)] bool mutable);
 
 		/// <summary>
 		/// Creates a new integer global with the specified WasmerValue.
@@ -998,7 +999,7 @@ namespace WasmerSharp {
 		[DllImport (Library)]
 		extern static WorkaroundWasmerValue wasmer_global_get (IntPtr handle);
 
-		[StructLayout(LayoutKind.Sequential)]
+		[StructLayout (LayoutKind.Sequential)]
 		struct WorkaroundWasmerValue {
 			int x;
 			long y;
@@ -1050,7 +1051,7 @@ namespace WasmerSharp {
 		{
 			unsafe {
 				WorkaroundWasmerValue x;
-				
+
 				x = *(WorkaroundWasmerValue*)(&value);
 				wasmer_global_set (handle, x);
 			}
@@ -1089,7 +1090,7 @@ namespace WasmerSharp {
 		/// </summary>
 		public override string ToString ()
 		{
-			return $"{Kind}(\"{ModuleName}::{Name}\"" ;
+			return $"{Kind}(\"{ModuleName}::{Name}\"";
 		}
 	}
 
@@ -1243,7 +1244,7 @@ namespace WasmerSharp {
 
 				// The API does not like to get a null value, so we need to pass a pointer to something
 				// and a length of zero.
-				if (plen == 0){
+				if (plen == 0) {
 					parameters = new WasmerValue [1];
 					parameters [0] = 0;
 				}
@@ -1710,7 +1711,7 @@ namespace WasmerSharp {
 	/// and name.   The resulting method is returned as an Imports that is suitable to be passed
 	/// to the Instantiate methods.
 	/// </summary>
-	[AttributeUsage(AttributeTargets.Method)]
+	[AttributeUsage (AttributeTargets.Method)]
 	public class WasmerImportAttribute : Attribute {
 		/// <summary>The desired module name to apply to this method.</summary>
 		public string Module;
