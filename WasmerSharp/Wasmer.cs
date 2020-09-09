@@ -1182,6 +1182,31 @@ namespace WasmerSharp {
 		// wasmer_import_func_returns_arity
 	}
 
+	public class Exports : WasmerNativeHandle {
+		internal Exports (IntPtr handle) : base (handle) { }
+
+		[DllImport (Library)]
+		extern static IntPtr wasmer_exports_get (IntPtr handle, int idx);
+
+		[DllImport (Library)]
+		extern static int wasmer_exports_len (IntPtr handle);
+
+		[DllImport (Library)]
+		extern static void wasmer_exports_destroy (IntPtr handle);
+
+		public int Length {
+			get {
+				return wasmer_exports_len (handle);
+			}
+		}
+
+		public Export this [int index] {
+			get {
+				return new Export (wasmer_exports_get (handle, index));
+			}
+		}
+	}
+
 	/// <summary>
 	/// Instances represents all the state associated with a module.   These are created by calling Module.Instantiate or by calling the Instance constructor.
 	/// </summary>
@@ -1312,30 +1337,14 @@ namespace WasmerSharp {
 		[DllImport (Library)]
 		extern static void wasmer_instance_exports (IntPtr handle, out IntPtr exportsHandle);
 
-		[DllImport (Library)]
-		extern static IntPtr wasmer_exports_get (IntPtr handle, int idx);
-
-		[DllImport (Library)]
-		extern static int wasmer_exports_len (IntPtr handle);
-
-		[DllImport (Library)]
-		extern static void wasmer_exports_destroy (IntPtr handle);
-
 		/// <summary>
 		/// Returns an array with all the exports - the individual values must be manually disposed.
 		/// </summary>
 		/// <returns></returns>
-		public Export [] Exports {
+		public Exports Exports {
 			get {
-
 				wasmer_instance_exports (handle, out var exportsHandle);
-				var len = wasmer_exports_len (exportsHandle);
-				var result = new Export [len];
-				for (int i = 0; i < len; i++) {
-					result [i] = new Export (wasmer_exports_get (exportsHandle, i));
-				}
-				wasmer_exports_destroy (exportsHandle);
-				return result;
+				return new Exports (exportsHandle);
 			}
 		}
 
