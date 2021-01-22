@@ -55,7 +55,7 @@ the toplevel makefile target "fetch-runtimes".  Those are named:
 * `libwasmer_runtime_c_api.so` for Linux
 * `wasmer_runtime_c_api.dll` for Windows
 
-The runtime that you get needs to be copied in the appropriate locaion
+The runtime that you get needs to be copied in the appropriate location
 in `bin/Debug` or `bin/Release` in those places.
 
 If you want to work on the Wasmer runtime and produce the support
