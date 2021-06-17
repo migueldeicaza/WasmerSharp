@@ -1,0 +1,43 @@
+{
+    "FormattingOptions": {
+        "EnableEditorConfigSupport": false,
+        "NewLine": "\n",
+        "UseTabs": true,
+        "TabSize": 4,
+        "IndentationSize": 4,
+
+        "SpacingAfterMethodDeclarationName": true,
+        "SpaceWithinMethodDeclarationParenthesis": false,
+        "SpaceBetweenEmptyMethodDeclarationParentheses": false,
+        "SpaceAfterMethodCallName": true,
+        "SpaceWithinMethodCallParentheses": false,
+        "SpaceBetweenEmptyMethodCallParentheses": false,
+        "SpaceAfterControlFlowStatementKeyword": true,
+        "SpaceWithinExpressionParentheses": false,
+        "SpaceWithinCastParentheses": false,
+        "SpaceWithinOtherParentheses": false,
+        "SpaceAfterCast": false,
+        "SpacesIgnoreAroundVariableDeclaration": true,
+        "SpaceBeforeOpenSquareBracket": true,
+        "SpaceBetweenEmptySquareBrackets": false,
+        "SpaceWithinSquareBrackets": false,
+
+        "IndentSwitchSection": false,
+        "IndentSwitchCaseSection": true,
+        "NewLinesForBracesInTypes": false,
+        "NewLinesForBracesInMethods": true,
+        "NewLinesForBracesInProperties": false,
+        "NewLinesForBracesInAccessors": false,
+        "NewLinesForBracesInAnonymousMethods": false,
+        "NewLinesForBracesInControlBlocks": false,
+        "NewLinesForBracesInAnonymousTypes": false,
+        "NewLinesForBracesInObjectCollectionArrayInitializers": false,
+        "NewLinesForBracesInLambdaExpressionBody": false,
+        "NewLineForElse": false,
+        "NewLineForCatch": false,
+        "NewLineForFinally": false,
+        "NewLineForMembersInObjectInit": false,
+        "NewLineForMembersInAnonymousTypes": false,
+        "NewLineForClausesInQuery": false
+    }
+}
