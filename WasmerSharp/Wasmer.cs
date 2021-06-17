@@ -1592,7 +1592,7 @@ namespace WasmerSharp {
 				throw new ArgumentNullException (nameof (table));
 			ModuleName = moduleName;
 			ImportName = importName;
-			Kind = ImportExportKind.Function;
+			Kind = ImportExportKind.Table;
 			payload = table;
 		}
 	}
