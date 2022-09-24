@@ -378,17 +378,18 @@ namespace WasmerSharp {
 		/// <summary>
 		/// Returns the last error message that was raised by the Wasmer Runtime
 		/// </summary>
-		public string LastError {
-			get {
-				var len = wasmer_last_error_length ();
-				unsafe {
-					var buf = Marshal.AllocHGlobal (len);
-					wasmer_last_error_message (buf, len);
-					var str = System.Text.Encoding.UTF8.GetString ((byte*)buf, len);
+		/// <remarks>
+		/// Calling this clears the error
+		/// </remarks>
+		public static string GetAndClearLastError() {
+			var len = wasmer_last_error_length ();
+			unsafe {
+				var buf = Marshal.AllocHGlobal (len);
+				wasmer_last_error_message (buf, len);
+				var str = System.Text.Encoding.UTF8.GetString ((byte*)buf, len);
 
-					Marshal.FreeHGlobal (buf);
-					return str;
-				}
+				Marshal.FreeHGlobal (buf);
+				return str;
 			}
 		}
 
@@ -1250,7 +1251,7 @@ namespace WasmerSharp {
 						if (wasmer_instantiate (out var result, (IntPtr)bp, (uint)wasm.Length, p, llimports.Length) == WasmerResult.Ok)
 							handle = result;
 						else
-							throw new Exception ("Error instantiating from the provided wasm file" + LastError);
+							throw new Exception ("Error instantiating from the provided wasm file" + WasmerNativeHandle.GetAndClearLastError());
 					}
 				}
 			}
