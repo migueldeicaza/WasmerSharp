@@ -483,7 +483,7 @@ namespace WasmerSharp {
 		/// Creates a new Instance from the given wasm bytes and imports. 
 		/// </summary>
 		/// <param name="imports">The list of imports to pass, usually Function, Global and Memory</param>
-		/// <returns>A Wasmer.Instance on success, or null on error. You can use WasmerNativeHandle.GetAndClearLastError() to get details on the error.</returns>
+		/// <returns>A Wasmer.Instance on success. Trows on errors.</returns>
 		public Instance Instantiate (params Import [] imports)
 		{
 			if (imports == null)
@@ -498,10 +498,11 @@ namespace WasmerSharp {
 			}
 			unsafe {
 				fixed (wasmer_import* p = &llimports [0]) {
-					if (wasmer_module_instantiate (handle, out var result, p, llimports.Length) == WasmerResult.Ok)
+					if (wasmer_module_instantiate (handle, out var result, p, llimports.Length) == WasmerResult.Ok) {
 						return new Instance (result);
-					else
-						return null;
+					} else {
+						throw new Exception ("Error instantiating wasm module: " + WasmerNativeHandle.GetAndClearLastError());
+					}
 				}
 			}
 		}
