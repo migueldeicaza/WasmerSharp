@@ -1230,7 +1230,7 @@ namespace WasmerSharp {
 		/// </summary>
 		/// <param name="wasm">Wasm byte code</param>
 		/// <param name="imports">The list of imports to pass, usually Function, Global and Memory</param>
-		/// <returns>A Wasmer.Instance on success, or null on error. You can use WasmerNativeHandle.GetAndClearLastError() to get details on the error.</returns>
+		/// <returns>A Wasmer.Instance on success. Throws exception on errors.</returns>
 		public Instance (byte [] wasm, params Import [] imports)
 		{
 			if (wasm == null)
