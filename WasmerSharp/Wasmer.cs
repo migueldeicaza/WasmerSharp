@@ -412,7 +412,7 @@ namespace WasmerSharp {
 		/// </summary>
 		/// <param name="wasmBody">A pointer to a block of memory containing the WASM code to load into the module</param>
 		/// <param name="bodyLength">The size of the wasmBody pointer</param>
-		/// <returns>The WasmerModule instance, or null on error.   You can use the LastError error property to get details on the error.</returns>
+		/// <returns>The WasmerModule instance, or null on error. You can use WasmerNativeHandle.GetAndClearLastError() to get details on the error.</returns>
 		public static Module Create (IntPtr wasmBody, uint bodyLength)
 		{
 			if (wasmer_compile (out var handle, wasmBody, bodyLength) == WasmerResult.Ok) {
@@ -425,7 +425,7 @@ namespace WasmerSharp {
 		/// Creates a new Module from the given WASM bytes
 		/// </summary>
 		/// <param name="wasmBody">An array containing the WASM code to load into the module</param>
-		/// <returns>The WasmerModule instance, or null on error.  You can use the LastError error property to get details on the error.</returns>
+		/// <returns>The WasmerModule instance, or null on error. You can use WasmerNativeHandle.GetAndClearLastError() to get details on the error.</returns>
 		public static Module Create (byte [] wasmBody)
 		{
 			if (wasmBody == null)
@@ -483,7 +483,7 @@ namespace WasmerSharp {
 		/// Creates a new Instance from the given wasm bytes and imports. 
 		/// </summary>
 		/// <param name="imports">The list of imports to pass, usually Function, Global and Memory</param>
-		/// <returns>A Wasmer.Instance on success, or null on error.   You can use the LastError error property to get details on the error.</returns>
+		/// <returns>A Wasmer.Instance on success, or null on error. You can use WasmerNativeHandle.GetAndClearLastError() to get details on the error.</returns>
 		public Instance Instantiate (params Import [] imports)
 		{
 			if (imports == null)
@@ -563,7 +563,7 @@ namespace WasmerSharp {
 		/// <summary>
 		/// Serializes the module, the result can be turned into a byte array and saved.
 		/// </summary>
-		/// <returns>Null on error, or an instance of SerializedModule on success.  You can use the LastError error property to get details on the error.</returns>
+		/// <returns>Null on error, or an instance of SerializedModule on success. You can use WasmerNativeHandle.GetAndClearLastError() to get details on the error.</returns>
 		public SerializedModule Serialize ()
 		{
 			if (wasmer_module_serialize (out var serialized, handle) == WasmerResult.Ok) {
@@ -678,7 +678,7 @@ namespace WasmerSharp {
 		extern static WasmerResult wasmer_export_func_params_arity (IntPtr handle, out uint result);
 
 		/// <summary>
-		/// Returns the parameter types for the exported function as an array.   Returns null on error. You can use the LastError error property to get details on the error.
+		/// Returns the parameter types for the exported function as an array.   Returns null on error. You can use WasmerNativeHandle.GetAndClearLastError() to get details on the error.
 		/// </summary>
 		public WasmerValueType [] Parameters {
 			get {
@@ -702,7 +702,7 @@ namespace WasmerSharp {
 		extern static WasmerResult wasmer_export_func_returns_arity (IntPtr handle, out uint result);
 
 		/// <summary>
-		/// Returns the return types for the exported function as an array.   Returns null on error. You can use the LastError error property to get details on the error.
+		/// Returns the return types for the exported function as an array.   Returns null on error. You can use WasmerNativeHandle.GetAndClearLastError() to get details on the error.
 		/// </summary>
 		public WasmerValueType [] Returns {
 			get {
@@ -757,7 +757,7 @@ namespace WasmerSharp {
 		/// <summary>
 		/// Gets the exported function
 		/// </summary>
-		/// <returns>Null on error, or the exported function.  You can use the LastError error property to get details on the error.</returns>
+		/// <returns>Null on error, or the exported function. You can use WasmerNativeHandle.GetAndClearLastError() to get details on the error.</returns>
 		public ExportFunction GetExportFunction ()
 		{
 			var rh = wasmer_export_to_func (handle);
@@ -808,7 +808,7 @@ namespace WasmerSharp {
 		/// </summary>
 		/// <param name="minPages">Minimum number of allowed pages</param>
 		/// <param name="maxPages">Optional, Maximum number of allowed pages</param>
-		/// <returns>The object on success, or null on failure. You can use the LastError error property to get details on the error.</returns>
+		/// <returns>The object on success, or null on failure. You can use WasmerNativeHandle.GetAndClearLastError() to get details on the error.</returns>
 		public static Memory Create (uint minPages, uint? maxPages = null)
 		{
 			Limits limits;
@@ -869,7 +869,7 @@ namespace WasmerSharp {
 		/// Grows the memory by the specified amount of pages.
 		/// </summary>
 		/// <param name="deltaPages">The number of additional pages to grow</param>
-		/// <returns>true on success, false on error.   You can use the LastError property to get more details on the error.</returns>
+		/// <returns>true on success, false on error. You can use WasmerNativeHandle.GetAndClearLastError() to get more details on the error.</returns>
 		public bool Grow (uint deltaPages)
 		{
 			return wasmer_memory_grow (handle, deltaPages) != 0;
@@ -1230,7 +1230,7 @@ namespace WasmerSharp {
 		/// </summary>
 		/// <param name="wasm">Wasm byte code</param>
 		/// <param name="imports">The list of imports to pass, usually Function, Global and Memory</param>
-		/// <returns>A Wasmer.Instance on success, or null on error.   You can use the LastError error property to get details on the error.</returns>
+		/// <returns>A Wasmer.Instance on success, or null on error. You can use WasmerNativeHandle.GetAndClearLastError() to get details on the error.</returns>
 		public Instance (byte [] wasm, params Import [] imports)
 		{
 			if (wasm == null)
@@ -1288,7 +1288,7 @@ namespace WasmerSharp {
 		/// </summary>
 		/// <param name="functionName">Namer of the exported function to call in the instane</param>
 		/// <param name="args">The argument types are limited to int, long, float and double.</param>
-		/// <returns>An array of values on success, null on error. You can use the LastError error property to get details on the error.</returns>
+		/// <returns>An array of values on success, null on error. You can use WasmerNativeHandle.GetAndClearLastError() to get details on the error.</returns>
 		public object [] Call (string functionName, params object [] args)
 		{
 			if (functionName == null)
@@ -1415,7 +1415,7 @@ namespace WasmerSharp {
 		/// </summary>
 		/// <param name="min">Minimum number of elements to store on the table.</param>
 		/// <param name="max">Optional, maximum number of elements to store on the table.</param>
-		/// <returns>An instance of Table on success, or null on error.  You can use the LastError error property to get details on the error.</returns>
+		/// <returns>An instance of Table on success, or null on error. You can use the WasmerNativeHandle.GetAndClearLastError to get details on the error.</returns>
 		public static Table Create (uint min, uint? max = null)
 		{
 			Limits limits;
@@ -1441,7 +1441,7 @@ namespace WasmerSharp {
 		/// Attemps to grow the table by the specified number of elements.
 		/// </summary>
 		/// <param name="delta">Number of elements to add to the table.</param>
-		/// <returns>true on success, false on failure.  You can use the LastError error property to get details on the error.</returns>
+		/// <returns>true on success, false on failure. You can use the WasmerNativeHandle.GetAndClearLastError() to get details on the error.</returns>
 		public bool Grow (uint delta)
 		{
 			return wasmer_table_grow (handle, delta) == WasmerResult.Ok;
@@ -1625,7 +1625,7 @@ namespace WasmerSharp {
 		/// </summary>
 		/// <param name="bytes">Pointer to a region in memory containing the serialized module.</param>
 		/// <param name="len">The number of bytes toe process from the buffer</param>
-		/// <returns>Returns null on error, or an instance of SerializeModule on success.  You can use the LastError error property to get details on the error.</returns>
+		/// <returns>Returns null on error, or an instance of SerializeModule on success. You can use WasmerNativeHandle.GetAndClearLastError() to get details on the error.</returns>
 		public static SerializedModule FromBytes (IntPtr bytes, uint len)
 		{
 			if (wasmer_serialized_module_from_bytes (out var handle, bytes, len) == WasmerResult.Ok)
@@ -1638,7 +1638,7 @@ namespace WasmerSharp {
 		/// Creates a new SerializedModule from the provided byte array
 		/// </summary>
 		/// <param name="buffer">Array of bytes containing the serialized module.</param>
-		/// <returns>Returns null on error, or an instance of SerializeModule on success.   You can use the LastError error property to get details on the error.</returns>
+		/// <returns>Returns null on error, or an instance of SerializeModule on success. You can use WasmerNativeHandle.GetAndClearLastError() to get details on the error.</returns>
 		public static SerializedModule FromBytes (byte [] buffer)
 		{
 			unsafe {
@@ -1671,7 +1671,7 @@ namespace WasmerSharp {
 		/// <summary>
 		/// Deserialize the given serialized module.
 		/// </summary>
-		/// <returns>Returns an instance of a Module, or null on error.  You can use the LastError error property to get details on the error. </returns>
+		/// <returns>Returns an instance of a Module, or null on error. You can use WasmerNativeHandle.GetAndClearLastError() to get details on the error. </returns>
 		public Module Deserialize ()
 		{
 			if (wasmer_module_deserialize (out var moduleHandle, handle) == WasmerResult.Ok)
